@@ -1,0 +1,121 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_attendees",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_attendee",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_attendees",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_dr_attendee_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_attendee_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_dr_attendee_DuplicateBaseRecord": "レコードの重複  (cr5ee_dr_attendee_DuplicateBaseRecord)",
+      "cr5ee_dr_attendee_DuplicateMatchingRecord": "レコードの重複  (cr5ee_dr_attendee_DuplicateMatchingRecord)",
+      "cr5ee_dr_attendee_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_attendee_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_attendee_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_attendee_SyncErrors": "同期エラー",
+      "cr5ee_dr_attendeeid": "DR_attendee",
+      "cr5ee_isattendance": "IsAttendance",
+      "cr5ee_meeting": "meeting",
+      "cr5ee_name": "id",
+      "cr5ee_participant": "participant",
+      "cr5ee_role": "role",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_attendees",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_attendees (ビュー)",
+    "Name": "_cr5ee_dr_attendee_views",
+    "RelatedEntityName": "DR_attendees",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "529d4b2c-52f3-42a7-8baa-a92effaf3587": "アクティブなDR_attendees",
+      "747b7c19-f4db-4a3c-80f3-b7175e81a812": "DR_attendee検索ダイアログ ビュー",
+      "9a53e1e4-026b-4c50-8129-cbabb8b389e6": "DR_attendee関連ビュー",
+      "d11780c6-8f70-4a45-be59-b551fdb74752": "DR_attendeeの高度な検索ビュー",
+      "d6db75f5-4c21-4fdf-8f26-95d7fe51bbf8": "非アクティブなDR_attendees"
+    }
+  },
+  {
+    "DisplayName": "IsAttendance (DR_attendees)",
+    "Name": "cr5ee_dr_attendee_cr5ee_isattendance",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr5ee_isattendance",
+        "OptionSetReferenceEntityName": "DR_attendees"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cr5ee_isattendance",
+    "RelatedEntityName": "DR_attendees",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "状態 (DR_attendees)",
+    "Name": "cr5ee_dr_attendee_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_attendees"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_attendees",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_attendees)",
+    "Name": "cr5ee_dr_attendee_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_attendees"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_attendees",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,331 @@
+"Administrate As screen.'tabletAutoLayout_HeaderMainFooter_ver1.0'":
+    OnVisible: =
+
+    ScreenContainer1_3 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =2
+
+        HeaderContainer1_3 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =2
+
+            Icon16_2 As icon.ChevronLeft:
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Icon: =Icon.ChevronLeft
+                OnSelect: =Navigate(drMain)
+                PaddingBottom: =7
+                PaddingLeft: =7
+                PaddingRight: =7
+                PaddingTop: =7
+                Width: =Parent.Height
+                ZIndex: =1
+
+            Label5_3 As label:
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =Parent.Height
+                Size: =25
+                Text: ="Administrate"
+                Width: =300
+                ZIndex: =2
+
+            Container8_5 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =headerFooterHeight
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =10
+                LayoutJustifyContent: =LayoutJustifyContent.End
+                LayoutMinHeight: =headerFooterHeight
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingRight: =17
+                ZIndex: =3
+
+        MainSectionContainer1_3 As groupContainer.verticalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =3
+
+            Container21 As groupContainer.verticalAutoLayoutContainer:
+                BorderColor: =RGBA(56, 96, 178, 1)
+                BorderThickness: =1
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =layoutGapDefault
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =15
+                PaddingRight: =15
+                ZIndex: =2
+
+                Label77 As label:
+                    FontWeight: =FontWeight.Semibold
+                    Size: =20
+                    Text: ="Administrators"
+                    Width: =250
+                    ZIndex: =1
+
+                Container24 As groupContainer.horizontalAutoLayoutContainer:
+                    LayoutGap: =layoutGapDefault
+                    LayoutMinHeight: =19
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =2
+
+                    ComboBox1_1 As combobox:
+                        DisplayFields: =["fullname","internalemailaddress"]
+                        Height: =39
+                        InputTextPlaceholder: ="対象者の検索"
+                        Items: ='ユーザー '
+                        SearchFields: =["fullname"]
+                        SearchItems: =Search('ユーザー ',ComboBox1_1.SearchText,"fullname")
+                        SelectMultiple: =false
+                        Template: =ListItemTemplate.Double
+                        Width: =500
+                        X: =734
+                        Y: =55
+                        ZIndex: =2
+
+                    Icon18_2 As icon.AddUser:
+                        Height: =Parent.Height
+                        Icon: =Icon.AddUser
+                        OnSelect: |-
+                            =UpdateContext({adminRoleTemplate:First(Filter(DR_roleTemplateLists,templateName=roleTemplateAdmin))});
+                            UpdateContext({adminRole:First(Filter(DR_roleMaster,nameEN=roleAdmin))});
+                            If(
+                                IsEmpty(
+                                    Filter(DR_roleTemplate,template.templateName=roleTemplateAdmin,role.nameEN=roleAdmin,appUser.既定電子メール=ComboBox1_1.Selected.既定電子メール)
+                                ),
+                                Collect(
+                                    DR_roleTemplate,
+                                    {
+                                        template: adminRoleTemplate,
+                                        appUser:ComboBox1_1.Selected,
+                                        role:adminRole
+                                    }
+                                ),
+                                Notify(Concatenate(ComboBox1_1.Selected.氏名, "は、既に設定されています。"));
+                            );
+                        Width: =Parent.Height
+                        ZIndex: =3
+
+                "Gallery13 As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Height: =Parent.Height - (Label77.Height + Parent.LayoutGap) * 2
+                    Items: =Filter(DR_roleTemplate,template.templateName=roleTemplateAdmin,role.nameEN=roleAdmin)
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =Parent.Height - (Label77.Height + Parent.LayoutGap) * 2
+                    LayoutMinWidth: =320
+                    TemplatePadding: =0
+                    TemplateSize: =70
+                    ZIndex: =4
+
+                    Title16 As label:
+                        Height: =41
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.appUser.氏名
+                        Width: =480
+                        Y: =2
+                        ZIndex: =1
+
+                    Separator14 As rectangle:
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =5
+
+                    Icon20 As icon.CancelBadge:
+                        Height: =30
+                        Icon: =Icon.CancelBadge
+                        OnSelect: |-
+                            =Remove(
+                                DR_roleTemplate,
+                                Filter(
+                                    DR_roleTemplate,
+                                    template.templateName=roleTemplateAdmin,
+                                    role.nameEN=roleAdmin,
+                                    appUser.既定電子メール=ThisItem.appUser.既定電子メール)
+                            );
+                            Refresh(DR_roleTemplate);
+                        Width: =30
+                        X: =Parent.Width - (Self.Width * 2)
+                        Y: =(Parent.TemplateHeight - Self.Height) /2
+                        ZIndex: =6
+
+                    Subtitle12_1 As label:
+                        Height: =29
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.appUser.既定電子メール
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =580
+                        Y: =43
+                        ZIndex: =7
+
+            Container23 As groupContainer.verticalAutoLayoutContainer:
+                BorderColor: =RGBA(56, 96, 178, 1)
+                BorderThickness: =1
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =layoutGapDefault
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =15
+                PaddingRight: =15
+                ZIndex: =3
+
+                Label77_1 As label:
+                    FontWeight: =FontWeight.Semibold
+                    Size: =20
+                    Text: ="Project Planners"
+                    Width: =250
+                    ZIndex: =1
+
+                Container24_1 As groupContainer.horizontalAutoLayoutContainer:
+                    LayoutGap: =layoutGapDefault
+                    LayoutMinHeight: =10
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =3
+
+                    ComboBox1_2 As combobox:
+                        DisplayFields: =["fullname","internalemailaddress"]
+                        Height: =39
+                        InputTextPlaceholder: ="対象者の検索"
+                        Items: ='ユーザー '
+                        SearchFields: =["fullname"]
+                        SearchItems: =Search('ユーザー ',ComboBox1_2.SearchText,"fullname")
+                        SelectMultiple: =false
+                        Template: =ListItemTemplate.Double
+                        Width: =500
+                        X: =734
+                        Y: =55
+                        ZIndex: =2
+
+                    Icon18_1 As icon.AddUser:
+                        Height: =Parent.Height
+                        Icon: =Icon.AddUser
+                        OnSelect: |-
+                            =UpdateContext({plannerRoleTemplate:First(Filter(DR_roleTemplateLists,templateName=roleTemplateAdmin))});
+                            UpdateContext({plannerRole:First(Filter(DR_roleMaster,nameEN=roleProjectPlanner))});
+                            If(
+                                IsEmpty(
+                                    Filter(DR_roleTemplate,template.templateName=roleTemplateAdmin,role.nameEN=roleProjectPlanner,appUser.既定電子メール=ComboBox1_2.Selected.既定電子メール)
+                                ),
+                                Collect(
+                                    DR_roleTemplate,
+                                    {
+                                        template: plannerRoleTemplate,
+                                        appUser:ComboBox1_2.Selected,
+                                        role:plannerRole
+                                    }
+                                ),
+                                Notify(Concatenate(ComboBox1_2.Selected.氏名, "は、既に設定されています。"));
+                            );
+                        Width: =Parent.Height
+                        ZIndex: =3
+
+                "Gallery13_1 As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                    Height: =Parent.Height - (Label77.Height + Parent.LayoutGap) * 2
+                    Items: =Sort(Filter(DR_roleTemplate,template.templateName=roleTemplateAdmin,role.nameEN=roleProjectPlanner),appUser.氏名)
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =Parent.Height - (Label77.Height + Parent.LayoutGap) * 2
+                    LayoutMinWidth: =320
+                    TemplatePadding: =0
+                    TemplateSize: =70
+                    ZIndex: =4
+
+                    Title16_1 As label:
+                        Height: =41
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.userName
+                        Width: =480
+                        Y: =2
+                        ZIndex: =1
+
+                    Separator14_1 As rectangle:
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =5
+
+                    Icon20_1 As icon.CancelBadge:
+                        Height: =30
+                        Icon: =Icon.CancelBadge
+                        OnSelect: |
+                            =Remove(
+                                DR_roleTemplate,
+                                Filter(
+                                    DR_roleTemplate,
+                                    template.templateName=roleTemplateAdmin,
+                                    role.nameEN=roleProjectPlanner,
+                                    appUser.既定電子メール=ThisItem.appUser.既定電子メール)
+                            );
+                        Width: =30
+                        X: =Parent.Width - (Self.Width * 2)
+                        Y: =(Parent.TemplateHeight - Self.Height) /2
+                        ZIndex: =6
+
+                    Subtitle12_2 As label:
+                        Height: =23
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.appUser.既定電子メール
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =397
+                        Y: =43
+                        ZIndex: =7
+
+        FooterContainer1_3 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =4
+
+            Label76_4 As label:
+                Align: =Align.Right
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                PaddingRight: =20
+                Text: |-
+                    =Concatenate("VER: ", appVer)
+                Width: =200
+                ZIndex: =1
+
+            Label86 As label:
+                Text: =CountRows(Sort(Filter(DR_roleTemplate,template.templateName=roleTemplateAdmin,role.nameEN=roleAdmin),appUser.氏名))
+                ZIndex: =2
+

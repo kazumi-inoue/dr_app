@@ -1,0 +1,671 @@
+"DR_FinishedDev As screen.'tabletAutoLayout_HeaderMainFooter_ver1.0'":
+    OnVisible: |-
+        =Set(targetProjectCode, First(Filter(DR_製造命令番号,製造命令番号id=targetProjectCodeId)));
+        UpdateContext(
+            {
+                pl: First(Filter(DR_projectMember,project.プロジェクトid=targetProjectCode.project.プロジェクトid,role.nameEN=roleProjectLeader)).appUser.既定電子メール,
+                pm: First(Filter(DR_projectMember,project.プロジェクトid=targetProjectCode.project.プロジェクトid,role.nameEN=roleProjectManager)).appUser.既定電子メール,
+                designDirector: First(Filter(DR_projectMember,project.プロジェクトid=targetProjectCode.project.プロジェクトid,role.nameEN=roleDesignPrimaryApprover)).appUser.既定電子メール,
+                devManager: First(Filter(DR_projectMember,project.プロジェクトid=targetProjectCode.project.プロジェクトid,role.nameEN=roleProjectPrimaryApprover)).appUser.既定電子メール
+            }
+        )
+
+    ScreenContainer1_11 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =2
+
+        HeaderContainer1_11 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            NavigateBack_5 As icon.ChevronLeft:
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Icon: =Icon.ChevronLeft
+                OnSelect: =Navigate(DR_ProjectCodeInput)
+                PaddingBottom: =7
+                PaddingLeft: =7
+                PaddingRight: =7
+                PaddingTop: =7
+                Width: =Parent.Height
+                ZIndex: =1
+
+            LabelTitle_6 As label:
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =Parent.Height
+                Size: =18
+                Text: |-
+                    =Concatenate(
+                        "【",
+                        If(
+                            CountRows(Filter(DR_製造命令番号,project.プロジェクトid=targetProjectCode.project.プロジェクトid)) > 0,
+                            First(Filter(DR_製造命令番号,project.プロジェクトid=targetProjectCode.project.プロジェクトid)).製造命令番号,
+                            "製番未付与"
+                        ),
+                        "】",
+                        targetProjectCode.project.開発品の名称
+                    )
+                Width: =Parent.Width - NavigateBack_5.Width - 100
+                ZIndex: =2
+
+            Container43 As groupContainer.horizontalAutoLayoutContainer:
+                ContentLanguage: =
+                LayoutJustifyContent: =LayoutJustifyContent.End
+                LayoutMinHeight: =Parent.Height
+                LayoutMinWidth: =100
+                LayoutMode: =LayoutMode.Auto
+                Width: =100
+                ZIndex: =3
+
+                Icon1 As icon.Save:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Icon: =Icon.Save
+                    PaddingBottom: =5
+                    PaddingLeft: =5
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    Width: =Parent.Height
+                    ZIndex: =1
+
+        Container36 As groupContainer.horizontalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =2
+
+            Container38 As groupContainer.horizontalAutoLayoutContainer:
+                BorderThickness: =1
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =500
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                Label2 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    Size: =18
+                    Text: ="進捗入力"
+                    Width: =Parent.Width
+                    ZIndex: =4
+
+                Container40 As groupContainer.horizontalAutoLayoutContainer:
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =5
+
+                    Container47 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        BorderThickness: =1
+                        Height: =60  
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutMinHeight: =45
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        Width: =Parent.Width
+                        Y: =1
+                        ZIndex: =1
+
+                        TextInput1 As text:
+                            Default: |-
+                                =If(
+                                    Month(targetProjectCode.製番発行日) < 4,
+                                    Year(targetProjectCode.製番発行日) - 1,
+                                    Year(targetProjectCode.製番発行日)
+                                )
+                            Format: =TextFormat.Number
+                            Width: =90
+                            ZIndex: =1
+
+                        Label2_13 As label:
+                            Text: ="年度"
+                            Width: =70
+                            X: =20
+                            Y: =20
+                            ZIndex: =2
+
+                        Label2_14 As label:
+                            Text: |-
+                                =Concatenate(
+                                    "(",
+                                    Int(TextInput1.Text) -1938,
+                                    "期分)"
+                                )
+                            Width: =100
+                            X: =20
+                            Y: =20
+                            ZIndex: =3
+
+                    Container42 As groupContainer.verticalAutoLayoutContainer:
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutMinHeight: =280
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        ZIndex: =2
+
+                        Container44 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =40
+                            LayoutMinHeight: =40
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            ZIndex: =1
+
+                            Label2_1 As label:
+                                Text: ="上期"
+                                Width: =70
+                                X: =20
+                                Y: =20
+                                ZIndex: =1
+
+                            TextInput2 As text:
+                                Align: =Align.Right
+                                Default: =0
+                                FontWeight: =FontWeight.Lighter
+                                Format: =TextFormat.Number
+                                Width: =70
+                                ZIndex: =2
+
+                            Label2_3 As label:
+                                LayoutMinHeight: =30
+                                Text: ="%"
+                                Width: =70
+                                X: =20
+                                Y: =20
+                                ZIndex: =3
+
+                        Label2_5 As label:
+                            Text: ="進捗詳細"
+                            Width: =140
+                            X: =20
+                            Y: =20
+                            ZIndex: =2
+
+                        TextInput4 As text:
+                            Default: =""
+                            Height: =180
+                            Mode: =TextMode.MultiLine
+                            Width: =Parent.Width - Parent.PaddingLeft - Parent.PaddingRight
+                            ZIndex: =3
+
+                    Container42_1 As groupContainer.verticalAutoLayoutContainer:
+                        BorderThickness: =1
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutMinHeight: =280
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        ZIndex: =3
+
+                        Container45 As groupContainer.horizontalAutoLayoutContainer:
+                            LayoutMinHeight: =40
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            ZIndex: =2
+
+                            Label2_2 As label:
+                                Text: ="下期"
+                                Width: =70
+                                ZIndex: =1
+
+                            TextInput3 As text:
+                                Align: =Align.Right
+                                Default: =0
+                                Format: =TextFormat.Number
+                                Width: =70
+                                ZIndex: =2
+
+                            Label2_4 As label:
+                                Text: ="%"
+                                Width: =70
+                                X: =20
+                                Y: =20
+                                ZIndex: =3
+
+                        Label2_6 As label:
+                            Text: ="進捗詳細"
+                            Width: =140
+                            X: =20
+                            Y: =20
+                            ZIndex: =3
+
+                        TextInput4_1 As text:
+                            Default: =""
+                            Height: =180
+                            Mode: =TextMode.MultiLine
+                            Width: =Parent.Width - Parent.PaddingLeft - Parent.PaddingRight
+                            ZIndex: =4
+
+            Container38_1 As groupContainer.horizontalAutoLayoutContainer:
+                BorderThickness: =1
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =500
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =10
+                ZIndex: =2
+
+                Label2_7 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    Size: =18
+                    Text: ="完結／中止／継続 入力"
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                Container46 As groupContainer.verticalAutoLayoutContainer:
+                    BorderThickness: =1
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    ZIndex: =2
+
+                    ComboBox2 As combobox:
+                        DisplayFields: =["cr5ee_drselect_completed_aborted_continued_list"]
+                        Items: ='DR選択肢_完了/中止/継続'
+                        SearchFields: =["cr5ee_drselect_completed_aborted_continued_list"]
+                        SearchItems: =Search('DR選択肢_完了/中止/継続',ComboBox2.SearchText,"cr5ee_drselect_completed_aborted_continued_list")
+                        SelectMultiple: =false
+                        ZIndex: =1
+
+                    Label2_8 As label:
+                        Text: ="理由"
+                        Width: =140
+                        X: =20
+                        Y: =20
+                        ZIndex: =2
+
+                    TextInput4_2 As text:
+                        Default: =""
+                        Height: =110
+                        Mode: =TextMode.MultiLine
+                        Width: =Parent.Width - Parent.PaddingLeft - Parent.PaddingRight
+                        ZIndex: =3
+
+                    Label3 As label:
+                        Text: ="開発品の処理"
+                        X: =40
+                        Y: =40
+                        ZIndex: =4
+
+                    "Gallery17 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                        Items: =CustomGallerySample
+                        Layout: =Layout.Vertical
+                        LayoutMinHeight: =287
+                        LayoutMinWidth: =320
+                        TemplatePadding: =0
+                        TemplateSize: =Min(160, Self.Height - 60)
+                        ZIndex: =5
+
+                        Image4 As image:
+                            Height: =128
+                            OnSelect: =Select(Parent)
+                            Width: =128
+                            X: =16
+                            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                            ZIndex: =1
+
+                        Title15 As label:
+                            Height: =Self.Size * 1.8
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =ThisItem.SampleHeading
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =Parent.TemplateWidth - Image4.Width - 104
+                            X: =Image4.X + Image4.Width + 24
+                            Y: =44
+                            ZIndex: =2
+
+                        Subtitle10 As label:
+                            Height: =Self.Size * 1.8
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =ThisItem.SampleText
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =Title15.Width
+                            X: =Title15.X
+                            Y: =Title15.Y + Title15.Height + 4
+                            ZIndex: =3
+
+                        NextArrow9 As icon.ChevronRight:
+                            AccessibleLabel: =Self.Tooltip
+                            Height: =60
+                            Icon: =Icon.ChevronRight
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingLeft: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            TabIndex: =0
+                            Tooltip: ="項目の詳細の表示"
+                            Width: =60
+                            X: =Parent.TemplateWidth - Self.Width - 5
+                            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                            ZIndex: =4
+
+                        Separator17 As rectangle:
+                            Height: =1
+                            OnSelect: =Select(Parent)
+                            Width: =Parent.TemplateWidth
+                            Y: =Parent.TemplateHeight - 1
+                            ZIndex: =5
+
+            Container51 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Height: =Parent.Height
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =300
+                LayoutMode: =LayoutMode.Auto
+                Width: =300
+                ZIndex: =4
+
+                Label2_17 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    Size: =18
+                    Text: ="承認フロー"
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                Label6_1 As label:
+                    Height: =43
+                    Text: ="PL"
+                    Width: =Parent.Width - 30
+                    X: =9
+                    Y: =51
+                    ZIndex: =2
+
+                ComboBox5_4 As combobox:
+                    DefaultSelectedItems: |-
+                        =If(
+                            IsBlank(pl),
+                            Blank(),
+                            First(Filter('ユーザー ',既定電子メール=pl))
+                        )
+                    DisplayFields: =["fullname"]
+                    InputTextPlaceholder: =""
+                    Items: ='ユーザー '
+                    SearchFields: =["fullname"]
+                    SearchItems: =Search('ユーザー ',ComboBox5_4.SearchText,"fullname")
+                    SelectMultiple: =false
+                    Width: =270
+                    X: =15
+                    Y: =83
+                    ZIndex: =3
+
+                Container50_3 As groupContainer.horizontalAutoLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Height: =55
+                    LayoutGap: =10
+                    LayoutJustifyContent: =LayoutJustifyContent.Center
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingTop: =10
+                    Width: =Parent.Width - 30
+                    X: =15
+                    Y: =135
+                    ZIndex: =4
+
+                    Button1_3 As button:
+                        Text: ="申請"
+                        Width: =60
+                        ZIndex: =3
+
+                    Label7_3 As label:
+                        Text: ="2023/00/00"
+                        ZIndex: =4
+
+                Icon5_3 As icon.ArrowDown:
+                    Height: =20
+                    Width: =20
+                    X: =144
+                    Y: =188
+                    ZIndex: =5
+
+                Label6_2 As label:
+                    Height: =43
+                    Text: ="PM"
+                    Width: =Parent.Width - 30
+                    X: =9
+                    Y: =51
+                    ZIndex: =6
+
+                ComboBox5_5 As combobox:
+                    DefaultSelectedItems: =
+                    DisplayFields: =["fullname"]
+                    InputTextPlaceholder: =""
+                    IsSearchable: =false
+                    Items: |-
+                        =If(
+                            IsBlank(pm),
+                            Blank(),
+                            First(Filter('ユーザー ',既定電子メール=pm))
+                        )
+                    SearchFields: =["fullname"]
+                    SearchItems: =[]
+                    SelectMultiple: =false
+                    Width: =270
+                    X: =15
+                    Y: =83
+                    ZIndex: =7
+
+                Container50_4 As groupContainer.horizontalAutoLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Height: =55
+                    LayoutGap: =10
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingTop: =10
+                    Width: =Parent.Width - 30
+                    X: =15
+                    Y: =135
+                    ZIndex: =8
+
+                    ComboBox6_4 As combobox:
+                        DisplayFields: =["cr5ee_drselect_approval_result_type_list"]
+                        InputTextPlaceholder: ="判断"
+                        Items: =DR選択肢_承認種類
+                        SearchFields: =["cr5ee_drselect_approval_result_type_list"]
+                        SearchItems: =Search(DR選択肢_承認種類,ComboBox6_4.SearchText,"cr5ee_drselect_approval_result_type_list")
+                        Width: =100
+                        ZIndex: =2
+
+                    Button1_4 As button:
+                        Text: ="登録"
+                        Width: =60
+                        ZIndex: =3
+
+                    Label7_2 As label:
+                        Text: ="2023/00/00"
+                        ZIndex: =4
+
+                Icon5_4 As icon.ArrowDown:
+                    Height: =20
+                    Width: =20
+                    X: =144
+                    Y: =188
+                    ZIndex: =9
+
+                Label6_3 As label:
+                    FontWeight: =FontWeight.Lighter
+                    Height: =43
+                    Text: ="開発部長"
+                    Width: =Parent.Width - 30
+                    X: =9
+                    Y: =51
+                    ZIndex: =10
+
+                ComboBox5_6 As combobox:
+                    DefaultSelectedItems: |-
+                        =If(
+                            IsBlank(designDirector),
+                            Blank(),
+                            First(Filter('ユーザー ',既定電子メール=designDirector))
+                        )
+                    DisplayFields: =["fullname"]
+                    InputTextPlaceholder: =""
+                    IsSearchable: =false
+                    Items: ='ユーザー '
+                    SearchFields: =["fullname"]
+                    SearchItems: =[]
+                    SelectMultiple: =false
+                    Width: =270
+                    X: =15
+                    Y: =83
+                    ZIndex: =11
+
+                Container50_5 As groupContainer.horizontalAutoLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Height: =55
+                    LayoutGap: =10
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingTop: =10
+                    Width: =Parent.Width - 30
+                    X: =15
+                    Y: =135
+                    ZIndex: =12
+
+                    ComboBox6_5 As combobox:
+                        DisplayFields: =["cr5ee_drselect_approval_result_type_list"]
+                        InputTextPlaceholder: ="判断"
+                        Items: =DR選択肢_承認種類
+                        SearchFields: =["cr5ee_drselect_approval_result_type_list"]
+                        SearchItems: =Search(DR選択肢_承認種類,ComboBox6_5.SearchText,"cr5ee_drselect_approval_result_type_list")
+                        Width: =100
+                        ZIndex: =2
+
+                    Button1_5 As button:
+                        Text: ="登録"
+                        Width: =60
+                        ZIndex: =3
+
+                    Label7_1 As label:
+                        Text: ="2023/00/00"
+                        ZIndex: =4
+
+                Icon5_5 As icon.ArrowDown:
+                    Height: =20
+                    Width: =20
+                    X: =144
+                    Y: =188
+                    ZIndex: =13
+
+                Label6_4 As label:
+                    FontWeight: =FontWeight.Lighter
+                    Height: =43
+                    Text: ="事業部長"
+                    Width: =Parent.Width - 30
+                    X: =9
+                    Y: =51
+                    ZIndex: =14
+
+                ComboBox5_7 As combobox:
+                    DefaultSelectedItems: |-
+                        =If(
+                            IsBlank(devManager),
+                            Blank(),
+                            First(Filter('ユーザー ',既定電子メール=devManager))
+                        )
+                    DisplayFields: =["fullname"]
+                    InputTextPlaceholder: =""
+                    Items: ='ユーザー '
+                    SearchFields: =["fullname"]
+                    SearchItems: =Search('ユーザー ',ComboBox5_7.SearchText,"fullname")
+                    SelectMultiple: =false
+                    Width: =270
+                    X: =15
+                    Y: =83
+                    ZIndex: =15
+
+                Container50_6 As groupContainer.horizontalAutoLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Height: =55
+                    LayoutGap: =10
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingTop: =10
+                    Width: =Parent.Width - 30
+                    X: =15
+                    Y: =135
+                    ZIndex: =16
+
+                    ComboBox6_6 As combobox:
+                        DisplayFields: =["cr5ee_drselect_approval_result_type_list"]
+                        InputTextPlaceholder: ="判断"
+                        Items: =DR選択肢_承認種類
+                        SearchFields: =["cr5ee_drselect_approval_result_type_list"]
+                        SearchItems: =Search(DR選択肢_承認種類,ComboBox6_6.SearchText,"cr5ee_drselect_approval_result_type_list")
+                        Width: =100
+                        ZIndex: =2
+
+                    Button1_6 As button:
+                        Text: ="登録"
+                        Width: =60
+                        ZIndex: =3
+
+                    Label7 As label:
+                        Text: ="2023/00/00"
+                        ZIndex: =4
+
+        FooterContainer1_11 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =3
+
+            Label76_12 As label:
+                Align: =Align.Right
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                PaddingRight: =20
+                Text: |-
+                    =Concatenate("VER: ", appVer)
+                Width: =200
+                ZIndex: =1
+

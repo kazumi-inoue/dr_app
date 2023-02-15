@@ -1,0 +1,872 @@
+"DR_planning As screen.'tabletAutoLayout_HeaderMainFooter_ver1.0'":
+    OnVisible: |-
+        =UpdateContext({planEdit:"edit",planNew:"new",planResult:"updateResult"});
+        Clear(attendees);
+        Set(teamsAttendeeText, "");
+
+    ScreenContainer1_8 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer1_8 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            NavigateBack_2 As icon.ChevronLeft:
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Icon: =Icon.ChevronLeft
+                OnSelect: =Navigate(backTo)
+                PaddingBottom: =7
+                PaddingLeft: =7
+                PaddingRight: =7
+                PaddingTop: =7
+                Width: =Parent.Height
+                ZIndex: =1
+
+            LabelTitle_2 As label:
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =Parent.Height
+                Size: =25
+                Text: ="イベント設定"
+                Width: =240
+                ZIndex: =2
+
+            LabelTitle_5 As label:
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                PaddingBottom: =10
+                Size: =16
+                Text: |-
+                    =Concatenate(
+                        "【",
+                        If(
+                            CountRows(Filter(DR_製造命令番号,project.プロジェクトid=invitationMtg.プロジェクトid.プロジェクトid, Not(IsBlank(製番発行日))))>0,
+                            Last(Sort(Filter(DR_製造命令番号,project.プロジェクトid=invitationMtg.プロジェクトid.プロジェクトid, Not(IsBlank(製番発行日))),製番発行日)).製造命令番号,
+                            "製番未取得"
+                        ),    
+                        "】 ",
+                        drEditTarget.開発品の名称
+                    )
+                VerticalAlign: =VerticalAlign.Bottom
+                Width: =Parent.Width-NavigateBack_2.Width
+                ZIndex: =3
+
+        Container17_1 As groupContainer.horizontalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =2
+
+            Container10_4 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(56, 96, 178, 1)
+                BorderThickness: =1
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                ZIndex: =1
+
+                Container7_9 As groupContainer.verticalAutoLayoutContainer:
+                    Height: =Parent.Height
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutGap: =3
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =5
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+                    Container28 As groupContainer.horizontalAutoLayoutContainer:
+                        Height: =40
+                        LayoutMinHeight: =Label74_32.Height
+                        LayoutMinWidth: =Parent.Width - Parent.PaddingLeft
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =Parent.Width - Parent.PaddingLeft
+                        ZIndex: =3
+
+                        Label74_32 As label:
+                            Height: =50
+                            PaddingBottom: =0
+                            PaddingTop: =0
+                            Text: ="DR予定/実績"
+                            VerticalAlign: =VerticalAlign.Bottom
+                            Width: =Parent.Width - Icon25.Width - 10
+                            Y: =40
+                            ZIndex: =1
+
+                        Icon25 As icon.AddDocument:
+                            Height: =Parent.Height
+                            Icon: =Icon.AddDocument
+                            OnSelect: |-
+                                =UpdateContext({drPlanMode:planNew});
+                            PaddingBottom: =2
+                            PaddingLeft: =2
+                            PaddingRight: =2
+                            PaddingTop: =2
+                            Tooltip: ="予定の追加"
+                            Width: =Parent.Height
+                            ZIndex: =2
+
+                    "Gallery3 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        BorderThickness: =1
+                        Height: =Parent.Height - Label74_32.Height * 2 - Parent.LayoutGap * 3
+                        Items: =Sort(Filter(DR_会議情報,プロジェクトid.プロジェクトid=drEditTarget.プロジェクトid),選択肢_DR種類id.DR開催順番,Descending)
+                        Layout: =Layout.Vertical
+                        LayoutMinHeight: =Parent.Height - Label74_32.Height -Parent.LayoutGap
+                        LayoutMinWidth: =320
+                        TemplateFill: |-
+                            =If(
+                                IsBlank(ThisItem.選択肢_承認種類id),
+                                RGBA(0, 0, 0, 0),
+                                RGBA(204, 204, 204, 1)
+                            )
+                        TemplatePadding: =10
+                        TemplateSize: =90
+                        Width: =Parent.Width - Parent.PaddingLeft- Parent.PaddingRight
+                        ZIndex: =4
+
+                        Separator4 As rectangle:
+                            Height: =1
+                            OnSelect: =Select(Parent)
+                            Width: =Parent.TemplateWidth
+                            Y: =Parent.TemplateHeight - 1
+                            ZIndex: =1
+
+                        Separator4_4 As rectangle:
+                            BorderColor: =RGBA(255, 191, 0, 1)
+                            BorderThickness: =3
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =Parent.TemplateHeight
+                            OnSelect: =Select(Parent)
+                            Visible: |-
+                                =If(
+                                    drPlanMode<>planNew,
+                                    targetItem.会議情報id=ThisItem.会議情報id
+                                )
+                            Width: =Parent.TemplateWidth
+                            ZIndex: =2
+
+                        Title4 As label:
+                            Height: =Self.Size * 1.8
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =16
+                            Text: =ThisItem.選択肢_DR種類id.DR種類一覧
+                            VerticalAlign: =VerticalAlign.Top
+                            X: =7
+                            Y: =8
+                            ZIndex: =3
+
+                        Icon14 As icon.Edit:
+                            Height: =50
+                            Icon: =Icon.Edit
+                            OnSelect: |-
+                                =UpdateContext({drPlanMode:planResult, targetItem:ThisItem});
+                            PaddingBottom: =10
+                            PaddingLeft: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Tooltip: ="DR実績編集"
+                            Width: =50
+                            X: =64
+                            Y: =42
+                            ZIndex: =4
+
+                        Icon17 As icon.Settings:
+                            Height: =50
+                            Icon: =Icon.Settings
+                            OnSelect: |-
+                                =UpdateContext({drPlanMode:planEdit, targetItem:ThisItem});
+                            PaddingBottom: =10
+                            PaddingLeft: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Tooltip: ="計画修正"
+                            Visible: |-
+                                =If(
+                                    IsBlank(ThisItem.選択肢_承認種類id),
+                                    true,
+                                    false
+                                )
+                            Width: =50
+                            X: =114
+                            Y: =42
+                            ZIndex: =5
+
+                        Icon26 As icon.CalendarBlank:
+                            Height: =50
+                            Icon: =Icon.CalendarBlank
+                            OnSelect: |-
+                                =Navigate(DR_invitation,ScreenTransition.Fade ,{targetDrId:ThisItem.会議情報id, backTo: DR_planning});
+                            PaddingBottom: =10
+                            PaddingLeft: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Tooltip: ="会議案内"
+                            Visible: |-
+                                =If(
+                                    IsBlank(ThisItem.選択肢_承認種類id),
+                                    true,
+                                    false
+                                )
+                            Width: =50
+                            X: =14
+                            Y: =43
+                            ZIndex: =6
+
+                        Icon30 As icon.CancelBadge:
+                            Height: =50
+                            Icon: =Icon.CancelBadge
+                            OnSelect: |-
+                                =Remove(
+                                    DR_会議情報,
+                                    Filter(DR_会議情報,会議情報id=ThisItem.会議情報id)
+                                )
+                            PaddingBottom: =10
+                            PaddingLeft: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Tooltip: ="削除"
+                            Visible: |-
+                                =If(
+                                    IsBlank(ThisItem.選択肢_承認種類id),
+                                    true,
+                                    false
+                                )
+                            Width: =50
+                            X: =Parent.Width - Self.Width - Parent.TemplatePadding * 2
+                            Y: =16
+                            ZIndex: =7
+
+                        Title4_2 As label:
+                            Height: =27
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =14
+                            Text: =Concatenate("予定：", Text(ThisItem.会議予定日,"yyyy/mm/dd"))
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =168
+                            X: =248
+                            Y: =Title4.Y
+                            ZIndex: =8
+
+                        Title4_3 As label:
+                            Height: =27
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =14
+                            Text: =Concatenate("実績：", Text(ThisItem.会議実施日,"yyyy/mm/dd"))
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =168
+                            X: =248
+                            Y: =34
+                            ZIndex: =9
+
+                        Title4_4 As label:
+                            Color: |-
+                                =If(
+                                    Self.Text<>"承認",
+                                    If(
+                                        Self.Text<>"却下",
+                                        RGBA(0, 0, 0, 1),
+                                        RGBA(255, 0, 0, 1)
+                                    ),
+                                    RGBA(56, 96, 178, 1)
+                                )
+                            Height: =28
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =14
+                            Text: =If(IsBlank(ThisItem.選択肢_承認種類id),"未",ThisItem.選択肢_承認種類id.承認種類一覧)
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =58
+                            X: =157
+                            Y: =Title4.Y
+                            ZIndex: =10
+
+                        Title4_10 As label:
+                            Color: =RGBA(255, 0, 0, 1)
+                            FontWeight: =FontWeight.Normal
+                            Height: =28
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =14
+                            Text: ="判定条件有"
+                            VerticalAlign: =VerticalAlign.Top
+                            Visible: =Not(Or(ThisItem.承認条件="",IsBlank(ThisItem.承認条件),IsEmpty(ThisItem.承認条件)))
+                            Width: =123
+                            X: =244
+                            Y: =61
+                            ZIndex: =11
+
+            Container32 As groupContainer.verticalAutoLayoutContainer:
+                BorderColor: =RGBA(56, 96, 178, 1)
+                BorderThickness: =1
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =870
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =2
+
+                Label75 As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Center
+                    BorderThickness: =1
+                    Fill: |
+                        =If(
+                            drPlanMode<>planEdit,
+                            If(
+                                drPlanMode=planNew,
+                                RGBA(220, 153, 153, 1),
+                                RGBA(255, 255, 255, 1)
+                            ),
+                            RGBA(136, 160, 209, 1)
+                        )
+                    FontWeight: =FontWeight.Bold
+                    Height: =50
+                    Size: =20
+                    Text: |
+                        =If(
+                            drPlanMode<>planEdit,
+                            If(
+                                drPlanMode=planNew,
+                                "新規登録",
+                                "実績登録"
+                            ),
+                            "計画編集"
+                        )
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                Container33 As groupContainer.manualLayoutContainer:
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    ZIndex: =2
+
+                    Container34 As groupContainer.verticalAutoLayoutContainer:
+                        Height: =608
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =5
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingLeft: =10
+                        PaddingTop: =10
+                        Width: =451
+                        ZIndex: =1
+
+                        Label83 As label:
+                            FontWeight: =FontWeight.Semibold
+                            Text: ="審議種類"
+                            VerticalAlign: =VerticalAlign.Bottom
+                            ZIndex: =1
+
+                        ComboBox3 As combobox:
+                            DefaultSelectedItems: |-
+                                =If(
+                                    drPlanMode=planNew,
+                                    Blank(),
+                                    targetItem.選択肢_DR種類id
+                                )
+                            DisplayFields: =["cr5ee_drselect_status_type_list"]
+                            DisplayMode: |-
+                                =If(
+                                    drPlanMode<>planResult,
+                                    DisplayMode.Edit,
+                                    DisplayMode.View
+                                )
+                            IsSearchable: =false
+                            Items: =Sort(DR選択肢_DR種類,DR開催順番)
+                            SearchFields: =["cr5ee_drselect_status_type_list"]
+                            SearchItems: =[]
+                            SelectMultiple: =false
+                            ZIndex: =2
+
+                        Label83_3 As label:
+                            FontWeight: =FontWeight.Bold
+                            Text: ="審議結果"
+                            VerticalAlign: =VerticalAlign.Bottom
+                            ZIndex: =7
+
+                        ComboBox3_4 As combobox:
+                            DefaultSelectedItems: =targetItem.選択肢_承認種類id
+                            DisplayFields: =["cr5ee_drselect_approval_result_type_list"]
+                            DisplayMode: |-
+                                =If(
+                                    drPlanMode=planResult,
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
+                            IsSearchable: =false
+                            Items: =DR選択肢_承認種類
+                            SearchFields: =["cr5ee_drselect_approval_result_type_list"]
+                            SearchItems: =[]
+                            SelectMultiple: =false
+                            ZIndex: =8
+
+                        Label83_4 As label:
+                            FontWeight: =FontWeight.Bold
+                            Text: ="承認条件"
+                            VerticalAlign: =VerticalAlign.Bottom
+                            ZIndex: =9
+
+                        TextInput22 As text:
+                            Default: |-
+                                =If(
+                                    IsEmpty(targetItem.承認条件),
+                                    "",
+                                    targetItem.承認条件
+                                )
+                            DisplayMode: |-
+                                =If(
+                                    drPlanMode=planResult,
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
+                            Height: =Parent.Height - ComboBox3.Height * 5 - Parent.LayoutGap * 7 - Parent.PaddingTop
+                            Mode: =TextMode.MultiLine
+                            Width: =Parent.Width - Parent.PaddingLeft - Parent.PaddingRight - 10
+                            ZIndex: =10
+
+                    Container34_1 As groupContainer.verticalAutoLayoutContainer:
+                        Height: =608
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =5
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        Width: =397
+                        X: =470
+                        ZIndex: =2
+
+                        Label83_1 As label:
+                            FontWeight: =FontWeight.Bold
+                            Text: ="予定日"
+                            VerticalAlign: =VerticalAlign.Bottom
+                            ZIndex: =1
+
+                        DatePicker9 As datepicker:
+                            DefaultDate: |-
+                                =If(
+                                    Or(IsEmpty(targetItem.会議予定日),drPlanMode=planNew),
+                                    Today(),
+                                    targetItem.会議予定日
+                                )
+                            DisplayMode: |-
+                                =If(
+                                    drPlanMode<>planResult,
+                                    DisplayMode.Edit,
+                                    DisplayMode.View
+                                )
+                            ZIndex: =2
+
+                        Label83_2 As label:
+                            FontWeight: =FontWeight.Bold
+                            Text: ="実施日"
+                            VerticalAlign: =VerticalAlign.Bottom
+                            ZIndex: =3
+
+                        DatePicker10 As datepicker:
+                            DefaultDate: |-
+                                =If(
+                                    Or(IsEmpty(targetItem.会議実施日),IsBlank(targetItem.会議実施日)),
+                                    targetItem.会議予定日,
+                                    targetItem.会議実施日
+                                )
+                            DisplayMode: |-
+                                =If(
+                                    drPlanMode=planResult,
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
+                            ZIndex: =4
+
+                        Container37 As groupContainer.horizontalAutoLayoutContainer:
+                            LayoutMinHeight: =40
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingTop: =10
+                            ZIndex: =5
+
+                            Label83_5 As label:
+                                FontWeight: =FontWeight.Bold
+                                Text: ="参加者"
+                                Visible: |-
+                                    =If(
+                                        drPlanMode=planResult,
+                                        true,
+                                        false
+                                    )
+                                ZIndex: =1
+
+                            Button20 As button:
+                                AlignInContainer: =AlignInContainer.Start
+                                FontWeight: =FontWeight.Normal
+                                Height: =Parent.Height - Parent.PaddingTop
+                                OnSelect: |
+                                    =Set(teamsAttendeeText, "");
+                                    UpdateContext({attendeesTextLoad:true});
+                                Size: =12
+                                Text: ="Teams会議ファイル読み込み"
+                                Visible: |-
+                                    =If(
+                                        drPlanMode=planResult,
+                                        true,
+                                        false
+                                    )
+                                Width: =220
+                                X: =40
+                                Y: =40
+                                ZIndex: =2
+
+                        "Gallery5 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            BorderColor: |-
+                                =If(
+                                    Self.DisplayMode=DisplayMode.Edit,
+                                    RGBA(0, 18, 107, 1),
+                                    colorSecondary
+                                )
+                            BorderThickness: =2
+                            DisplayMode: |-
+                                =If(
+                                    drPlanMode=planResult,
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
+                            Fill: =RGBA(255, 255, 255, 1)
+                            Height: =Parent.Height - ComboBox3.Height * 5 - Parent.LayoutGap * 7 - Parent.PaddingTop
+                            Items: =Filter(DR_attendees, meeting.会議情報id=targetItem.会議情報id)
+                            Layout: =Layout.Vertical
+                            LayoutMinHeight: =Parent.Height - ComboBox3.Height * 5 - Parent.LayoutGap * 7 - Parent.PaddingTop
+                            LayoutMinWidth: =320
+                            TemplatePadding: =0
+                            TemplateSize: =70
+                            Width: =Parent.Width - Parent.PaddingLeft - Parent.PaddingRight
+                            X: =40
+                            Y: =124
+                            ZIndex: =6
+
+                            "Gallery14 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+                                Height: =34
+                                Items: |-
+                                    =Filter(
+                                        DR_projectMember,
+                                        project.プロジェクトid=targetItem.プロジェクトid.プロジェクトid,
+                                        appUser.既定電子メール=ThisItem.participant.既定電子メール
+                                    )
+                                Layout: =Layout.Vertical
+                                TemplatePadding: =0
+                                TemplateSize: =32
+                                Width: =Parent.TemplateWidth - 20
+                                X: =10
+                                Y: =3
+                                ZIndex: =1
+
+                                Title12 As label:
+                                    FontWeight: =FontWeight.Lighter
+                                    Height: =15
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: =ThisItem.role.nameJP
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =152
+                                    ZIndex: =1
+
+                            Subtitle5 As label:
+                                FontWeight: =FontWeight.Bold
+                                Height: =25
+                                OnSelect: =Select(Parent)
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Size: =14
+                                Text: =ThisItem.participant.氏名
+                                VerticalAlign: =VerticalAlign.Top
+                                Width: =267
+                                X: =10
+                                Y: =38
+                                ZIndex: =2
+
+                            Separator11 As rectangle:
+                                Height: =1
+                                OnSelect: =Select(Parent)
+                                Width: =Parent.TemplateWidth
+                                Y: =Parent.TemplateHeight - 1
+                                ZIndex: =4
+
+                            Dropdown15 As dropdown:
+                                Default: |
+                                    =If(
+                                        First(
+                                            Filter(
+                                                DR_attendees,
+                                                meeting.会議情報id=targetItem.会議情報id,
+                                                participant.既定電子メール=ThisItem.participant.既定電子メール
+                                            )
+                                        ).IsAttendance<>'IsAttendance (DR_attendees)'.はい,
+                                        If(
+                                            First(
+                                                Filter(
+                                                    DR_attendees,
+                                                    meeting.会議情報id=targetItem.会議情報id,
+                                                    participant.既定電子メール=ThisItem.participant.既定電子メール
+                                                )
+                                            ).IsAttendance='IsAttendance (DR_attendees)'.いいえ,
+                                            "欠席",
+                                            ""
+                                        ),
+                                        "出席"
+                                    )
+                                DisplayMode: |-
+                                    =If(
+                                        IsEmpty(Filter(attendees,既定電子メール=ThisItem.participant.既定電子メール)),
+                                        DisplayMode.Edit,
+                                        DisplayMode.View
+                                    )
+                                Height: =25
+                                Items: =["出席","欠席"]
+                                OnChange: |-
+                                    =Patch(
+                                        DR_attendees,
+                                        First(
+                                            Filter(
+                                                DR_attendees,
+                                                meeting.会議情報id=targetItem.会議情報id,
+                                                participant.既定電子メール=ThisItem.participant.既定電子メール
+                                            )
+                                        ),
+                                        {
+                                            IsAttendance:If(Self.SelectedText.Value="出席",'IsAttendance (DR_attendees)'.はい,'IsAttendance (DR_attendees)'.いいえ)
+                                        }
+                                    )
+                                OnSelect: =Select(Parent)
+                                Width: =90
+                                X: =277
+                                Y: =38
+                                ZIndex: =5
+
+                    Icon13_1 As icon.Save:
+                        Color: =RGBA(56, 96, 178, 1)
+                        Height: =50
+                        Icon: =Icon.Save
+                        OnSelect: |
+                            =If(
+                                drPlanMode<>planNew,
+                                If(
+                                    drPlanMode=planEdit,
+                                    //Edit
+                                    UpdateContext({inProgress:true});
+                                    Patch(
+                                        DR_会議情報,
+                                        First(Filter(DR_会議情報,会議情報id=targetItem.会議情報id)),
+                                        {
+                                            選択肢_DR種類id:ComboBox3.Selected,
+                                            会議予定日:DatePicker9.SelectedDate
+                                        }
+                                    );
+                                    UpdateContext({inProgress:false});
+                                    ,
+                                    //Result
+                                    UpdateContext({inProgress:true});
+                                    Patch(
+                                        DR_会議情報,
+                                        First(Filter(DR_会議情報,会議情報id=targetItem.会議情報id)),
+                                        {
+                                            会議実施日:DatePicker10.SelectedDate,
+                                            選択肢_承認種類id:ComboBox3_4.Selected,
+                                            承認条件:TextInput22.Text
+                                        }
+                                    );
+                                    UpdateContext({inProgress:false});
+                                ),
+                                //New
+                                UpdateContext({inProgress:true});
+                                Collect(
+                                    DR_会議情報,
+                                    {
+                                        プロジェクトid:drEditTarget,
+                                        選択肢_DR種類id:ComboBox3.Selected,
+                                        会議予定日:DatePicker9.SelectedDate
+                                    }
+                                );
+                                UpdateContext({inProgress:false});
+                            );
+                        PaddingBottom: =5
+                        PaddingLeft: =5
+                        PaddingRight: =5
+                        PaddingTop: =5
+                        Width: =50
+                        X: =820
+                        ZIndex: =3
+
+        FooterContainer1_8 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =3
+
+            Label76_9 As label:
+                Align: =Align.Right
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                PaddingRight: =20
+                Text: |-
+                    =Concatenate("VER: ", appVer)
+                Width: =200
+                ZIndex: =1
+
+    Rectangle4 As rectangle:
+        BorderThickness: =1
+        Fill: =RGBA(215, 223, 240, 1)
+        Height: =632
+        Visible: =attendeesTextLoad
+        Width: =1328
+        X: =19
+        Y: =68
+        ZIndex: =2
+
+    TextInput24 As text:
+        Default: =teamsAttendeeText
+        Height: =490
+        HoverFill: =colorLight
+        Mode: =TextMode.MultiLine
+        Visible: =attendeesTextLoad
+        Width: =1305
+        X: =30
+        Y: =83
+        ZIndex: =3
+
+    Button21 As button:
+        OnSelect: |-
+            =UpdateContext({attendeesTextLoad: false})
+        Text: ="キャンセル"
+        Visible: =attendeesTextLoad
+        X: =954
+        Y: =648
+        ZIndex: =5
+
+    Button19 As button:
+        OnSelect: |-
+            =// init
+            ClearCollect(attendeeFile, Split(TextInput24.Text,Char(10)));
+            ClearCollect(IsAttendeePart, false);
+            Clear(attendeeLines);
+            
+            // collect attendees part in file
+            ForAll(
+                attendeeFile,
+                If(
+                    Len(Result)=0,
+                    Collect(IsAttendeePart, false)
+                );
+                If(
+                    Last(IsAttendeePart).Value,
+                    Collect(attendeeLines, Result)
+                );
+                If(
+                    IsMatch(Result, ".*参加者.*"),
+                    Collect(IsAttendeePart, true)
+                );
+            );
+            
+            Clear(nameLoc);
+            Clear(emailLoc);
+            ClearCollect(headerRow, Split(First(attendeeLines).Value, Char(09)));
+            ForAll(
+                Sequence(CountRows(headerRow)),
+                If(
+                    Value<CountRows(headerRow),
+                    If(
+                        Index(headerRow, Value).Result="名前",
+                        Collect(nameLoc,Value);
+                    );
+                    If(
+                        Index(headerRow, Value).Result="メール",
+                        Collect(emailLoc,Value);
+                    );
+                )
+            );
+            
+            Clear(attendeeRows);
+            ForAll(
+                attendeeLines,
+                If(
+                    Not(First(attendeeLines).Value=Value),
+                    Collect(
+                        attendeeRows, 
+                        {
+                            name:Index(Split(Value, Char(09)),Last(nameLoc).Value).Result,
+                            email:Index(Split(Value, Char(09)),Last(emailLoc).Value).Result
+                        }
+                    );
+                );
+            );
+            
+            Clear(attendees);
+            ForAll(
+                attendeeRows,
+                Collect(attendees, First(Filter('ユーザー ',既定電子メール=email)));
+                If(
+                    IsEmpty(Filter(DR_attendees,participant.既定電子メール=email,meeting.会議情報id=targetItem.会議情報id)),
+                    Collect(
+                        DR_attendees,
+                        {
+                            meeting: targetItem,
+                            participant: First(Filter('ユーザー ',既定電子メール=email)),
+                            IsAttendance: 'IsAttendance (DR_attendees)'.はい
+                        }
+                    ),
+                    Patch(
+                        DR_attendees,
+                        First(Filter(DR_attendees,participant.既定電子メール=email,meeting.会議情報id=targetItem.会議情報id)),
+                        {
+                            IsAttendance: 'IsAttendance (DR_attendees)'.はい
+                        }
+                    )
+                )
+            );
+            Refresh(DR_attendees);
+            UpdateContext({attendeesTextLoad: false})
+        Text: ="読み込み"
+        Visible: =attendeesTextLoad
+        X: =1153
+        Y: =648
+        ZIndex: =6
+

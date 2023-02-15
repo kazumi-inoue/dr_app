@@ -1,0 +1,112 @@
+Debug As screen:
+    OnVisible: |-
+        =/*
+        Clear(ItemsAll);
+        ForAll(
+            test1,
+            Collect(ItemsAll,Value)
+        );
+        */
+
+    Button15 As button:
+        Fill: =colorPrimary
+        Height: =46
+        OnSelect: |-
+            =//change mode
+            Set(debugMode, Not(debugMode));
+        Text: =If(debugMode,"Change to PROD mode", "Change to DEBUG mode")
+        Width: =297
+        X: =883
+        Y: =684
+        ZIndex: =1
+
+    Button15_1 As button:
+        Height: =46
+        OnSelect: |-
+            =//Color
+            Set(colorPrimary, ColorValue("RoyalBlue"));
+            Set(colorSecondary, ColorValue("LIGHTSLATEGRAY"));
+            Set(colorSuccess, ColorValue("LimeGreen"));
+            Set(colorDanger, ColorValue("deeppink"));
+            Set(colorWarning, ColorValue("coral"));
+            Set(colorInfo, ColorValue("PowderBlue"));
+            Set(colorLight, ColorValue("White"));
+            Set(colorDark, ColorValue("Black"));
+            
+            //app config
+            Set(headerFooterHeight, 55);
+            Set(layoutGapDefault, 17);
+            	
+            Set(roleTemplateAdmin,"admin");
+            Set(roleAdmin,"Admin");
+            Set(roleProjectPlanner,"Project Planner");
+            Set(roleProjectPrimaryApprover,"Project Primary Approver");
+            Set(roleProjectSecondaryApprover,"Project Secondary Approver");
+            Set(roleBussinessPrimaryApprover,"Bussiness Primary Approver");
+            Set(roleBussinessSecondaryApprover,"Bussiness Secondary Approver");
+            Set(roleDesignPrimaryApprover,"Design Primary Approver");
+            Set(roleDesignSecondaryApprover,"Design Secondary Approver");
+            Set(roleProductionPrimaryApprover,"Production Primary Approver");
+            Set(roleProductionSecondaryApprover	,"Production Secondary Approver	");
+            Set(roleProjectManager,"Project Manager");
+            Set(roleProjectLeader,"Project Leader");
+            Set(roleProjectMember,"Project Member");
+            Set(roleProjectCouncillor,"Project Councillor");
+            Set(roleProjectCodeApprover,"Project Code Approver");
+            Set(roleProjectCodeCoordinator,"Project Code Coordinator");
+            Set(rolePrimary,"Primary");
+            Set(roleApprover,"Approver");
+            
+            Set(displayNew,"New");
+            Set(displayEdit,"Edit");
+            Set(displayView,"View");
+            
+            Set(approval_approved, First(Filter(DR選択肢_承認種類,承認種類一覧="承認")));
+            Set(approval_deny, First(Filter(DR選択肢_承認種類,承認種類一覧="却下")));
+            Set(approval_notYet, First(Filter(DR選択肢_承認種類,承認種類一覧="未")));
+        Text: ="APP Config"
+        Width: =297
+        X: =534
+        Y: =684
+        ZIndex: =2
+
+    Label87 As label:
+        Height: =145
+        Text: |-
+            ="TODO：
+            
+            ・メイン画面で、X番でのフィルター機能（前方一致）➡完了！
+            
+            ・会議招集機能のところのSharePointフォルダー表示を、プロジェクトフォルダーで表示できるようにする　➡ 完了
+            
+            ・Teamsの会議招集のPower Automateとの連携➡ 完了！Power Automateでの自動読み込みは権限の問題で実装できなかったため、テキスト貼り付けで実現
+            
+            ・Power AutomateでTeams会議の出席者を取得する
+            
+            ・X番の採番フローでのTeams通知と、通知で表示されるリンクから直接承認画面に飛べるようにする。
+            
+            ・X番のクローズ用の画面とフロー構築
+            
+            
+            
+            ・Teamsカレンダーで、空き時間検索が出来るようにする"
+        Width: =1293
+        X: =73
+        ZIndex: =7
+
+    AttachmentControl As attachments:
+        AddAttachmentText: ="アップロードする廃棄・保存ファイルを選択"
+        BorderColor: =RGBA(0, 0, 0, 1)
+        Height: =100
+        IsInDataCard: =true
+        Items: =
+        PaddingBottom: =5
+        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+        PaddingRight: =5
+        PaddingTop: =5
+        Tooltip: =DisplayMode.Edit
+        Width: =Parent.Width - 60
+        X: =30
+        Y: =241
+        ZIndex: =8
+

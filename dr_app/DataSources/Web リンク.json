@@ -1,0 +1,218 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "adx_weblinks",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "adx_weblink",
+    "MaxGetRowsCount": 2000,
+    "Name": "Web リンク",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "{Attachments}": "Attachments",
+      "adx_createdbyipaddress": "作成者 IP アドレス",
+      "adx_createdbyusername": "作成者ユーザー名",
+      "adx_description": "説明",
+      "adx_disablepagevalidation": "ページの検証の無効化",
+      "adx_displayimageonly": "画像のみを表示",
+      "adx_displayorder": "表示順序",
+      "adx_displaypagechildlinks": "ページの子リンクを表示",
+      "adx_externalurl": "外部 URL",
+      "adx_imagealttext": "画像の代替テキスト",
+      "adx_imageheight": "画像の高さ",
+      "adx_imageurl": "画像 URL",
+      "adx_imagewidth": "画像の幅",
+      "adx_modifiedbyipaddress": "修正者 IP アドレス",
+      "adx_modifiedbyusername": "修正者ユーザー名",
+      "adx_name": "名前",
+      "adx_openinnewwindow": "新しいウィンドウで開く",
+      "adx_pageid": "ページ",
+      "adx_parentweblinkid": "親 Web リンク",
+      "adx_publishingstateid": "公開状況",
+      "adx_robotsfollowlink": "ロボットのフォロー リンク",
+      "adx_weblink_Annotations": "メモ ",
+      "adx_weblink_AsyncOperations": "システム ジョブ ",
+      "adx_weblink_BulkDeleteFailures": "一括削除の失敗 ",
+      "adx_weblink_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "adx_weblink_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "adx_weblink_ProcessSession": "プロセス セッション",
+      "adx_weblink_SyncErrors": "同期エラー",
+      "adx_weblink_weblink": "Web リンク (adx_weblink_weblink)",
+      "adx_weblinkid": "Web リンク (adx_weblinkid)",
+      "adx_weblinksetid": "Web リンク セット",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所有部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "Web リンク",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Web リンク (ビュー)",
+    "Name": "_adx_weblink_views",
+    "RelatedEntityName": "Web リンク",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "3245c4ed-55e8-4c62-a4fb-255e423df735": "Web リンク検索ダイアログ ビュー",
+      "61e048d6-48ea-4cff-b5a8-ca4c98c1c956": "Web リンク関連ビュー",
+      "6608d06a-8b0f-4165-b18b-e6a484417226": "Web リンクの高度な検索ビュー",
+      "989ebac9-c8b4-4e86-a189-945de8daf354": "非アクティブな Web リンク",
+      "bc0cb771-002e-43d3-8e19-09ad0cc8a001": "アクティブな Web リンク"
+    }
+  },
+  {
+    "DisplayName": "ページの検証の無効化 (Web リンク)",
+    "Name": "adx_weblink_adx_disablepagevalidation",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_disablepagevalidation",
+        "OptionSetReferenceEntityName": "Web リンク"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_disablepagevalidation",
+    "RelatedEntityName": "Web リンク",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "画像のみを表示 (Web リンク)",
+    "Name": "adx_weblink_adx_displayimageonly",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_displayimageonly",
+        "OptionSetReferenceEntityName": "Web リンク"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_displayimageonly",
+    "RelatedEntityName": "Web リンク",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ページの子リンクを表示 (Web リンク)",
+    "Name": "adx_weblink_adx_displaypagechildlinks",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_displaypagechildlinks",
+        "OptionSetReferenceEntityName": "Web リンク"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_displaypagechildlinks",
+    "RelatedEntityName": "Web リンク",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "新しいウィンドウで開く (Web リンク)",
+    "Name": "adx_weblink_adx_openinnewwindow",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_openinnewwindow",
+        "OptionSetReferenceEntityName": "Web リンク"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_openinnewwindow",
+    "RelatedEntityName": "Web リンク",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ロボットのフォロー リンク (Web リンク)",
+    "Name": "adx_weblink_adx_robotsfollowlink",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_robotsfollowlink",
+        "OptionSetReferenceEntityName": "Web リンク"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_robotsfollowlink",
+    "RelatedEntityName": "Web リンク",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "状態 (Web リンク)",
+    "Name": "adx_weblink_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Web リンク"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Web リンク",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (Web リンク)",
+    "Name": "adx_weblink_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Web リンク"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Web リンク",
+    "Type": "OptionSetInfo"
+  }
+]

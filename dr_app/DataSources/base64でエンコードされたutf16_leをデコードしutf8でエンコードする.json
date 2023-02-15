@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "98872728-488e-46d5-864e-a5e8815b106a",
+    "Name": "base64でエンコードされたutf16_leをデコードしutf8でエンコードする",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": null
+  }
+]

@@ -1,0 +1,265 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "sharepointsites",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "sharepointsite",
+    "MaxGetRowsCount": 2000,
+    "Name": "SharePoint サイト ",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "absoluteurl": "絶対 URL",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "description": "説明",
+      "exchangerate": "為替レート",
+      "importsequencenumber": "インポート シーケンス番号",
+      "isdefault": "既定のサイト",
+      "isgridpresent": "リスト コンポーネントがインストール済み",
+      "ispowerbisite": "Power BI レポートの埋め込みを許可",
+      "lastvalidated": "最終検証日",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "name": "名前",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "parentsite": "親サイト",
+      "relativeurl": "相対 URL",
+      "servicetype": "サービスの種類",
+      "sharepointdocumentlocation_parent_sharepointsite": "ドキュメントの場所 ",
+      "SharePointSite_AsyncOperations": "システム ジョブ ",
+      "SharePointSite_DuplicateBaseRecord": "レコードの重複  (SharePointSite_DuplicateBaseRecord)",
+      "SharePointSite_DuplicateMatchingRecord": "レコードの重複  (SharePointSite_DuplicateMatchingRecord)",
+      "sharepointsite_parentsite_sharepointsite": "SharePoint サイト ",
+      "sharepointsite_principalobjectattributeaccess": "フィールド共有 ",
+      "SharePointSite_ProcessSessions": "プロセス セッション",
+      "SharePointSite_SyncErrors": "同期エラー",
+      "sharepointsiteid": "SharePoint サイト ID",
+      "sitecollectionid": "SiteCollectionId",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "TimeZoneRuleVersionNumber",
+      "transactioncurrencyid": "通貨型",
+      "userid": "SharePoint サイトの所有者",
+      "utcconversiontimezonecode": "UTCConversionTimeZoneCode",
+      "validationstatus": "最終検証の状態",
+      "validationstatuserrorcode": "追加情報",
+      "versionnumber": "VersionNumber"
+    },
+    "PreferredName": "SharePoint サイト ",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "SharePoint サイト  (ビュー)",
+    "Name": "_sharepointsite_views",
+    "RelatedEntityName": "SharePoint サイト ",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "519a30fa-6d4a-4a9d-befe-2b08c9429e87": "SharePoint サイト検索ダイアログ ビュー",
+      "76251bbd-bc73-41d1-ae97-37c361b542f9": "すべての SharePoint サイト",
+      "8735625e-5657-df11-a5a2-00155d2a9005": "自分のアクティブな SharePoint サイト",
+      "9d844e0d-5657-df11-a5a2-00155d2a9005": "非アクティブな SharePoint サイト",
+      "a529f7aa-f755-41bf-92ec-5a89174bec15": "SharePoint サイトの高度な検索ビュー",
+      "df2fe6da-f97f-4878-80b6-8deb7d9d6a09": "SharePoint サイト関連ビュー",
+      "ef773df3-5557-df11-a5a2-00155d2a9005": "アクティブな SharePoint サイト"
+    }
+  },
+  {
+    "DisplayName": "検証の状態",
+    "Name": "sharepoint_validationstatus",
+    "OptionSetInfoNameMapping": {
+      "1": "未検証",
+      "2": "処理中",
+      "3": "無効",
+      "4": "有効",
+      "5": "検証できませんでした"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "validationstatus",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "validationstatus",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "検証ステータス",
+    "Name": "sharepoint_validationstatusreason",
+    "OptionSetInfoNameMapping": {
+      "1": "このレコードの URL は検証されていません。",
+      "2": "このレコードの URL は有効です。",
+      "3": "このレコードの URL は無効です。",
+      "4": "Microsoft Dynamics 365 と SharePoint の URL スキーマは異なります。",
+      "5": "Internet Explorer のセキュリティ設定が原因で、URL にアクセスできませんでした。",
+      "6": "認証の失敗です。",
+      "7": "無効な資格情報です。"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "validationstatuserrorcode",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "validationstatuserrorcode",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "SharePoint フォルダー構造のエンティティ (SharePoint サイト )",
+    "Name": "sharepointsite_folderstructureentity",
+    "OptionSetInfoNameMapping": {
+      "0": "なし",
+      "1": "取引先企業",
+      "2": "取引先担当者"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "folderstructureentity",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "EntityNameType",
+    "RelatedColumnInvariantName": "folderstructureentity",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "既定のサイト (SharePoint サイト )",
+    "Name": "sharepointsite_isdefault",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "isdefault",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "isdefault",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "リスト コンポーネントがインストール済み (SharePoint サイト )",
+    "Name": "sharepointsite_isgridpresent",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "isgridpresent",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "isgridpresent",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Power BI レポートの埋め込みを許可 (SharePoint サイト )",
+    "Name": "sharepointsite_ispowerbisite",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ispowerbisite",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ispowerbisite",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ServiceType",
+    "Name": "sharepointsite_servicetype",
+    "OptionSetInfoNameMapping": {
+      "0": "SharePoint",
+      "1": "OneDrive",
+      "2": "共有アイテム",
+      "3": "MS チーム"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "servicetype",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "servicetype",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "状態 (SharePoint サイト )",
+    "Name": "sharepointsite_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (SharePoint サイト )",
+    "Name": "sharepointsite_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "SharePoint サイト "
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "SharePoint サイト ",
+    "Type": "OptionSetInfo"
+  }
+]

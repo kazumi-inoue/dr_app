@@ -1,0 +1,97 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_project_members",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_project_member",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_プロジェクトメンバー",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_dr_project_ID": "プロジェクトid",
+      "cr5ee_dr_project_member": "プロジェクトメンバー",
+      "cr5ee_dr_project_member_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_project_member_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_dr_project_member_id": "プロジェクトメンバーid",
+      "cr5ee_dr_project_member_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_project_member_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_project_member_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_project_member_SyncErrors": "同期エラー",
+      "cr5ee_dr_project_memberid": "DR_プロジェクトメンバー",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_プロジェクトメンバー",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_プロジェクトメンバー (ビュー)",
+    "Name": "_cr5ee_dr_project_member_views",
+    "RelatedEntityName": "DR_プロジェクトメンバー",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "01dac9ac-f8f9-4732-a057-beef14b39e44": "非アクティブなDR_プロジェクトメンバー",
+      "2a0e429f-bc18-4d88-9f40-a8b387c13c98": "DR_プロジェクトメンバーの高度な検索ビュー",
+      "87a1aa48-fdc9-4db7-854e-d12aa4e4742b": "DR_プロジェクトメンバー検索ダイアログ ビュー",
+      "8e1a2d75-bd0f-4647-8276-413c440e273c": "アクティブなDR_プロジェクトメンバー",
+      "cc57dc85-f751-4f8f-8770-3e7e9785927d": "DR_プロジェクトメンバー関連ビュー"
+    }
+  },
+  {
+    "DisplayName": "状態 (DR_プロジェクトメンバー)",
+    "Name": "cr5ee_dr_project_member_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_プロジェクトメンバー"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_プロジェクトメンバー",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_プロジェクトメンバー)",
+    "Name": "cr5ee_dr_project_member_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_プロジェクトメンバー"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_プロジェクトメンバー",
+    "Type": "OptionSetInfo"
+  }
+]

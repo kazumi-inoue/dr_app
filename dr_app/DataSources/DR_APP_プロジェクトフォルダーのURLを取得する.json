@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "df447750-749e-4edf-bed6-e34e94dcdaae",
+    "Name": "DR_APP_プロジェクトフォルダーのURLを取得する",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": null
+  }
+]

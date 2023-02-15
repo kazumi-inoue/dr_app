@@ -1,0 +1,95 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_drselect_completed_aborted_continueds",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_drselect_completed_aborted_continued",
+    "Name": "DR選択肢_完了/中止/継続",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_drselect_completed_aborted_continued_AsyncOperations": "システム ジョブ ",
+      "cr5ee_drselect_completed_aborted_continued_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_drselect_completed_aborted_continued_id": "選択肢 完了中止継続id",
+      "cr5ee_drselect_completed_aborted_continued_list": "完了中止継続一覧",
+      "cr5ee_drselect_completed_aborted_continued_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_drselect_completed_aborted_continued_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_drselect_completed_aborted_continued_ProcessSession": "プロセス セッション",
+      "cr5ee_drselect_completed_aborted_continued_SyncErrors": "同期エラー",
+      "cr5ee_drselect_completed_aborted_continuedid": "DR選択肢_完了/中止/継続",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR選択肢_完了/中止/継続",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR選択肢_完了/中止/継続 (ビュー)",
+    "Name": "_cr5ee_drselect_completed_aborted_continued_views",
+    "RelatedEntityName": "DR選択肢_完了/中止/継続",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "34a04873-3607-4f57-b8a1-e6d385ebb500": "アクティブなDR選択肢_完了/中止/継続",
+      "3fcb29a3-0df1-4147-bf71-376516731fe4": "DR選択肢_完了/中止/継続検索ダイアログ ビュー",
+      "4d02552c-1dd2-4980-8ff0-c445ac3819ff": "DR選択肢_完了/中止/継続関連ビュー",
+      "530e93c7-d233-4eca-a7bf-346817e24feb": "DR選択肢_完了/中止/継続の高度な検索ビュー",
+      "558221e5-23c1-4ef5-8b10-6bb3c002beaf": "非アクティブなDR選択肢_完了/中止/継続"
+    }
+  },
+  {
+    "DisplayName": "状態 (DR選択肢_完了/中止/継続)",
+    "Name": "cr5ee_drselect_completed_aborted_continued_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR選択肢_完了/中止/継続"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR選択肢_完了/中止/継続",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR選択肢_完了/中止/継続)",
+    "Name": "cr5ee_drselect_completed_aborted_continued_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR選択肢_完了/中止/継続"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR選択肢_完了/中止/継続",
+    "Type": "OptionSetInfo"
+  }
+]

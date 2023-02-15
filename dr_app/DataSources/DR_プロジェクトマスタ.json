@@ -1,0 +1,235 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_projects",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_project",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_プロジェクトマスタ",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "cr5ee_active": "IsActive",
+      "cr5ee_cr5ee_dr_meeting_info_dr_project_ID_cr5ee": "DR_会議情報",
+      "cr5ee_cr5ee_dr_order_number_dr_project_ID_cr5ee": "DR_製造命令番号",
+      "cr5ee_cr5ee_dr_project_member_dr_project_ID_cr5": "DR_プロジェクトメンバー",
+      "cr5ee_dr_appli_date": "申請日",
+      "cr5ee_dr_completion_date": "製番完了予定日",
+      "cr5ee_dr_cost_mil": "想定開発変動費 （百万）",
+      "cr5ee_dr_default_judge_id": "デフォルト審査者id",
+      "cr5ee_dr_name_product": "開発品の名称",
+      "cr5ee_dr_necessity_asses_records": "環境アセス必要？",
+      "cr5ee_dr_necessity_develop_records": "開発記録必要?",
+      "cr5ee_dr_operate_time": "想定開発稼働時間",
+      "cr5ee_dr_order_number_type": "選択肢_製番種類id",
+      "cr5ee_dr_order_recipient": "受注先",
+      "cr5ee_dr_paid_or_not": "有償？(受注時)",
+      "cr5ee_dr_pre_order_number": "前年度製番（ある場合）",
+      "cr5ee_dr_project_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_project_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_dr_project_id": "プロジェクトid",
+      "cr5ee_dr_project_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_project_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_project_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_project_SyncErrors": "同期エラー",
+      "cr5ee_dr_projectid": "DR_プロジェクトマスタ",
+      "cr5ee_DR_projectMember_project_cr5ee_dr_p": "DR_projectMember",
+      "cr5ee_dr_purpose": "開発の目的",
+      "cr5ee_dr_reason_not_necessity_asses_records": "環境アセス不要時理由",
+      "cr5ee_dr_reason_not_necessity_develop_records": "開発記録不要時理由",
+      "cr5ee_dr_received_or_not": "自社開発？",
+      "cr5ee_open": "IsOpen",
+      "cr5ee_projectfolder": "projectFolder",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "organizationid": "組織 ID",
+      "overriddencreatedon": "レコード作成日",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_プロジェクトマスタ",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_プロジェクトマスタ (ビュー)",
+    "Name": "_cr5ee_dr_project_views",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "15648fa7-47ad-40bd-813c-caf7781ccec5": "アクティブなDR_プロジェクトマスタ",
+      "237bd474-9aeb-4f8d-80b2-fc872b7f4010": "DR_プロジェクトマスタの高度な検索ビュー",
+      "40de739d-f202-4a06-9aca-8203e4ec818b": "DR_プロジェクトマスタ関連ビュー",
+      "e2ad24a1-b468-4018-8e65-ebf1a07db1c5": "非アクティブなDR_プロジェクトマスタ",
+      "eb715e3b-aa01-4627-a70d-2f2b7af41a70": "DR_プロジェクトマスタ検索ダイアログ ビュー"
+    }
+  },
+  {
+    "DisplayName": "IsActive (DR_プロジェクトマスタ)",
+    "Name": "cr5ee_dr_project_cr5ee_active",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr5ee_active",
+        "OptionSetReferenceEntityName": "DR_プロジェクトマスタ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cr5ee_active",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "環境アセス必要？ (DR_プロジェクトマスタ)",
+    "Name": "cr5ee_dr_project_cr5ee_dr_necessity_asses_records",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr5ee_dr_necessity_asses_records",
+        "OptionSetReferenceEntityName": "DR_プロジェクトマスタ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cr5ee_dr_necessity_asses_records",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "開発記録必要? (DR_プロジェクトマスタ)",
+    "Name": "cr5ee_dr_project_cr5ee_dr_necessity_develop_records",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr5ee_dr_necessity_develop_records",
+        "OptionSetReferenceEntityName": "DR_プロジェクトマスタ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cr5ee_dr_necessity_develop_records",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "有償？(受注時) (DR_プロジェクトマスタ)",
+    "Name": "cr5ee_dr_project_cr5ee_dr_paid_or_not",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr5ee_dr_paid_or_not",
+        "OptionSetReferenceEntityName": "DR_プロジェクトマスタ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cr5ee_dr_paid_or_not",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "自社開発？ (DR_プロジェクトマスタ)",
+    "Name": "cr5ee_dr_project_cr5ee_dr_received_or_not",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr5ee_dr_received_or_not",
+        "OptionSetReferenceEntityName": "DR_プロジェクトマスタ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cr5ee_dr_received_or_not",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "IsOpen (DR_プロジェクトマスタ)",
+    "Name": "cr5ee_dr_project_cr5ee_open",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr5ee_open",
+        "OptionSetReferenceEntityName": "DR_プロジェクトマスタ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cr5ee_open",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "状態 (DR_プロジェクトマスタ)",
+    "Name": "cr5ee_dr_project_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_プロジェクトマスタ"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_プロジェクトマスタ)",
+    "Name": "cr5ee_dr_project_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_プロジェクトマスタ"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_プロジェクトマスタ",
+    "Type": "OptionSetInfo"
+  }
+]

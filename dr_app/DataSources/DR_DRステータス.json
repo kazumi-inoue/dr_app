@@ -1,0 +1,128 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_statuses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_status",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_DRステータス",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_dr_status": "会議名",
+      "cr5ee_dr_status_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_status_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_dr_status_connections1": "つながり (cr5ee_dr_status_connections1)",
+      "cr5ee_dr_status_connections2": "つながり (cr5ee_dr_status_connections2)",
+      "cr5ee_dr_status_Feedback": "フィードバック",
+      "cr5ee_dr_status_id": "DRスタータスid",
+      "cr5ee_dr_status_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_status_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_status_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_status_QueueItems": "キュー アイテム ",
+      "cr5ee_dr_status_SyncErrors": "同期エラー",
+      "cr5ee_dr_status_Teams": "チーム ",
+      "cr5ee_dr_statusid": "DR_DRステータス",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "emailaddress": "電子メール アドレス",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_DRステータス",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_DRステータス (ビュー)",
+    "Name": "_cr5ee_dr_status_views",
+    "RelatedEntityName": "DR_DRステータス",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2de38a35-d999-4dd3-9a26-f7908394e53f": "アクティブなDR_DRステータス",
+      "4749fa01-2dcd-4132-98f0-a52f18f99462": "DR_DRステータス関連ビュー",
+      "de10da83-f719-4530-8dae-4886d6ea37a7": "DR_DRステータス検索ダイアログ ビュー",
+      "f7dd59ba-de95-44da-9100-f7e4dc004120": "DR_DRステータスの高度な検索ビュー",
+      "f940860e-7e94-46e6-b6c9-20eecd50f944": "非アクティブなDR_DRステータス"
+    }
+  },
+  {
+    "DisplayName": "DR選択_DRステータス",
+    "Name": "cr5ee_dr_status_select",
+    "OptionSetInfoNameMapping": {
+      "507940000": "DR0",
+      "507940001": "DR1",
+      "507940002": "SDR(-1)",
+      "507940003": "DR2",
+      "507940004": "SDR(-2)",
+      "507940005": "DR3(-1)",
+      "507940006": "DR3(-2)",
+      "507940007": "DR4"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr5ee_dr_status",
+        "OptionSetReferenceEntityName": "DR_DRステータス"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cr5ee_dr_status",
+    "RelatedEntityName": "DR_DRステータス",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "状態 (DR_DRステータス)",
+    "Name": "cr5ee_dr_status_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_DRステータス"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_DRステータス",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_DRステータス)",
+    "Name": "cr5ee_dr_status_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_DRステータス"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_DRステータス",
+    "Type": "OptionSetInfo"
+  }
+]

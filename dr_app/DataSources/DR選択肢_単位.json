@@ -1,0 +1,93 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_drselect_units",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_drselect_unit",
+    "Name": "DR選択肢_単位",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "cr5ee_cr5ee_dr_preservation_disposal_report_uni": "DR_preservation_disposal_report",
+      "cr5ee_drselect_unit_AsyncOperations": "システム ジョブ ",
+      "cr5ee_drselect_unit_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_drselect_unit_id": "選択肢 単位id",
+      "cr5ee_drselect_unit_list": "単位一覧",
+      "cr5ee_drselect_unit_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_drselect_unit_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_drselect_unit_ProcessSession": "プロセス セッション",
+      "cr5ee_drselect_unit_SyncErrors": "同期エラー",
+      "cr5ee_drselect_unitid": "DR選択肢_単位",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "organizationid": "組織 ID",
+      "overriddencreatedon": "レコード作成日",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR選択肢_単位",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR選択肢_単位 (ビュー)",
+    "Name": "_cr5ee_drselect_unit_views",
+    "RelatedEntityName": "DR選択肢_単位",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0b55bb22-47e7-409f-b6fd-9fb12a2c2c27": "DR選択肢_単位関連ビュー",
+      "2133f7f9-6426-4b67-8fe8-5782afad3190": "非アクティブなDR選択肢_単位",
+      "835883ce-46ae-46b6-aa8c-f4bf6c3782dc": "DR選択肢_単位検索ダイアログ ビュー",
+      "dca60927-a721-46b5-826e-8a89ed0e4478": "アクティブなDR選択肢_単位",
+      "e708df0a-b7a4-4d2c-978c-fe37b5843e90": "DR選択肢_単位の高度な検索ビュー"
+    }
+  },
+  {
+    "DisplayName": "状態 (DR選択肢_単位)",
+    "Name": "cr5ee_drselect_unit_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR選択肢_単位"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR選択肢_単位",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR選択肢_単位)",
+    "Name": "cr5ee_drselect_unit_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR選択肢_単位"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR選択肢_単位",
+    "Type": "OptionSetInfo"
+  }
+]

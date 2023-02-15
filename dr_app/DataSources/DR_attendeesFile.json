@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_attendeesfiles",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_attendeesfile",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_attendeesFile",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_attendeefile": "attendeeFile",
+      "cr5ee_dr_attendeesfile_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_attendeesfile_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_dr_attendeesfile_DuplicateBaseRecord": "レコードの重複  (cr5ee_dr_attendeesfile_DuplicateBaseRecord)",
+      "cr5ee_dr_attendeesfile_DuplicateMatchingRecord": "レコードの重複  (cr5ee_dr_attendeesfile_DuplicateMatchingRecord)",
+      "cr5ee_dr_attendeesfile_FileAttachments": "FileAttachments",
+      "cr5ee_dr_attendeesfile_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_attendeesfile_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_attendeesfile_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_attendeesfile_SyncErrors": "同期エラー",
+      "cr5ee_dr_attendeesfileid": "DR_attendeesFile",
+      "cr5ee_meetingInfo": "meetingInfo",
+      "cr5ee_name": "id",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_attendeesFile",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_attendeesFile (ビュー)",
+    "Name": "_cr5ee_dr_attendeesfile_views",
+    "RelatedEntityName": "DR_attendeesFile",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "26301739-e593-4c62-b9e3-9072122ddbb9": "DR_attendeesFile検索ダイアログ ビュー",
+      "9233fd39-7920-47c8-85c5-c756b94d84bb": "DR_attendeesFileの高度な検索ビュー",
+      "d3772c2d-2e86-4901-b5b8-3728636f404c": "非アクティブなDR_attendeesFile",
+      "d6bf6bdd-b87c-41c9-ae3c-d316d4c00e14": "DR_attendeesFile関連ビュー",
+      "fb8f95f9-ef95-4834-aed0-43a51335daf2": "アクティブなDR_attendeesFile"
+    }
+  },
+  {
+    "DisplayName": "状態 (DR_attendeesFile)",
+    "Name": "cr5ee_dr_attendeesfile_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_attendeesFile"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_attendeesFile",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_attendeesFile)",
+    "Name": "cr5ee_dr_attendeesfile_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_attendeesFile"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_attendeesFile",
+    "Type": "OptionSetInfo"
+  }
+]

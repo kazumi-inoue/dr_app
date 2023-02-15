@@ -1,0 +1,447 @@
+"DR_EditProjectMember As screen.'tabletAutoLayout_HeaderMainFooter_ver1.0'":
+    OnVisible: |-
+        =UpdateContext({drEditTarget:First(Filter(DR_プロジェクトマスタ,プロジェクトid=drEditTargetContext))});
+        
+        If(
+            drEditModeSwitch.Value,
+            ClearCollect(
+                projectAll,
+                AddColumns(DR_プロジェクトマスタ, "projectId", プロジェクトid)
+            );
+            ClearCollect(projectCodeAll, DR_製造命令番号);
+            ClearCollect(
+                projectOption,
+                Sort(
+                    AddColumns(
+                        projectAll,
+                        "Option",
+                        Concatenate(
+                            If(
+                                IsEmpty(Filter(projectCodeAll,project.プロジェクトid=projectId)),
+                                "製番未取得",
+                                Last(Sort(Filter(projectCodeAll,project.プロジェクトid=projectId),製番発行日)).製造命令番号
+                            ),
+                            " ",
+                            開発品の名称
+                        )
+                    ),
+                    Option
+                )
+            );
+        )
+
+    ScreenContainer1_5 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =2
+
+        HeaderContainer1_5 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =2
+
+            Icon16 As icon.ChevronLeft:
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Icon: =Icon.ChevronLeft
+                OnSelect: |-
+                    =Navigate(ProjectInput,ScreenTransition.Fade,{drEditTargetContext:drEditTarget.プロジェクトid});
+                PaddingBottom: =7
+                PaddingLeft: =7
+                PaddingRight: =7
+                PaddingTop: =7
+                Width: =Parent.Height
+                ZIndex: =1
+
+            Label5_5 As label:
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =Parent.Height
+                PaddingLeft: =15
+                Size: =18
+                Text: |-
+                    =Concatenate(
+                        "【",
+                        If(
+                            CountRows(Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid)) > 0,
+                            First(Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid)).製造命令番号,
+                            "製番未付与"
+                        ),
+                        "_",
+                        drEditTarget.開発品の名称, 
+                        "】",
+                        " Members"
+                    )
+                Width: =Parent.Width- Icon16.Width
+                ZIndex: =2
+
+        MainSectionContainer1_5 As groupContainer.verticalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =3
+
+            Container23_2 As groupContainer.verticalAutoLayoutContainer:
+                BorderColor: =RGBA(56, 96, 178, 1)
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =layoutGapDefault
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =15
+                PaddingRight: =15
+                ZIndex: =3
+
+                Label77_5 As label:
+                    Text: ="Template"
+                    ZIndex: =1
+
+                Container24_6 As groupContainer.horizontalAutoLayoutContainer:
+                    LayoutGap: =layoutGapDefault
+                    LayoutMinHeight: =10
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =2
+
+                    ComboBox1_6 As combobox:
+                        DisplayFields: =["cr5ee_templatename","internalemailaddress"]
+                        Height: =39
+                        InputTextPlaceholder: ="テンプレートの検索"
+                        IsSearchable: =false
+                        Items: =Sort(Filter(DR_roleTemplateLists,templateName<>roleTemplateAdmin),templateName)
+                        SearchFields: =["cr5ee_templatename"]
+                        SearchItems: =[]
+                        SelectMultiple: =false
+                        Width: =500
+                        X: =734
+                        Y: =55
+                        ZIndex: =2
+
+                "Gallery13_5 As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                    Height: =Parent.Height - (Label77_5.Height + Parent.LayoutGap) * 3
+                    Items: =Sort(Sort(Filter(DR_roleTemplate,template.templateName=ComboBox1_6.Selected.templateName),role.nameEN),appUser.氏名)
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =Parent.Height - (Label77_5.Height + Parent.LayoutGap) * 3.2
+                    LayoutMinWidth: =320
+                    TemplatePadding: =0
+                    TemplateSize: =100//Title16_4.Height + Subtitle12_6.Height * 1.4 * 2
+                    ZIndex: =4
+
+                    Title16_4 As label:
+                        Height: =41
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.userName
+                        Width: =480
+                        Y: =32
+                        ZIndex: =1
+
+                    Separator14_4 As rectangle:
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =5
+
+                    Subtitle12_6 As label:
+                        Height: =23
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.appUser.既定電子メール
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =397
+                        Y: =74
+                        ZIndex: =7
+
+                    Subtitle12_7 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =23
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.role.nameJP
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =397
+                        Y: =14
+                        ZIndex: =8
+
+                Container1 As groupContainer.horizontalAutoLayoutContainer:
+                    LayoutJustifyContent: =LayoutJustifyContent.End
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =5
+
+                    Button18 As button:
+                        OnSelect: |+
+                            =// update context as selected project
+                            UpdateContext({selectedProject:First(Filter(DR_プロジェクトマスタ,プロジェクトid=drEditTarget.プロジェクトid))});
+                            
+                            // pick members from selected template
+                            Clear(addProjectMember);
+                            ForAll(
+                                Filter(DR_roleTemplate,template.templateName=ComboBox1_6.Selected.templateName),
+                                Collect(
+                                    addProjectMember,
+                                    {
+                                        templateRole:role.nameEN,
+                                        templateUser:appUser.既定電子メール
+                                    }
+                                );
+                            );
+                            
+                            // pick member who is already in the team.
+                            ClearCollect(
+                                existingMember, 
+                                Filter(
+                                    DR_projectMember,
+                                    project.プロジェクトid=selectedProject.プロジェクトid
+                                )
+                            );
+                            
+                            // add template members
+                            ForAll(
+                                addProjectMember,
+                                If(
+                                    // Check if duplicate user
+                                    Or(
+                                        IsBlank(existingMember),
+                                        IsEmpty(
+                                            Filter(
+                                                existingMember,
+                                                role.nameEN=templateRole,
+                                                appUser.既定電子メール=templateUser
+                                            )
+                                        )
+                                    ),
+                                    // Case of OK
+                                    Collect(
+                                        DR_projectMember,
+                                        {
+                                            project: selectedProject,
+                                            appUser:First(Filter('ユーザー ',既定電子メール=templateUser)),
+                                            role:First(Filter(DR_roleMaster,nameEN=templateRole))
+                                        }
+                                    )
+                                )
+                            )
+                            
+                        Text: ="このテンプレートをメンバーに追加 ➡"
+                        Width: =400
+                        ZIndex: =1
+
+            Container23_3 As groupContainer.verticalAutoLayoutContainer:
+                BorderColor: =RGBA(56, 96, 178, 1)
+                BorderThickness: =1
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =layoutGapDefault
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =15
+                PaddingRight: =15
+                ZIndex: =4
+
+                Label77_6 As label:
+                    Text: ="Members"
+                    ZIndex: =1
+
+                Container24_8 As groupContainer.horizontalAutoLayoutContainer:
+                    LayoutGap: =layoutGapDefault
+                    LayoutMinHeight: =10
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =2
+
+                    ComboBox1_9 As combobox:
+                        DisplayFields: =["fullname","internalemailaddress"]
+                        Height: =39
+                        InputTextPlaceholder: ="対象者の検索"
+                        Items: ='ユーザー '
+                        SearchFields: =["fullname"]
+                        SearchItems: =Search('ユーザー ',ComboBox1_9.SearchText,"fullname")
+                        SelectMultiple: =false
+                        Template: =ListItemTemplate.Double
+                        Width: =500
+                        X: =734
+                        Y: =55
+                        ZIndex: =2
+
+                Container24_9 As groupContainer.horizontalAutoLayoutContainer:
+                    LayoutGap: =layoutGapDefault
+                    LayoutMinHeight: =10
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =3
+
+                    ComboBox1_10 As combobox:
+                        DisplayFields: =["cr5ee_namejp","cr5ee_nameen"]
+                        Height: =39
+                        InputTextPlaceholder: ="ロールの検索"
+                        IsSearchable: =false
+                        Items: |-
+                            =Sort(
+                                Filter(
+                                    DR_roleMaster,
+                                    nameEN<>roleAdmin,
+                                    nameEN<>roleProjectPlanner
+                                ),
+                                nameEN
+                            )
+                        SearchFields: =["cr5ee_name"]
+                        SearchItems: =[]
+                        SelectMultiple: =false
+                        Template: =ListItemTemplate.Double
+                        Width: =500
+                        X: =734
+                        Y: =55
+                        ZIndex: =1
+
+                    Icon18_7 As icon.AddUser:
+                        Height: =40
+                        Icon: =Icon.AddUser
+                        OnSelect: |-
+                            =UpdateContext({selectedRole:ComboBox1_10.Selected});
+                            UpdateContext({selectedProject:First(Filter(DR_プロジェクトマスタ,プロジェクトid=drEditTarget.プロジェクトid))});
+                            If(
+                                // Check if duplicate user
+                                IsEmpty(
+                                    Filter(
+                                        DR_projectMember,
+                                        project.プロジェクトid=drEditTarget.プロジェクトid,
+                                        role.nameEN=selectedRole.nameEN,
+                                        appUser.既定電子メール=ComboBox1_9.Selected.既定電子メール
+                                    )
+                                ),
+                                // Case of OK
+                                Collect(
+                                    DR_projectMember,
+                                    {
+                                        project: selectedProject,
+                                        appUser:ComboBox1_9.Selected,
+                                        role:selectedRole
+                                    }
+                                ),
+                                // Case of duplicate user
+                                Notify(Concatenate(ComboBox1_9.Selected.氏名, "は、",selectedRole.nameJP,"で既に設定されています。"));
+                            );
+                        Width: =40
+                        ZIndex: =2
+
+                "Gallery13_6 As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                    Height: =Parent.Height - (Label77_5.Height + Parent.LayoutGap) * 3
+                    Items: =Sort(Sort(Filter(DR_projectMember,project.プロジェクトid=drEditTarget.プロジェクトid),role.nameEN),appUser.氏名)
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =Parent.Height - (Label77_5.Height + Parent.LayoutGap) * 3
+                    LayoutMinWidth: =320
+                    TemplatePadding: =0
+                    TemplateSize: =100//Title16_5.Height + Subtitle12_9.Height * 1.4 * 2
+                    ZIndex: =4
+
+                    Title16_5 As label:
+                        Height: =41
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.appUser.氏名
+                        Width: =480
+                        Y: =32
+                        ZIndex: =1
+
+                    Separator14_5 As rectangle:
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =5
+
+                    Icon20_7 As icon.CancelBadge:
+                        Height: =30
+                        Icon: =Icon.CancelBadge
+                        OnSelect: |-
+                            =Remove(
+                                DR_projectMember,
+                                Filter(
+                                    DR_projectMember,
+                                    project.プロジェクトid=drEditTarget.プロジェクトid,
+                                    role.nameEN=ThisItem.role.nameEN,
+                                    appUser.既定電子メール=ThisItem.appUser.既定電子メール)
+                            );
+                        Width: =30
+                        X: =Parent.Width - (Self.Width * 2)
+                        Y: =(Parent.TemplateHeight - Self.Height) /2
+                        ZIndex: =6
+
+                    Subtitle12_9 As label:
+                        Height: =23
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.appUser.既定電子メール
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =397
+                        Y: =74
+                        ZIndex: =7
+
+                    Subtitle12_8 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =23
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.role.nameJP
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =397
+                        Y: =14
+                        ZIndex: =8
+
+        FooterContainer1_5 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =4
+
+            Label76_6 As label:
+                Align: =Align.Right
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                PaddingRight: =20
+                Text: |-
+                    =Concatenate("VER: ", appVer)
+                Width: =200
+                ZIndex: =1
+
+            Label12 As label:
+                Text: =drEditTarget.開発品の名称
+                ZIndex: =2
+

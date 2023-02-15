@@ -1,0 +1,99 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_roletemplatelists",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_roletemplatelist",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_roleTemplateLists",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_DR_roleTemplate_template_cr5ee_DR_r": "DR_roleTemplate",
+      "cr5ee_dr_roletemplatelist_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_roletemplatelist_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_dr_roletemplatelist_DuplicateBaseRecord": "レコードの重複  (cr5ee_dr_roletemplatelist_DuplicateBaseRecord)",
+      "cr5ee_dr_roletemplatelist_DuplicateMatchingRecord": "レコードの重複  (cr5ee_dr_roletemplatelist_DuplicateMatchingRecord)",
+      "cr5ee_dr_roletemplatelist_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_roletemplatelist_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_roletemplatelist_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_roletemplatelist_SyncErrors": "同期エラー",
+      "cr5ee_dr_roletemplatelistid": "DR_roleTemplateList",
+      "cr5ee_name": "id",
+      "cr5ee_templatename": "templateName",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_roleTemplateLists",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_roleTemplateLists (ビュー)",
+    "Name": "_cr5ee_dr_roletemplatelist_views",
+    "RelatedEntityName": "DR_roleTemplateLists",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "1aaae800-7f03-416a-a424-63e3bd690050": "アクティブなDR_roleTemplateLists",
+      "28e3978e-ed07-4464-b736-1d0df8fc78c0": "DR_roleTemplateList関連ビュー",
+      "3250b6ed-50b8-43d7-bc8c-fef69cdc50b5": "非アクティブなDR_roleTemplateLists",
+      "46bbce19-ab27-4193-9e5b-7e9072ba5abf": "DR_roleTemplateList検索ダイアログ ビュー",
+      "784987a7-5448-4ef0-83d5-4d0328d1334f": "DR_roleTemplateListの高度な検索ビュー"
+    }
+  },
+  {
+    "DisplayName": "状態 (DR_roleTemplateLists)",
+    "Name": "cr5ee_dr_roletemplatelist_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_roleTemplateLists"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_roleTemplateLists",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_roleTemplateLists)",
+    "Name": "cr5ee_dr_roletemplatelist_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_roleTemplateLists"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_roleTemplateLists",
+    "Type": "OptionSetInfo"
+  }
+]

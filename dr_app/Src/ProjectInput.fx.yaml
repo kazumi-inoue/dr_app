@@ -1,0 +1,816 @@
+"ProjectInput As screen.'tabletAutoLayout_HeaderMainFooter_ver1.0'":
+    OnVisible: |
+        =If(
+            displayModeContext=displayNew,
+            Set(targetProject,Blank()),
+            Set(targetProject,First(Filter(DR_プロジェクトマスタ,プロジェクトid=targetProjectId)));
+        );
+        Set(openReset,false);
+
+    ScreenContainer1 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =2
+
+        HeaderContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =2
+
+            Icon16_5 As icon.ChevronLeft:
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Icon: =Icon.ChevronLeft
+                OnSelect: =Navigate(backTo)
+                PaddingBottom: =7
+                PaddingLeft: =7
+                PaddingRight: =7
+                PaddingTop: =7
+                Width: =Parent.Height
+                ZIndex: =1
+
+            Label5 As label:
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =Parent.Height
+                Size: =25
+                Text: |-
+                    =If(
+                        displayModeContext<>displayView,
+                        If(
+                            displayModeContext=displayNew,
+                            "プロジェクト登録",
+                            "プロジェクト編集"
+                        ),
+                        "プロジェクト詳細"
+                    )
+                Width: =300
+                ZIndex: =2
+
+            Container8_1 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =headerFooterHeight
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =25
+                LayoutJustifyContent: =LayoutJustifyContent.End
+                LayoutMinHeight: =headerFooterHeight
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =3
+
+                Toggle1_1 As toggleSwitch:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: =Or(IsBlank(targetProject.IsActive),IsEmpty(targetProject.IsActive),targetProject.IsActive<>'IsActive (DR_プロジェクトマスタ)'.いいえ)
+                    DisplayMode: |-
+                        =If(
+                            displayModeContext=displayEdit,
+                            DisplayMode.Edit,
+                            DisplayMode.View
+                        )
+                    FalseText: ="Pause"
+                    TrueFill: =RGBA(54, 176, 75, 1)
+                    TrueText: ="Active"
+                    Visible: =displayModeContext<>displayNew
+                    Width: =110
+                    ZIndex: =1
+
+                Toggle1 As toggleSwitch:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: =Or(IsBlank(targetProject.IsOpen),IsEmpty(targetProject.IsOpen),targetProject.IsOpen<>'IsOpen (DR_プロジェクトマスタ)'.いいえ)
+                    DisplayMode: |-
+                        =If(
+                            displayModeContext=displayEdit,
+                            DisplayMode.Edit,
+                            DisplayMode.View
+                        )
+                    FalseText: ="Closed"
+                    OnChange: |-
+                        =If(
+                            Self.Value=false,
+                            // if change to "closed"
+                            If(
+                                CountRows(
+                                    Filter(
+                                        DR_会議情報,
+                                        プロジェクトid.プロジェクトid=targetProject.プロジェクトid,
+                                        選択肢_承認種類id.承認種類一覧<>"承認"
+                                    )
+                                ) > 0,
+                                // if there are not completed dr
+                                Notify("完了していない会議予定があります。");
+                                Set(openReset,true);
+                            ),
+                            Set(openReset,false);
+                        )
+                    Reset: =openReset
+                    TrueFill: =RGBA(255, 191, 0, 1)
+                    TrueText: ="Open"
+                    Visible: =displayModeContext=displayEdit
+                    Width: =120
+                    ZIndex: =2
+
+                ComboBox3_1 As combobox:
+                    DefaultSelectedItems: =
+                    DisplayFields: =["Option","projectCode"]
+                    Height: =36
+                    IsSearchable: =false
+                    Items: =projectOption
+                    OnChange: =
+                    OnSelect: =Set(targetProject,First(Filter(DR_プロジェクトマスタ,プロジェクトid=First(Self.SelectedItems).プロジェクトid)))
+                    SearchFields: =["cr5ee_dr_cost_mil"]
+                    SearchItems: =[]
+                    SelectMultiple: =false
+                    Visible: =And(drEditMode,debugMode)
+                    Width: =637
+                    X: =32
+                    Y: =17
+                    ZIndex: =3
+
+                drEditModeSwitch As toggleSwitch:
+                    FalseFill: =RGBA(172, 62, 11, 1)
+                    FalseText: =
+                    OnChange: |
+                        =UpdateContext({drEditMode:drEditModeSwitch.Value});
+                        If(
+                            drEditMode,
+                            ClearCollect(
+                                projectAll,
+                                AddColumns(DR_プロジェクトマスタ, "projectId", プロジェクトid)
+                            );
+                            ClearCollect(projectCodeAll, DR_製造命令番号);
+                            ClearCollect(
+                                projectOption,
+                                Sort(
+                                    AddColumns(
+                                        projectAll,
+                                        "Option",
+                                        Concatenate(
+                                            If(
+                                                IsEmpty(Filter(projectCodeAll,project.プロジェクトid=projectId)),
+                                                "製番未取得",
+                                                Last(Sort(Filter(projectCodeAll,project.プロジェクトid=projectId),製番発行日)).製造命令番号
+                                            ),
+                                            " ",
+                                            開発品の名称
+                                        )
+                                    ),
+                                    Option
+                                )
+                            );
+                        );
+                    TrueFill: =RGBA(99, 139, 44, 1)
+                    TrueText: =
+                    Visible: =debugMode
+                    Width: =60
+                    X: =20
+                    Y: =29
+                    ZIndex: =4
+
+                Label80 As label:
+                    Align: =Align.Center
+                    Fill: =If(drEditMode,RGBA(187, 221, 140, 1),RGBA(250, 155, 112, 1))
+                    FontWeight: =FontWeight.Bold
+                    Text: =If(drEditMode,"編集","新規")
+                    Visible: =debugMode
+                    Width: =50
+                    ZIndex: =5
+
+                Icon13 As icon.Save:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Icon: =Icon.Save
+                    OnSelect: |-
+                        =If(displayModeContext<>displayView,
+                            If(
+                                displayModeContext=displayEdit,
+                                //Edit
+                                UpdateContext({inProgress:true});
+                                Patch(
+                                    DR_プロジェクトマスタ,
+                                    First(Filter(DR_プロジェクトマスタ,プロジェクトid=targetProject.プロジェクトid)),
+                                    {
+                                        開発品の名称:TextInput21_2.Text,
+                                        開発の目的:TextInput21.Text,
+                                        '自社開発？':If(devRecord_2.Value,'自社開発？ (DR_プロジェクトマスタ)'.いいえ,'自社開発？ (DR_プロジェクトマスタ)'.はい),
+                                        '有償？(受注時)':If(devRecord_1.Value,'有償？(受注時) (DR_プロジェクトマスタ)'.はい,'有償？(受注時) (DR_プロジェクトマスタ)'.いいえ),
+                                        受注先:TextInput21_3.Text,
+                                        想定開発稼働時間:Int(TextInput21_4.Text),
+                                        '想定開発変動費 （百万）':TextInput21_5.Text,
+                                        '開発記録必要?':If(devRecord.Value,'開発記録必要? (DR_プロジェクトマスタ)'.はい,'開発記録必要? (DR_プロジェクトマスタ)'.いいえ),
+                                        開発記録不要時理由:TextInput21_20.Text,
+                                        '環境アセス必要？':If(envAses.Value,'環境アセス必要？ (DR_プロジェクトマスタ)'.はい,'環境アセス必要？ (DR_プロジェクトマスタ)'.いいえ),
+                                        環境アセス不要時理由:TextInput21_22.Text,
+                                        製番完了予定日:DatePicker8.SelectedDate,
+                                        IsActive:If(Toggle1_1.Value,'IsActive (DR_プロジェクトマスタ)'.はい,'IsActive (DR_プロジェクトマスタ)'.いいえ),
+                                        IsOpen:If(Toggle1.Value,'IsOpen (DR_プロジェクトマスタ)'.はい,'IsOpen (DR_プロジェクトマスタ)'.いいえ)
+                                    }
+                                );
+                                UpdateContext({inProgress:false});
+                                ,
+                                //New
+                                UpdateContext({inProgress:true});
+                                Set(folderName,{projectName:TextInput21_2.Text});
+                                Set(replacedFolderName, DR_APP_プロジェクト名の禁止文字列を置換する.Run(JSON(folderName)).replaced);
+                                Set(folderName,{folderName:replacedFolderName});
+                                Set(automateRet, DR_APP_プロジェクトフォルダーを作成する.Run(JSON(folderName)));
+                                Collect(
+                                    DR_プロジェクトマスタ,
+                                    {
+                                        開発品の名称:TextInput21_2.Text,
+                                        開発の目的:TextInput21.Text,
+                                        '自社開発？':If(devRecord_2.Value,'自社開発？ (DR_プロジェクトマスタ)'.いいえ,'自社開発？ (DR_プロジェクトマスタ)'.はい),
+                                        '有償？(受注時)':If(devRecord_1.Value,'有償？(受注時) (DR_プロジェクトマスタ)'.はい,'有償？(受注時) (DR_プロジェクトマスタ)'.いいえ),
+                                        受注先:TextInput21_3.Text,
+                                        想定開発稼働時間:Int(TextInput21_4.Text),
+                                        '想定開発変動費 （百万）':TextInput21_5.Text,
+                                        '開発記録必要?':If(devRecord.Value,'開発記録必要? (DR_プロジェクトマスタ)'.はい,'開発記録必要? (DR_プロジェクトマスタ)'.いいえ),
+                                        開発記録不要時理由:TextInput21_20.Text,
+                                        '環境アセス必要？':If(envAses.Value,'環境アセス必要？ (DR_プロジェクトマスタ)'.はい,'環境アセス必要？ (DR_プロジェクトマスタ)'.いいえ),
+                                        環境アセス不要時理由:TextInput21_22.Text,
+                                        製番完了予定日:DatePicker8.SelectedDate,
+                                        IsActive:'IsActive (DR_プロジェクトマスタ)'.はい,
+                                        IsOpen:'IsOpen (DR_プロジェクトマスタ)'.はい,
+                                        projectFolder:Int(automateRet.folderid)
+                                    }
+                                );
+                                UpdateContext({inProgress:false, displayModeContext:displayEdit});
+                                Navigate(backTo);
+                            )
+                        )
+                    PaddingBottom: =5
+                    PaddingLeft: =5
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    Visible: |-
+                        =If(
+                            displayModeContext=displayView,
+                            false,
+                            true
+                        )
+                    Width: =Parent.Height
+                    ZIndex: =6
+
+        MainSectionContainer1 As groupContainer.verticalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =3
+
+            Container10 As groupContainer.manualLayoutContainer:
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                ZIndex: =2
+
+                Container7 As groupContainer.verticalAutoLayoutContainer:
+                    Height: =642
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutGap: =17
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =10
+                    PaddingTop: =5
+                    Width: =180
+                    Y: =9
+                    ZIndex: =1
+
+                    LabelProductName As label:
+                        Text: ="開発品の名称"
+                        Width: =Parent.Width
+                        ZIndex: =1
+
+                    Container3_1 As groupContainer.manualLayoutContainer:
+                        Height: =LabelProductName.Height
+                        LayoutMinHeight: =10
+                        LayoutMinWidth: =50
+                        Width: =Parent.Width
+                        ZIndex: =2
+
+                        Container5_1 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =LabelProductName.Height
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                            Label74_24 As label:
+                                Height: =LabelProductName.Height
+                                Text: ="製番"
+                                Width: =Parent.Width * 2/3
+                                Y: =40
+                                ZIndex: =1
+
+                            Icon3 As icon.Edit:
+                                Height: =Parent.Height
+                                Icon: =Icon.Edit
+                                OnSelect: |+
+                                    =Navigate( DR_ProjectCodeInput, ScreenTransition.Fade, { drEditTargetContext: targetProject.プロジェクトid } );
+                                    
+                                    
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                Visible: |-
+                                    =If(
+                                        displayModeContext=displayView,
+                                        false,
+                                        true
+                                    )
+                                Width: =Parent.Height
+                                ZIndex: =2
+
+                    Label74_5 As label:
+                        Height: =LabelProductName.Height * 3
+                        Text: ="開発の目的"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width
+                        ZIndex: =3
+
+                    Label74_2 As label:
+                        Height: =29
+                        Text: ="客先受注/自社開発"
+                        Width: =Parent.Width
+                        ZIndex: =4
+
+                    Label74_3 As label:
+                        Height: =29
+                        Text: ="有償/無償"
+                        Width: =Parent.Width
+                        ZIndex: =5
+
+                    Label74_4 As label:
+                        Height: =LabelProductName.Height
+                        Text: ="受注先"
+                        Width: =Parent.Width
+                        ZIndex: =6
+
+                    Label74_23 As label:
+                        Height: =LabelProductName.Height
+                        Text: ="完了予定日"
+                        Width: =Parent.Width
+                        ZIndex: =7
+
+                    Label74_6 As label:
+                        Height: =LabelProductName.Height
+                        Text: ="想定開発稼働時間"
+                        Width: =Parent.Width
+                        ZIndex: =8
+
+                    Label74_7 As label:
+                        Height: =LabelProductName.Height
+                        Text: ="想定開発変動費"
+                        Width: =Parent.Width
+                        ZIndex: =9
+
+                    Label74 As label:
+                        Height: =Parent.Height - (LabelProductName.Height *11 + Container7.LayoutGap * 11)
+                        Text: =""
+                        ZIndex: =10
+
+                Container7_1 As groupContainer.verticalAutoLayoutContainer:
+                    Height: =Container7.Height
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutGap: =Container7.LayoutGap
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =5
+                    Width: =Parent.Width - Container7.Width
+                    X: =Container7.Width
+                    Y: =Container7.Y
+                    ZIndex: =2
+
+                    TextInput21_2 As text:
+                        Default: =targetProject.開発品の名称
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                DisplayMode.Disabled
+                            )
+                        Height: =LabelProductName.Height
+                        Tooltip: |-
+                            =Concatenate("Project ID: ",targetProject.プロジェクトid)
+                        Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                        ZIndex: =1
+
+                    Container5 As groupContainer.horizontalAutoLayoutContainer:
+                        Height: =LabelProductName.Height
+                        LayoutGap: =10
+                        LayoutMinHeight: =10
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =Parent.Width
+                        ZIndex: =2
+
+                        TextInput21_6 As text:
+                            Default: =Last(Sort(Filter(DR_製造命令番号,project.プロジェクトid=targetProject.プロジェクトid),製番発行日)).製造命令番号
+                            DisplayMode: |-
+                                =If(
+                                    displayModeContext<>displayView,
+                                    DisplayMode.Disabled,
+                                    DisplayMode.Disabled
+                                )
+                            Height: =LabelProductName.Height
+                            Width: =(Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)) /2
+                            ZIndex: =1
+
+                        Label78 As label:
+                            Align: =Align.Right
+                            Text: =""
+                            Width: =50
+                            ZIndex: =2
+
+                        Icon35 As icon.CalendarBlank:
+                            Height: =TextInput21_6.Height
+                            Icon: =Icon.CalendarBlank
+                            OnSelect: |-
+                                =Navigate(DR_planning,ScreenTransition.Fade,{drEditTarget:targetProject,backTo:ProjectInput})
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            Visible: |-
+                                =If(
+                                    displayModeContext=displayView,
+                                    false,
+                                    true
+                                )
+                            Width: =TextInput21_6.Height
+                            ZIndex: =3
+
+                    TextInput21 As text:
+                        Default: =targetProject.開発の目的
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                DisplayMode.Disabled
+                            )
+                        Height: =LabelProductName.Height * 3
+                        Mode: =TextMode.MultiLine
+                        Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                        ZIndex: =3
+
+                    devRecord_2 As toggleSwitch:
+                        Default: =If(targetProject.'自社開発？'='自社開発？ (DR_プロジェクトマスタ)'.はい,false,true)
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                DisplayMode.View
+                            )
+                        FalseText: ="自社開発"
+                        TrueText: ="客先受注"
+                        Width: =Parent.Width / 3
+                        ZIndex: =4
+
+                    devRecord_1 As toggleSwitch:
+                        Default: =If(targetProject.'有償？(受注時)'='有償？(受注時) (DR_プロジェクトマスタ)'.はい,true,false)
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                DisplayMode.View
+                            )
+                        FalseText: ="無償"
+                        TrueText: ="有償"
+                        Width: =Parent.Width / 4
+                        ZIndex: =5
+
+                    TextInput21_3 As text:
+                        Default: =targetProject.受注先
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                DisplayMode.Disabled
+                            )
+                        Height: =LabelProductName.Height
+                        Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                        ZIndex: =6
+
+                    DatePicker8 As datepicker:
+                        DefaultDate: =If(drEditMode,targetProject.製番完了予定日,Today())
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                DisplayMode.View
+                            )
+                        Height: =LabelProductName.Height
+                        ZIndex: =7
+
+                    Container13 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        ZIndex: =8
+
+                        Container14 As groupContainer.verticalAutoLayoutContainer:
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            ZIndex: =1
+
+                            Container14_1 As groupContainer.verticalAutoLayoutContainer:
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutGap: =Container7.LayoutGap
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                PaddingRight: =10
+                                ZIndex: =1
+
+                                TextInput21_4 As text:
+                                    Default: =targetProject.想定開発稼働時間
+                                    DisplayMode: |-
+                                        =If(
+                                            displayModeContext<>displayView,
+                                            If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                            DisplayMode.Disabled
+                                        )
+                                    Format: =TextFormat.Number
+                                    Height: =LabelProductName.Height
+                                    Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                                    ZIndex: =1
+
+                                TextInput21_5 As text:
+                                    Default: =targetProject.'想定開発変動費 （百万）'
+                                    DisplayMode: |-
+                                        =If(
+                                            displayModeContext<>displayView,
+                                            If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                            DisplayMode.Disabled
+                                        )
+                                    Format: =TextFormat.Number
+                                    Height: =LabelProductName.Height
+                                    Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                                    ZIndex: =2
+
+                        Container15 As groupContainer.verticalAutoLayoutContainer:
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutGap: =Container7.LayoutGap
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            ZIndex: =2
+
+                            Label79 As label:
+                                Text: ="H"
+                                X: =344
+                                Y: =380
+                                ZIndex: =1
+
+                            Label79_1 As label:
+                                Text: ="百万円"
+                                X: =344
+                                Y: =380
+                                ZIndex: =2
+
+                    Label74_1 As label:
+                        Height: =Parent.Height - (LabelProductName.Height *11 + Container7.LayoutGap * 11)
+                        Text: =""
+                        ZIndex: =9
+
+            Container10_1 As groupContainer.manualLayoutContainer:
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                ZIndex: =3
+
+                Container7_2 As groupContainer.verticalAutoLayoutContainer:
+                    Height: =Container7.Height
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutGap: =Container7.LayoutGap
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =10
+                    PaddingTop: =5
+                    Width: =165
+                    Y: =Container7.Y
+                    ZIndex: =1
+
+                    Label74_19 As label:
+                        Height: =28
+                        Text: ="開発記録"
+                        Width: =Parent.Width
+                        ZIndex: =9
+
+                    Label74_20 As label:
+                        Height: =LabelProductName.Height * 2
+                        Text: |-
+                            ="開発記録
+                            不要時理由"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width
+                        ZIndex: =10
+
+                    Label74_21 As label:
+                        Height: =28
+                        Text: ="環境アセスメント"
+                        Width: =Parent.Width
+                        ZIndex: =11
+
+                    Label74_22 As label:
+                        Height: =LabelProductName.Height * 2
+                        Text: |-
+                            ="環境アセスメント
+                            不要時理由"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width
+                        ZIndex: =12
+
+                    Container3_2 As groupContainer.manualLayoutContainer:
+                        Height: =LabelProductName.Height
+                        LayoutMinHeight: =10
+                        LayoutMinWidth: =50
+                        Width: =Parent.Width
+                        ZIndex: =14
+
+                        Container5_2 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =LabelProductName.Height
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                            Label74_26 As label:
+                                Height: =LabelProductName.Height
+                                Text: ="メンバー"
+                                Width: =Parent.Width * 2/3
+                                Y: =40
+                                ZIndex: =1
+
+                            Icon2 As icon.AddUser:
+                                Height: =Parent.Height
+                                Icon: =Icon.AddUser
+                                OnSelect: |-
+                                    =Navigate(DR_EditProjectMember,ScreenTransition.Fade,{drEditTargetContext:targetProject.プロジェクトid})
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                Visible: |-
+                                    =If(
+                                        displayModeContext=displayView,
+                                        false,
+                                        true
+                                    )
+                                Width: =Parent.Height
+                                ZIndex: =3
+
+                Container7_3 As groupContainer.verticalAutoLayoutContainer:
+                    Height: =Container7.Height
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutGap: =Container7.LayoutGap
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingRight: =10
+                    PaddingTop: =5
+                    Width: =Parent.Width-Container7_2.Width
+                    X: =Container7_2.Width
+                    Y: =Container7.Y
+                    ZIndex: =2
+
+                    devRecord As toggleSwitch:
+                        Default: =If(targetProject.'開発記録必要?'='開発記録必要? (DR_プロジェクトマスタ)'.はい,true,false)
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                DisplayMode.View
+                            )
+                        FalseText: ="不要"
+                        TrueText: ="必要"
+                        Width: =Parent.Width / 4
+                        ZIndex: =1
+
+                    TextInput21_20 As text:
+                        Default: =targetProject.開発記録不要時理由
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,If(devRecord.Value,DisplayMode.Disabled,DisplayMode.Edit)),
+                                DisplayMode.Disabled
+                            )
+                        Height: =LabelProductName.Height * 2
+                        Mode: =TextMode.MultiLine
+                        Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                        ZIndex: =2
+
+                    envAses As toggleSwitch:
+                        Default: =If(targetProject.'環境アセス必要？'='環境アセス必要？ (DR_プロジェクトマスタ)'.はい,true,false)
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,DisplayMode.Edit),
+                                DisplayMode.View
+                            )
+                        FalseText: ="不要"
+                        TrueText: ="必要"
+                        Width: =Parent.Width / 4
+                        ZIndex: =3
+
+                    TextInput21_22 As text:
+                        Default: =targetProject.環境アセス不要時理由
+                        DisplayMode: |-
+                            =If(
+                                displayModeContext<>displayView,
+                                If(inProgress,DisplayMode.Disabled,If(envAses.Value,DisplayMode.Disabled,DisplayMode.Edit)),
+                                DisplayMode.Disabled
+                            )
+                        Height: =LabelProductName.Height * 2
+                        Mode: =TextMode.MultiLine
+                        Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                        ZIndex: =4
+
+                    ComboBox1 As combobox:
+                        DefaultSelectedItems: =Filter(DR_roleMaster,Or(nameEN=roleProjectManager,nameEN=roleProjectLeader,nameEN=roleProjectMember))
+                        DisplayFields: =["cr5ee_namejp"]
+                        InputTextPlaceholder: ="表示対象ロールを選択"
+                        Items: =Filter(DR_roleMaster,nameEN<>roleAdmin,nameEN<>roleProjectPlanner)
+                        SearchFields: =["cr5ee_namejp"]
+                        SearchItems: =Search(Filter(DR_roleMaster,nameEN<>roleAdmin,nameEN<>roleProjectPlanner),ComboBox1.SearchText,"cr5ee_namejp")
+                        Width: =Parent.Width
+                        ZIndex: =5
+
+                    "Gallery6 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        BorderThickness: =1
+                        Height: =LabelProductName.Height * 2
+                        Items: |-
+                            =Filter(
+                                AddColumns(
+                                    Filter(DR_projectMember,project.プロジェクトid=targetProject.プロジェクトid),
+                                    "selected",
+                                    Filter(
+                                        ComboBox1.SelectedItems,
+                                        role.nameEN=nameEN
+                                    )
+                                ),
+                                Not(IsEmpty(selected))
+                            )
+                        Layout: =Layout.Vertical
+                        LayoutMinHeight: =LabelProductName.Height * 4
+                        LayoutMinWidth: =320
+                        TemplatePadding: =0
+                        TemplateSize: =LabelProductName.Height
+                        Width: =Parent.Width - 12
+                        ZIndex: =6
+
+                        Title7 As label:
+                            FontWeight: =FontWeight.Normal
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =14
+                            Text: =ThisItem.role.nameJP
+                            Width: =264
+                            X: =18
+                            ZIndex: =1
+
+                        Separator5 As rectangle:
+                            Height: =1
+                            OnSelect: =Select(Parent)
+                            Width: =Parent.TemplateWidth
+                            Y: =Parent.TemplateHeight - 1
+                            ZIndex: =3
+
+                        Title7_1 As label:
+                            Height: =39
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =15
+                            Text: =ThisItem.appUser.氏名
+                            Width: =223
+                            X: =283
+                            ZIndex: =4
+
+        FooterContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =4
+
+            Label76_1 As label:
+                Align: =Align.Right
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                PaddingRight: =20
+                Text: |-
+                    =Concatenate("VER: ", appVer)
+                Width: =200
+                ZIndex: =1
+

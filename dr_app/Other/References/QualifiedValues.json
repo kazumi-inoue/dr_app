@@ -1,0 +1,182 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_cr5ee_dr_attendee_forms",
+      "Namespace": "DR_attendees (フォーム)",
+      "Values": {
+        "情報": "3dd737e1-656f-438b-b649-7d51e59ed428"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_attendeesfile_forms",
+      "Namespace": "DR_attendeesFile (フォーム)",
+      "Values": {
+        "情報": "42d9f901-09a7-4926-b7fd-e889e3e148d9"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_status_forms",
+      "Namespace": "DR_DRステータス (フォーム)",
+      "Values": {
+        "情報": "5ef20707-df50-4c3f-b0aa-c5669cd73f80"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_example_forms",
+      "Namespace": "DR_example (フォーム)",
+      "Values": {
+        "情報": "8f8978a1-61e7-4598-9d35-b22a2f02d1dc"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_projectmember_forms",
+      "Namespace": "DR_projectMember (フォーム)",
+      "Values": {
+        "情報": "eb475fc7-4bdf-41c8-abcb-ff2ba7ba9b27"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_rolemaster_forms",
+      "Namespace": "DR_roleMaster (フォーム)",
+      "Values": {
+        "情報": "c406aa84-6458-42d5-8379-d28c448c8aed"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_roletemplate_forms",
+      "Namespace": "DR_roleTemplate (フォーム)",
+      "Values": {
+        "情報": "00ffb090-9a90-4b78-bd2e-c942cc5b0d9a"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_roletemplatelist_forms",
+      "Namespace": "DR_roleTemplateLists (フォーム)",
+      "Values": {
+        "情報": "40dcca01-0f0d-405f-a8ea-e12ae9af1cb0"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_project_forms",
+      "Namespace": "DR_プロジェクトマスタ (フォーム)",
+      "Values": {
+        "情報": "33e0a265-06ce-43e0-9e9e-930e234f78da"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_project_member_forms",
+      "Namespace": "DR_プロジェクトメンバー (フォーム)",
+      "Values": {
+        "情報": "3f8f6e7d-27ab-47c0-9326-f7d1c945b17b"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_meeting_info_forms",
+      "Namespace": "DR_会議情報 (フォーム)",
+      "Values": {
+        "情報": "3d04af0a-22e7-4985-8c56-a1f48beecb1c"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_meeting_guidance_forms",
+      "Namespace": "DR_会議案内 (フォーム)",
+      "Values": {
+        "情報": "27d26599-6e1a-4da0-9b04-6ad10d30e491"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_dr_meeting_approval_status_forms",
+      "Namespace": "DR_承認ステータス (フォーム)",
+      "Values": {
+        "情報": "58cb27e0-bd6e-4902-bf2b-a8067a50f4d8"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_dr_order_number_forms",
+      "Namespace": "DR_製造命令番号 (フォーム)",
+      "Values": {
+        "情報": "493e4489-7193-401d-99cb-cf8f667d36e2"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_drselect_status_type_forms",
+      "Namespace": "DR選択肢_DR種類 (フォーム)",
+      "Values": {
+        "情報": "27ddb209-7daa-43ba-b071-6c59b8c24453"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_drselect_completed_aborted_continued_forms",
+      "Namespace": "DR選択肢_完了/中止/継続 (フォーム)",
+      "Values": {
+        "情報": "a0c7f49c-7c54-4b89-a268-f48fde9ec92c"
+      }
+    },
+    {
+      "Kind": "default.cds_cr5ee_drselect_approval_result_type_forms",
+      "Namespace": "DR選択肢_承認種類 (フォーム)",
+      "Values": {
+        "情報": "3c658a80-63f5-4293-b5a4-e82a58c37fb3"
+      }
+    },
+    {
+      "Kind": "default.cds_sharepointsite_forms",
+      "Namespace": "SharePoint サイト  (フォーム)",
+      "Values": {
+        "情報": "ba6522af-e71b-df11-aa01-00155d2a9006"
+      }
+    },
+    {
+      "Kind": "default.cds_adx_webpage_forms",
+      "Namespace": "Web ページ (フォーム)",
+      "Values": {
+        "Content Page": "4c2b38f7-578b-4078-bcf6-703d932ebf3a",
+        "Information": "007c799c-a87f-4471-b00b-bf7555a0f85d"
+      }
+    },
+    {
+      "Kind": "default.cds_adx_weblinkset_forms",
+      "Namespace": "Web リンク セット (フォーム)",
+      "Values": {
+        "Information": "1c038742-0f0b-4b1e-a61f-79fa72d4cc50"
+      }
+    },
+    {
+      "Kind": "default.cds_adx_weblink_forms",
+      "Namespace": "Web リンク (フォーム)",
+      "Values": {
+        "Information": "2623d4e7-ac46-4283-a509-3281ecfb199d"
+      }
+    },
+    {
+      "Kind": "default.cds_systemuser_forms",
+      "Namespace": "ユーザー  (フォーム)",
+      "Values": {
+        "アプリケーション ユーザー": "d26924ef-4d80-46f7-ab1d-e6ae80a54ce8",
+        "ユーザー": "c2cd9e55-d4b4-4b55-9951-16ead79643e5",
+        "ユーザー フォーム – ビジネス": "c2413504-7eb2-4c59-a087-95d819866114",
+        "ユーザー階層のタイル フォーム": "c68d6c09-d7a7-4959-8d0f-44b8cff9b452",
+        "情報": "094fb08a-77bb-49e0-b7ea-8dbddfd01294"
+      }
+    },
+    {
+      "Kind": "default.cds_aaduser_forms",
+      "Namespace": "AAD Users (フォーム)",
+      "Values": {
+        "Information": "dd5ded01-9aad-4e25-8d0e-e9acdaecbe4e"
+      }
+    },
+    {
+      "Kind": "default.cds_optionset_forms",
+      "Namespace": "OptionSets (フォーム)",
+      "Values": {}
+    },
+    {
+      "Kind": "default.cds_cr5ee_drselect_unit_forms",
+      "Namespace": "DR選択肢_単位 (フォーム)",
+      "Values": {
+        "情報": "1a56f35f-0738-49e5-9172-d9268b9a41f4"
+      }
+    }
+  ]
+}

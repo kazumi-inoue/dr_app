@@ -1,0 +1,53 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =//version
+        Set(appVer, "0.0.1");
+        
+        //color
+        Set(colorPrimary, RGBA(56, 96, 178, 1));
+        Set(colorSecondary, RGBA(204, 204, 204, 1));
+        Set(colorSuccess, ColorValue("LimeGreen"));
+        Set(colorDanger, ColorValue("deeppink"));
+        Set(colorWarning, ColorValue("coral"));
+        Set(colorInfo, ColorValue("PowderBlue"));
+        Set(colorLight, ColorValue("White"));
+        Set(colorDark, ColorValue("Black"));
+        
+        
+        //app mode
+        Set(debugMode, false);
+        
+        //app config
+        Set(headerFooterHeight, 55);
+        Set(layoutGapDefault, 17);
+        	
+        Set(roleTemplateAdmin,"admin");
+        Set(roleAdmin,"Admin");
+        Set(roleProjectPlanner,"Project Planner");
+        Set(roleProjectPrimaryApprover,"Project Primary Approver");
+        Set(roleProjectSecondaryApprover,"Project Secondary Approver");
+        Set(roleBussinessPrimaryApprover,"Bussiness Primary Approver");
+        Set(roleBussinessSecondaryApprover,"Bussiness Secondary Approver");
+        Set(roleDesignPrimaryApprover,"Design Primary Approver");
+        Set(roleDesignSecondaryApprover,"Design Secondary Approver");
+        Set(roleProductionPrimaryApprover,"Production Primary Approver");
+        Set(roleProductionSecondaryApprover	,"Production Secondary Approver	");
+        Set(roleProjectManager,"Project Manager");
+        Set(roleProjectLeader,"Project Leader");
+        Set(roleProjectMember,"Project Member");
+        Set(roleProjectCouncillor,"Project Councillor");
+        Set(roleProjectCodeApprover,"Project Code Approver");
+        Set(roleProjectCodeCoordinator,"Project Code Coordinator");
+        Set(rolePrimary,"Primary");
+        Set(roleApprover,"Approver");
+        
+        Set(displayNew,"New");
+        Set(displayEdit,"Edit");
+        Set(displayView,"View");
+        
+        Set(approval_approved, First(Filter(DR選択肢_承認種類,承認種類一覧="承認")));
+        Set(approval_deny, First(Filter(DR選択肢_承認種類,承認種類一覧="却下")));
+        Set(approval_notYet, First(Filter(DR選択肢_承認種類,承認種類一覧="未")));
+    StartScreen: =
+

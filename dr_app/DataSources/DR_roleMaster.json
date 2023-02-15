@@ -1,0 +1,102 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_rolemasters",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_rolemaster",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_roleMaster",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_DR_attendee_role_cr5ee_DR_roleMaste": "DR_attendees",
+      "cr5ee_DR_projectMember_role_cr5ee_DR_role": "DR_projectMember",
+      "cr5ee_dr_rolemaster_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_rolemaster_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_dr_rolemaster_DuplicateBaseRecord": "レコードの重複  (cr5ee_dr_rolemaster_DuplicateBaseRecord)",
+      "cr5ee_dr_rolemaster_DuplicateMatchingRecord": "レコードの重複  (cr5ee_dr_rolemaster_DuplicateMatchingRecord)",
+      "cr5ee_dr_rolemaster_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_rolemaster_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_rolemaster_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_rolemaster_SyncErrors": "同期エラー",
+      "cr5ee_dr_rolemasterid": "DR_roleMaster",
+      "cr5ee_DR_roleTemplate_role_cr5ee_DR_roleM": "DR_roleTemplate",
+      "cr5ee_name": "id",
+      "cr5ee_nameen": "nameEN",
+      "cr5ee_namejp": "nameJP",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_roleMaster",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_roleMaster (ビュー)",
+    "Name": "_cr5ee_dr_rolemaster_views",
+    "RelatedEntityName": "DR_roleMaster",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "4be08c63-4acc-40ce-95bf-30930315d4e8": "DR_roleMasterの高度な検索ビュー",
+      "50f8aa88-c1aa-42b2-889b-162a3f3216d5": "DR_roleMaster検索ダイアログ ビュー",
+      "cad2f44b-abc7-40da-ab54-4b87d7cd262a": "非アクティブなDR_roleMaster",
+      "e9ca1c8f-25c5-480b-a034-502aaf69c6bd": "DR_roleMaster関連ビュー",
+      "f3b8c017-7c7f-4d42-ba74-86d7df648eaf": "アクティブなDR_roleMaster"
+    }
+  },
+  {
+    "DisplayName": "状態 (DR_roleMaster)",
+    "Name": "cr5ee_dr_rolemaster_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_roleMaster"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_roleMaster",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_roleMaster)",
+    "Name": "cr5ee_dr_rolemaster_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_roleMaster"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_roleMaster",
+    "Type": "OptionSetInfo"
+  }
+]

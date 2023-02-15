@@ -1,0 +1,209 @@
+"'Color sample' As screen":
+
+    Label90 As label:
+        BorderThickness: =1
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =colorPrimary
+        FontWeight: =FontWeight.Bold
+        Text: ="colorPrimary"
+        Width: =174
+        X: =32
+        Y: =76
+        ZIndex: =1
+
+    Label90_1 As label:
+        BorderThickness: =1
+        Fill: =colorSecondary
+        FontWeight: =FontWeight.Bold
+        Text: ="colorSecondary"
+        Width: =174
+        X: =32
+        Y: =123
+        ZIndex: =2
+
+    Label90_2 As label:
+        BorderThickness: =1
+        Color: =colorDark
+        Fill: =colorSuccess
+        FontWeight: =FontWeight.Bold
+        Text: ="colorSuccess"
+        Width: =174
+        X: =32
+        Y: =170
+        ZIndex: =3
+
+    Label90_3 As label:
+        BorderThickness: =1
+        Color: =colorLight
+        Fill: =colorDanger
+        FontWeight: =FontWeight.Bold
+        Text: ="colorDanger"
+        Width: =174
+        X: =32
+        Y: =217
+        ZIndex: =4
+
+    Label90_4 As label:
+        BorderThickness: =1
+        Fill: =colorWarning
+        FontWeight: =FontWeight.Bold
+        Text: ="colorWarning"
+        Width: =174
+        X: =32
+        Y: =264
+        ZIndex: =5
+
+    Label90_5 As label:
+        BorderThickness: =1
+        Fill: =colorLight
+        FontWeight: =FontWeight.Bold
+        Text: ="colorLight"
+        Width: =174
+        X: =32
+        Y: =358
+        ZIndex: =6
+
+    Label90_6 As label:
+        BorderThickness: =1
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =colorDark
+        FontWeight: =FontWeight.Bold
+        Text: ="colorDark"
+        Width: =174
+        X: =32
+        Y: =405
+        ZIndex: =7
+
+    Label90_7 As label:
+        BorderColor: =colorPrimary
+        BorderThickness: =1
+        Color: =colorPrimary
+        FontWeight: =FontWeight.Bold
+        Text: ="colorPrimary"
+        Width: =168
+        X: =228
+        Y: =76
+        ZIndex: =8
+
+    Label90_8 As label:
+        BorderColor: =colorSecondary
+        BorderThickness: =1
+        Color: =colorSecondary
+        Fill: =RGBA(0, 0, 0, 0)    
+        FontWeight: =FontWeight.Bold
+        Text: ="colorSecondary"
+        Width: =168
+        X: =228
+        Y: =123
+        ZIndex: =9
+
+    Label90_9 As label:
+        BorderColor: =colorSuccess
+        BorderThickness: =1
+        Color: =colorSuccess
+        FontWeight: =FontWeight.Bold
+        Text: ="colorSuccess"
+        Width: =168
+        X: =228
+        Y: =170
+        ZIndex: =10
+
+    Label90_10 As label:
+        BorderColor: =colorDanger
+        BorderThickness: =1
+        Color: =colorDanger
+        FontWeight: =FontWeight.Bold
+        Text: ="colorDanger"
+        Width: =168
+        X: =228
+        Y: =217
+        ZIndex: =11
+
+    Label90_11 As label:
+        BorderColor: =colorWarning
+        BorderThickness: =1
+        Color: =colorWarning
+        Fill: =RGBA(0, 0, 0, 0)    
+        FontWeight: =FontWeight.Bold
+        Text: ="colorWarning"
+        Width: =168
+        X: =228
+        Y: =264
+        ZIndex: =12
+
+    Label90_12 As label:
+        BorderColor: =colorLight
+        BorderThickness: =1
+        Color: =colorLight
+        Fill: =colorDark
+        FontWeight: =FontWeight.Bold
+        Text: ="colorLight"
+        Width: =168
+        X: =228
+        Y: =358
+        ZIndex: =13
+
+    Label90_13 As label:
+        BorderColor: =colorDark
+        BorderThickness: =1
+        Color: =colorDark
+        FontWeight: =FontWeight.Bold
+        Text: ="colorDark"
+        Width: =168
+        X: =228
+        Y: =405
+        ZIndex: =14
+
+    Label91 As label:
+        Text: ="Fill"
+        X: =44
+        Y: =36
+        ZIndex: =15
+
+    Label91_1 As label:
+        Text: ="Color & BorderColor"
+        Width: =208
+        X: =230
+        Y: =36
+        ZIndex: =16
+
+    Label90_15 As label:
+        BorderThickness: =1
+        Fill: =colorInfo
+        FontWeight: =FontWeight.Bold
+        Text: ="colorInfo"
+        Width: =174
+        X: =32
+        Y: =311
+        ZIndex: =19
+
+    Label90_16 As label:
+        BorderColor: =colorInfo
+        BorderThickness: =1
+        Color: =colorInfo
+        Fill: =colorLight
+        FontWeight: =FontWeight.Bold
+        Text: ="colorInfo"
+        Width: =168
+        X: =228
+        Y: =311
+        ZIndex: =20
+
+    Button15_2 As button:
+        Height: =46
+        OnSelect: |
+            =//color
+            Set(colorPrimary, RGBA(56, 96, 178, 1));
+            Set(colorSecondary, RGBA(204, 204, 204, 1));
+            Set(colorSuccess, ColorValue("LimeGreen"));
+            Set(colorDanger, ColorValue("deeppink"));
+            Set(colorWarning, ColorValue("coral"));
+            Set(colorInfo, ColorValue("PowderBlue"));
+            Set(colorLight, ColorValue("White"));
+            Set(colorDark, ColorValue("Black"));
+        Text: ="APP Config"
+        Width: =297
+        X: =583
+        Y: =164
+        ZIndex: =21
+

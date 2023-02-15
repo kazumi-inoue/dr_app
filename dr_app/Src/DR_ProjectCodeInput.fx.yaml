@@ -1,0 +1,842 @@
+"DR_ProjectCodeInput As screen.'tabletAutoLayout_HeaderMainFooter_ver1.0'":
+    OnVisible: |
+        =UpdateContext({drEditTarget:First(Filter(DR_プロジェクトマスタ,プロジェクトid=drEditTargetContext))});
+        UpdateContext({inProgress:false});
+        UpdateContext({denyComment:""});
+
+    ScreenContainer1_1 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =2
+
+        HeaderContainer1_1 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =2
+
+            Icon16_1 As icon.ChevronLeft:
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Icon: =Icon.ChevronLeft
+                OnSelect: |-
+                    =Navigate(ProjectInput,ScreenTransition.Fade,{drEditTargetContext:drEditTarget.プロジェクトid});
+                PaddingBottom: =7
+                PaddingLeft: =7
+                PaddingRight: =7
+                PaddingTop: =7
+                Width: =Parent.Height
+                ZIndex: =1
+
+            Label5_1 As label:
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =Parent.Height
+                Size: =18
+                Text: |-
+                    =Concatenate(
+                        " 製番編集",
+                        "【",
+                        If(
+                            CountRows(Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid)) > 0,
+                            First(Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid)).製造命令番号,
+                            "製番未付与"
+                        ),
+                        "】",
+                        drEditTarget.開発品の名称
+                    )
+                Width: =Parent.Width - Icon16_1.Width
+                ZIndex: =2
+
+            Container8_2 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =headerFooterHeight
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =10
+                LayoutJustifyContent: =LayoutJustifyContent.End
+                LayoutMinHeight: =headerFooterHeight
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingRight: =17
+                Visible: =debugMode
+                ZIndex: =3
+
+                ComboBox3_2 As combobox:
+                    DefaultSelectedItems: =
+                    DisplayFields: =["Option","projectCode"]
+                    Height: =36
+                    IsSearchable: =false
+                    Items: =projectOption
+                    OnChange: =
+                    OnSelect: |-
+                        =UpdateContext({drEditTarget:First(Filter(DR_プロジェクトマスタ,プロジェクトid=Self.Selected.プロジェクトid))})
+                    SearchFields: =["cr5ee_dr_cost_mil"]
+                    SearchItems: =[]
+                    SelectMultiple: =false
+                    Visible: =drEditMode_1.Value
+                    Width: =637
+                    X: =32
+                    Y: =17
+                    ZIndex: =1
+
+                drEditMode_1 As toggleSwitch:
+                    FalseFill: =RGBA(172, 62, 11, 1)
+                    FalseText: =
+                    OnChange: |-
+                        =If(
+                            drEditMode_1.Value,
+                            ClearCollect(
+                                projectAll,
+                                AddColumns(DR_プロジェクトマスタ, "projectId", プロジェクトid)
+                            );
+                            ClearCollect(projectCodeAll, DR_製造命令番号);
+                            ClearCollect(
+                                projectOption,
+                                Sort(
+                                    AddColumns(
+                                        projectAll,
+                                        "Option",
+                                        Concatenate(
+                                            If(
+                                                IsEmpty(Filter(projectCodeAll,project.プロジェクトid=projectId)),
+                                                "製番未取得",
+                                                Last(Sort(Filter(projectCodeAll,project.プロジェクトid=projectId),製番発行日)).製造命令番号
+                                            ),
+                                            " ",
+                                            開発品の名称
+                                        )
+                                    ),
+                                    Option
+                                )
+                            );
+                        )
+                    TrueFill: =RGBA(99, 139, 44, 1)
+                    TrueText: =
+                    Width: =60
+                    X: =20
+                    Y: =29
+                    ZIndex: =2
+
+                Label80_1 As label:
+                    Align: =Align.Center
+                    Fill: =If(drEditMode_1.Value,RGBA(187, 221, 140, 1),RGBA(250, 155, 112, 1))
+                    FontWeight: =FontWeight.Bold
+                    Text: =If(drEditMode_1,"編集","新規")
+                    Width: =50
+                    ZIndex: =3
+
+        MainSectionContainer1_1 As groupContainer.verticalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =3
+
+            Container2_1 As groupContainer.verticalAutoLayoutContainer:
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                Container10_2 As groupContainer.manualLayoutContainer:
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    ZIndex: =1
+
+                    Container7_4 As groupContainer.verticalAutoLayoutContainer:
+                        Height: =642
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =17
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingLeft: =10
+                        PaddingTop: =5
+                        Width: =180
+                        Y: =9
+                        ZIndex: =1
+
+                        LabelProductName_1 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Text: ="開発品の名称"
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                        Label74_8 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height * 3
+                            Text: ="開発の目的"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =Parent.Width
+                            ZIndex: =3
+
+                        Label74_9 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height
+                            Text: ="客先受注/自社開発"
+                            Width: =Parent.Width
+                            ZIndex: =4
+
+                        Label74_10 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height
+                            Text: ="有償/無償"
+                            Width: =Parent.Width
+                            ZIndex: =5
+
+                        Label74_11 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height
+                            Text: ="受注先"
+                            Width: =Parent.Width
+                            ZIndex: =6
+
+                        Label74_28 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height
+                            Text: ="完了予定日"
+                            Width: =Parent.Width
+                            ZIndex: =7
+
+                        Label74_12 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height
+                            Text: ="想定開発稼働時間"
+                            Width: =Parent.Width
+                            ZIndex: =8
+
+                        Label74_13 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height
+                            Text: ="想定開発変動費"
+                            Width: =Parent.Width
+                            ZIndex: =9
+
+                        Label74_35 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height
+                            Text: ="開発記録"
+                            Width: =Parent.Width
+                            ZIndex: =11
+
+                        Label74_40 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height
+                            Text: ="環境アセスメント"
+                            Width: =Parent.Width
+                            ZIndex: =12
+
+                    Container7_5 As groupContainer.verticalAutoLayoutContainer:
+                        Height: =Container7_4.Height
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =Container7_4.LayoutGap
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =5
+                        Width: =Parent.Width - Container7_4.Width
+                        X: =Container7_4.Width
+                        Y: =Container7_4.Y
+                        ZIndex: =2
+
+                        LabelProductName_3 As label:
+                            BorderColor: =RGBA(128, 128, 128, 1)
+                            BorderThickness: =1
+                            Color: =RGBA(128, 128, 128, 1)
+                            Text: =drEditTarget.開発品の名称
+                            Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                            ZIndex: =1
+
+                        LabelProductName_4 As label:
+                            BorderColor: =RGBA(128, 128, 128, 1)
+                            BorderThickness: =1
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height * 3
+                            Text: =drEditTarget.開発の目的
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                            ZIndex: =2
+
+                        devRecord_3 As toggleSwitch:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Default: =If(drEditTarget.'自社開発？'='自社開発？ (DR_プロジェクトマスタ)'.はい,false,true)
+                            DisplayMode: =DisplayMode.Disabled
+                            FalseText: ="自社開発"
+                            Height: =LabelProductName_1.Height
+                            TrueText: ="客先受注"
+                            Width: =Parent.Width / 3
+                            ZIndex: =3
+
+                        devRecord_4 As toggleSwitch:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Default: =If(drEditTarget.'有償？(受注時)'='有償？(受注時) (DR_プロジェクトマスタ)'.はい,true,false)
+                            DisplayMode: =DisplayMode.Disabled
+                            FalseText: ="無償"
+                            Height: =LabelProductName_1.Height
+                            TrueText: ="有償"
+                            Width: =Parent.Width / 4
+                            ZIndex: =4
+
+                        LabelProductName_5 As label:
+                            BorderThickness: =1
+                            DisplayMode: =DisplayMode.Disabled
+                            Text: =drEditTarget.受注先
+                            Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                            ZIndex: =5
+
+                        LabelProductName_6 As label:
+                            BorderThickness: =1
+                            DisplayMode: =DisplayMode.Disabled
+                            Text: =Text(drEditTarget.製番完了予定日,"yyyy/mm/dd")
+                            Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                            ZIndex: =7
+
+                        Container13_1 As groupContainer.horizontalAutoLayoutContainer:
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            ZIndex: =8
+
+                            Container14_2 As groupContainer.verticalAutoLayoutContainer:
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                ZIndex: =1
+
+                                Container14_3 As groupContainer.verticalAutoLayoutContainer:
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =Container7_4.LayoutGap
+                                    LayoutMinHeight: =100
+                                    LayoutMinWidth: =250
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingRight: =10
+                                    ZIndex: =1
+
+                                    LabelProductName_7 As label:
+                                        BorderThickness: =1
+                                        DisplayMode: =DisplayMode.Disabled
+                                        Text: =drEditTarget.想定開発稼働時間
+                                        Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                                        ZIndex: =1
+
+                                    LabelProductName_8 As label:
+                                        BorderThickness: =1
+                                        DisplayMode: =DisplayMode.Disabled
+                                        Text: =drEditTarget.'想定開発変動費 （百万）'
+                                        Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                                        ZIndex: =4
+
+                            Container15_1 As groupContainer.verticalAutoLayoutContainer:
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutGap: =Container7_4.LayoutGap
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                ZIndex: =2
+
+                                Label79_2 As label:
+                                    Text: ="H"
+                                    X: =344
+                                    Y: =380
+                                    ZIndex: =1
+
+                                Label79_3 As label:
+                                    Text: ="百万円"
+                                    X: =344
+                                    Y: =380
+                                    ZIndex: =2
+
+                        devRecord_9 As toggleSwitch:
+                            Default: =If(drEditTarget.'開発記録必要?'='開発記録必要? (DR_プロジェクトマスタ)'.はい,true,false)
+                            DisplayMode: =DisplayMode.Disabled
+                            FalseText: ="不要"
+                            Height: =LabelProductName_1.Height
+                            TrueText: ="必要"
+                            Width: =Parent.Width / 4
+                            ZIndex: =10
+
+                        envAses_3 As toggleSwitch:
+                            Default: =If(drEditTarget.'環境アセス必要？'='環境アセス必要？ (DR_プロジェクトマスタ)'.はい,true,false)
+                            DisplayMode: =DisplayMode.Disabled
+                            FalseText: ="不要"
+                            Height: =LabelProductName_1.Height
+                            TrueText: ="必要"
+                            Width: =Parent.Width / 4
+                            ZIndex: =11
+
+                Container10_3 As groupContainer.manualLayoutContainer:
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    ZIndex: =2
+
+                    Container7_6 As groupContainer.verticalAutoLayoutContainer:
+                        Height: =Container7_4.Height
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =Container7_4.LayoutGap
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingLeft: =10
+                        PaddingTop: =5
+                        Width: =165
+                        Y: =Container7_4.Y
+                        ZIndex: =1
+
+                        LabelProductName_9 As label:
+                            Color: =RGBA(128, 128, 128, 1)
+                            Height: =LabelProductName_1.Height * 3
+                            Text: ="割当済み製番"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                        Container12_1 As groupContainer.manualLayoutContainer:
+                            LayoutMinHeight: =10
+                            LayoutMinWidth: =25
+                            Width: =Parent.Width
+                            ZIndex: =6
+
+                            Container6_1 As groupContainer.horizontalAutoLayoutContainer:
+                                Height: =LabelProductName_1.Height*2
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =Parent.Width
+                                ZIndex: =1
+
+                                LabelProductName_11 As label:
+                                    Height: =LabelProductName_1.Height
+                                    Text: ="新規製番取得申請"
+                                    Width: =Parent.Width
+                                    ZIndex: =1
+
+                            Container8_4 As groupContainer.horizontalAutoLayoutContainer:
+                                Height: =LabelProductName_1.Height*2
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =Parent.Width
+                                Y: =80
+                                ZIndex: =2
+
+                                LabelProductName_12 As label:
+                                    Height: =LabelProductName_1.Height
+                                    Text: ="新規製番取得承認"
+                                    Width: =Parent.Width
+                                    ZIndex: =2
+
+                            Container11_1 As groupContainer.verticalAutoLayoutContainer:
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutGap: =Container7_4.LayoutGap
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =Parent.Width
+                                Y: =LabelProductName_1.Height*6
+                                ZIndex: =3
+
+                                LabelProductName_13 As label:
+                                    Height: =LabelProductName_1.Height
+                                    Text: ="製番発行者"
+                                    Width: =Parent.Width
+                                    ZIndex: =1
+
+                                LabelProductName_10 As label:
+                                    Height: =LabelProductName_1.Height
+                                    Text: ="登録する製番"
+                                    Width: =Parent.Width
+                                    ZIndex: =2
+
+                    Container7_7 As groupContainer.verticalAutoLayoutContainer:
+                        Height: =Container7_4.Height
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =Container7_4.LayoutGap
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingRight: =10
+                        PaddingTop: =5
+                        Width: =Parent.Width-Container7_6.Width
+                        X: =Container7_6.Width
+                        Y: =Container7_4.Y
+                        ZIndex: =2
+
+                        Container12 As groupContainer.manualLayoutContainer:
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            Height: =500
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
+                            ZIndex: =7
+
+                            Container6 As groupContainer.horizontalAutoLayoutContainer:
+                                Height: =LabelProductName_1.Height*2
+                                LayoutGap: =17
+                                LayoutMode: =LayoutMode.Auto
+                                Y: =140
+                                ZIndex: =1
+
+                                LabelProductName_14 As label:
+                                    BorderThickness: =1
+                                    DisplayMode: =DisplayMode.Disabled
+                                    Text: =User().FullName
+                                    Width: =(Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft))* (3/5)
+                                    ZIndex: =1
+
+                                Button16 As button:
+                                    OnSelect: |
+                                        =ClearCollect(codeForThis,Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid));
+                                        If(
+                                            // is there no record of not approved or not inputted?
+                                            IsEmpty(
+                                                Filter(
+                                                    codeForThis,
+                                                    Or(IsEmpty(承認id),IsEmpty(製造命令番号))
+                                                )
+                                            ),
+                                            // no record of inprogress
+                                            Collect(
+                                                DR_製造命令番号,
+                                                {
+                                                    project: First(Filter(DR_プロジェクトマスタ,プロジェクトid=drEditTarget.プロジェクトid)),
+                                                    製番申請者: First(Filter('ユーザー ',既定電子メール=User().Email)),
+                                                    製番申請日: Now()
+                                                }
+                                            ),
+                                            // there is a inprogress record
+                                            Notify("製番申請中のため、新規申請ができません。")
+                                        )
+                                    Text: ="申請"
+                                    ZIndex: =2
+
+                            Container11 As groupContainer.verticalAutoLayoutContainer:
+                                Height: =LabelProductName_1.Height * 3 + Container7_4.LayoutGap * 3
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutGap: =Container7_4.LayoutGap
+                                LayoutMode: =LayoutMode.Auto
+                                Y: =406
+                                ZIndex: =3
+
+                                LabelProductName_17 As label:
+                                    BorderThickness: =1
+                                    DisplayMode: =DisplayMode.Disabled
+                                    Text: =User().FullName
+                                    Width: =(Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft))* (3/5)
+                                    ZIndex: =1
+
+                                Container6_2 As groupContainer.horizontalAutoLayoutContainer:
+                                    AlignInContainer: =AlignInContainer.SetByContainer
+                                    Height: =LabelProductName_1.Height*2
+                                    LayoutGap: =17
+                                    LayoutMinHeight: =100
+                                    LayoutMinWidth: =250
+                                    LayoutMode: =LayoutMode.Auto
+                                    ZIndex: =3
+
+                                    TextInput21_18 As text:
+                                        Default: =
+                                        DisplayMode: =If(inProgress,DisplayMode.Disabled,DisplayMode.Edit)
+                                        Height: =LabelProductName.Height
+                                        Width: =(Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft))* (3/5)
+                                        ZIndex: =1
+
+                                    Icon13_3 As icon.Save:
+                                        Color: =RGBA(56, 96, 178, 1)
+                                        Height: =LabelProductName.Height
+                                        Icon: =Icon.Save
+                                        OnSelect: |-
+                                            =If(
+                                                And(Len(TextInput21_18.Text) > 0,Len(TextInput21_18.Text) = 10),
+                                                // deny comment is OK
+                                                If(
+                                                    CountRows(Filter(DR_製造命令番号,製造命令番号=TextInput21_18.Text)) = 0,
+                                                    // code is not duplicated.
+                                                    ClearCollect(codeForThis,Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid));
+                                                    Set(
+                                                        inputTarget,
+                                                        First(Filter(
+                                                            codeForThis,
+                                                            承認id.'選択肢 承認種類id'=approval_approved.'選択肢 承認種類id',
+                                                            IsBlank(製造命令番号)
+                                                        ))
+                                                    );
+                                                    If(
+                                                        IsBlank(inputTarget),
+                                                        // no target
+                                                        Notify("製番入力待ちのアイテムがありません。"),
+                                                        // there is a target
+                                                        Set(projectName,{projectName:drEditTarget.projectFolder});
+                                                        Set(
+                                                            changeFolderName,
+                                                            {
+                                                                folderId:DR_APP_プロジェクト名の禁止文字列を置換する.Run(JSON(projectName)),
+                                                                projectCode:TextInput21_18.Text,
+                                                                projectName:drEditTarget.開発品の名称
+                                                            }
+                                                        );
+                                                        DR_APP_プロジェクトフォルダーの名前を変更する.Run(JSON(changeFolderName));
+                                                        UpdateContext({a:inputTarget.製造命令番号id,b:First(Filter('ユーザー ',既定電子メール=User().Email)),c:Now(),d:TextInput21_18.Text});
+                                                        Patch(
+                                                            DR_製造命令番号,
+                                                            First(Filter(
+                                                                DR_製造命令番号,
+                                                                製造命令番号id=inputTarget.製造命令番号id
+                                                            )),
+                                                            {
+                                                                '製番入力者 ': First(Filter('ユーザー ',既定電子メール=User().Email)),
+                                                                製番発行日: Now(),
+                                                                製造命令番号: TextInput21_18.Text
+                                                            }
+                                                        );
+                                                    ),
+                                                    // code is duplicated.
+                                                    Notify(Concatenate("この製造命令番号は、",First(Filter(DR_製造命令番号,製造命令番号=TextInput21_18.Text)).project.開発品の名称 ,"で使用されています。"));
+                                                ),
+                                                If(
+                                                    And(Len(TextInput21_18.Text) = 0),
+                                                    // deny comment is not OK
+                                                    Notify("製造命令番号が入力されていません。"),
+                                                    Notify("製造命令番号が10桁になっていません。")        
+                                                )
+                                            )
+                                        PaddingBottom: =5
+                                        PaddingLeft: =5
+                                        PaddingRight: =5
+                                        PaddingTop: =5
+                                        Width: =LabelProductName.Height
+                                        ZIndex: =2
+
+                            Container16 As groupContainer.manualLayoutContainer:
+                                Height: =186
+                                Y: =220
+                                ZIndex: =4
+
+                                Container8 As groupContainer.horizontalAutoLayoutContainer:
+                                    Height: =LabelProductName_1.Height*2
+                                    LayoutGap: =17
+                                    LayoutMode: =LayoutMode.Auto
+                                    ZIndex: =1
+
+                                    LabelProductName_15 As label:
+                                        BorderThickness: =1
+                                        DisplayMode: =DisplayMode.Disabled
+                                        Text: =User().FullName
+                                        Width: =(Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft))* (3/5)
+                                        ZIndex: =1
+
+                                    Button16_1 As button:
+                                        OnSelect: |
+                                            =ClearCollect(codeForThis,Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid));
+                                            Set(
+                                                approveTarget,
+                                                First(Filter(
+                                                    codeForThis,
+                                                    IsBlank(承認id)
+                                                ))
+                                            );
+                                            If(
+                                                IsBlank(approveTarget),
+                                                Notify("製番申請中のアイテムがありません。"),
+                                                Patch(
+                                                    DR_製造命令番号,
+                                                    First(Filter(
+                                                        DR_製造命令番号,
+                                                        製造命令番号id=approveTarget.製造命令番号id
+                                                    )),
+                                                    {
+                                                        製番承認者: First(Filter('ユーザー ',既定電子メール=User().Email)),
+                                                        製番承認日: Now(),
+                                                        承認id: approval_approved
+                                                    }
+                                                );
+                                            )
+                                        Text: ="承認"
+                                        Width: =80
+                                        ZIndex: =2
+
+                                    Button16_2 As button:
+                                        Fill: =RGBA(255, 0, 0, 1)
+                                        OnSelect: |-
+                                            =If(
+                                                Len(TextInput21_11.Text)>0,
+                                                // 否認コメント記載あり
+                                                ClearCollect(codeForThis,Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid));
+                                                Set(
+                                                    approveTarget,
+                                                    First(Filter(
+                                                        codeForThis,
+                                                        IsBlank(承認id)
+                                                    ))
+                                                );
+                                                If(
+                                                    IsBlank(approveTarget),
+                                                    Notify("製番申請中のアイテムがありません。"),
+                                                    Patch(
+                                                        DR_製造命令番号,
+                                                        First(Filter(
+                                                            DR_製造命令番号,
+                                                            製造命令番号id=approveTarget.製造命令番号id
+                                                        )),
+                                                        {
+                                                            製番承認者: First(Filter('ユーザー ',既定電子メール=User().Email)),
+                                                            製番承認日: Now(),
+                                                            承認id: approval_deny,
+                                                            否認コメント: TextInput21_11.Text
+                                                        }
+                                                    );
+                                                ),
+                                                // 否認コメント記載無し
+                                                Notify("否認コメントが記載されていません。")
+                                            )
+                                        Text: ="否認"
+                                        Width: =80
+                                        ZIndex: =3
+
+                                TextInput21_11 As text:
+                                    Default: =denyComment
+                                    DisplayMode: =If(inProgress,DisplayMode.Disabled,DisplayMode.Edit)
+                                    Height: =LabelProductName.Height*2
+                                    Mode: =TextMode.MultiLine
+                                    Tooltip: ="否認時コメント"
+                                    Width: =Parent.Width - (Parent.PaddingRight + Parent.PaddingLeft)
+                                    Y: =82
+                                    ZIndex: =2
+
+                                LabelProductName_16 As label:
+                                    Height: =LabelProductName_1.Height
+                                    Text: ="否認コメント（否認時必須）"
+                                    VerticalAlign: =VerticalAlign.Bottom
+                                    Width: =Parent.Width
+                                    Y: =42
+                                    ZIndex: =3
+
+                                Icon15 As icon.Erase:
+                                    Height: =LabelProductName_16.Height
+                                    Icon: =Icon.Erase
+                                    OnSelect: |-
+                                        =UpdateContext({denyComment:""});
+                                    PaddingBottom: =1
+                                    PaddingLeft: =7
+                                    PaddingRight: =7
+                                    PaddingTop: =7
+                                    Tooltip: ="否認コメントの文字を全消去"
+                                    Width: =LabelProductName_16.Height
+                                    X: =251
+                                    Y: =42
+                                    ZIndex: =4
+
+                            "Gallery7 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+                                Height: =LabelProductName_1.Height * 3
+                                Items: =Filter(DR_製造命令番号,project.プロジェクトid=drEditTarget.プロジェクトid)
+                                Layout: =Layout.Vertical
+                                TemplatePadding: =0
+                                TemplateSize: =40
+                                Width: =Parent.Width
+                                ZIndex: =5
+
+                                Separator7 As rectangle:
+                                    Height: =1
+                                    OnSelect: =Select(Parent)
+                                    Width: =Parent.TemplateWidth
+                                    Y: =Parent.TemplateHeight - 1
+                                    ZIndex: =3
+
+                                Title10_1 As label:
+                                    FontWeight: =FontWeight.Normal
+                                    Height: =30
+                                    OnSelect: =Select(Parent)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =13
+                                    Text: |-
+                                        =If(
+                                            IsBlank(ThisItem.承認id),
+                                            // approval is not yet
+                                            Concatenate("承認待ち（申請者：", ThisItem.製番申請者.氏名,"、申請日：",Text(ThisItem.製番申請日,"yyyy/mm/dd"),"）"),
+                                            // there is something judgement
+                                            If(
+                                                ThisItem.承認id.'選択肢 承認種類id'=approval_approved.'選択肢 承認種類id',
+                                                // approved 
+                                                If(
+                                                    IsBlank(ThisItem.製造命令番号),
+                                                    // not inputted 
+                                                    Concatenate("製番入力待ち（承認者：", ThisItem.製番申請者.氏名,"、承認日：",Text(ThisItem.製番承認日,"yyyy/mm/dd"),"）"),
+                                                    // inputted 
+                                                    Concatenate(ThisItem.製造命令番号," 発行日：",Text(ThisItem.製番発行日,"yyyy/mm/dd"))
+                                                ),
+                                                // denied
+                                                Concatenate(ThisItem.製番申請者.氏名,"の申請は否認されました")
+                                            )
+                                        )
+                                    Tooltip: |-
+                                        =If(
+                                            ThisItem.承認id.'選択肢 承認種類id'=approval_approved.'選択肢 承認種類id',
+                                            // Approved
+                                            If(
+                                                IsEmpty(ThisItem.製造命令番号),
+                                                // not inputted
+                                                Concatenate(
+                                                    "申請：",ThisItem.製番申請者.氏名,", 申請日：",Text(ThisItem.製番申請日,"yyyy/mm/dd"),Char(10),
+                                                    "承認：",ThisItem.製番承認者.氏名,", 承認日:",Text(ThisItem.製番承認日,"yyyy/mm/dd")
+                                                ),
+                                                Concatenate(
+                                                    "申請：",ThisItem.製番申請者.氏名,", 申請日：",Text(ThisItem.製番申請日,"yyyy/mm/dd"),Char(10),
+                                                    "承認：",ThisItem.製番承認者.氏名,", 承認日:",Text(ThisItem.製番承認日,"yyyy/mm/dd"),Char(10),
+                                                    "入力：",ThisItem.'製番入力者 '.氏名,", 発行日:",Text(ThisItem.製番発行日,"yyyy/mm/dd")
+                                                )
+                                            ),
+                                            Concatenate(
+                                                "否認：",ThisItem.製番承認者.氏名,", 否認日:",Text(ThisItem.製番承認日,"yyyy/mm/dd"),Char(10),
+                                                "否認コメント：",Char(10),
+                                                ThisItem.否認コメント
+                                            )   
+                                        )
+                                    Width: =Parent.Width
+                                    ZIndex: =4
+
+                                Icon6 As icon.ChevronRight:
+                                    Height: =30
+                                    Icon: =Icon.ChevronRight
+                                    OnSelect: |-
+                                        =Navigate(DR_FinishedDev,ScreenTransition.Fade,{targetProjectCodeId: ThisItem.製造命令番号id})
+                                    Width: =30
+                                    X: =470
+                                    Y: =4
+                                    ZIndex: =5
+
+        FooterContainer1_1 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(56, 96, 178, 1)
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =4
+
+            Label76_2 As label:
+                Align: =Align.Right
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                PaddingRight: =20
+                Text: |-
+                    =Concatenate("VER: ", appVer)
+                Width: =200
+                ZIndex: =1
+
+            Label88 As label:
+                Text: |-
+                    =CountRows(
+                        Filter(
+                            codeForThis,
+                            Or(IsBlank(承認id),IsBlank(製造命令番号))
+                        )
+                    )
+                ZIndex: =2
+
+            Label89 As label:
+                Text: |-
+                    =First(
+                        Filter(
+                            codeForThis,
+                            Not(Or(IsBlank(承認id),IsBlank(製造命令番号)))
+                        )
+                    ).製造命令番号id
+                ZIndex: =3
+

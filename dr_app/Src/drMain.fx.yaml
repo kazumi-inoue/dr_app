@@ -1,0 +1,1018 @@
+"drMain As screen.'tabletAutoLayout_HeaderMainFooter_ver1.0'":
+    OnVisible: |+
+        =//Collect login user assigned project
+        ClearCollect(
+            myAsign, 
+            Filter(
+                DR_projectMember,
+                appUser.既定電子メール=User().Email
+            )
+        );
+        
+        //Collect role on login user asigned project
+        ClearCollect(
+            myRoleAsign, 
+            Filter(
+                AddColumns(
+                    myAsign,
+                    "selected",
+                    Filter(
+                        ComboBox1_3.SelectedItems,
+                        role.nameEN=nameEN
+                    )
+                ),
+                Not(IsEmpty(selected))
+            )
+        );
+        
+        // Collect login user projects
+        Clear(MyProject);
+        ForAll(
+            myRoleAsign,
+            Collect(MyProject,project.プロジェクトid);
+        );
+        
+        // Delete duplicated project
+        Distinct(MyProject,Value);
+        UpdateContext({filterEdit: false});
+        
+
+    ScreenContainer1_2 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =2
+
+        HeaderContainer1_2 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =colorPrimary
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutGap: =10
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Label5_2 As label:
+                Color: =colorLight
+                FontWeight: =FontWeight.Bold
+                Height: =Parent.Height
+                PaddingLeft: =15
+                Size: =25
+                Text: ="プロジェクト管理"
+                Width: =350
+                ZIndex: =1
+
+            Container31 As groupContainer.horizontalAutoLayoutContainer:
+                LayoutGap: =10
+                LayoutJustifyContent: =LayoutJustifyContent.End
+                LayoutMinHeight: =Parent.Height
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =8
+
+                Icon24 As icon.AddLibrary:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Icon: =Icon.AddLibrary
+                    OnSelect: |-
+                        =Navigate(
+                            ProjectInput,
+                            ScreenTransition.Fade,
+                            {
+                                backTo:drMain,
+                                displayModeContext:displayNew
+                            }
+                        )
+                    PaddingBottom: =7
+                    PaddingLeft: =7
+                    PaddingRight: =7
+                    PaddingTop: =7
+                    Visible: |+
+                        =CountRows(
+                            Filter(
+                                DR_roleTemplate,
+                                template.templateName=roleTemplateAdmin,
+                                role.nameEN=roleProjectPlanner,
+                                appUser.既定電子メール=User().Email)
+                        ) > 0
+                        
+                    Width: =Parent.Height
+                    ZIndex: =1
+
+                Icon19 As icon.DetailList:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Icon: =Icon.DetailList
+                    OnSelect: =Navigate(DR_Progress);
+                    PaddingBottom: =7
+                    PaddingLeft: =7
+                    PaddingRight: =7
+                    PaddingTop: =7
+                    Width: =Parent.Height
+                    ZIndex: =2
+
+                Icon22 As icon.People:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Icon: =Icon.People
+                    OnSelect: =Navigate(AdministrateTemplate);
+                    PaddingBottom: =7
+                    PaddingLeft: =7
+                    PaddingRight: =7
+                    PaddingTop: =7
+                    Visible: |+
+                        =CountRows(
+                            Filter(
+                                DR_roleTemplate,
+                                template.templateName=roleTemplateAdmin,
+                                role.nameEN=roleAdmin,
+                                appUser.既定電子メール=User().Email)
+                        ) > 0
+                        
+                    Width: =Parent.Height
+                    X: =40
+                    Y: =40
+                    ZIndex: =3
+
+                Icon21 As icon.Settings:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Icon: =Icon.Settings
+                    OnSelect: =Navigate(Administrate)
+                    PaddingBottom: =7
+                    PaddingLeft: =7
+                    PaddingRight: =7
+                    PaddingTop: =7
+                    Visible: |+
+                        =CountRows(
+                            Filter(
+                                DR_roleTemplate,
+                                template.templateName=roleTemplateAdmin,
+                                role.nameEN=roleAdmin,
+                                appUser.既定電子メール=User().Email)
+                        ) > 0
+                        
+                    Width: =Parent.Height
+                    ZIndex: =4
+
+        Container9 As groupContainer.manualLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            ZIndex: =2
+
+            Container19 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =60
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =17
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =20
+                PaddingRight: =20
+                Width: =Parent.Width
+                ZIndex: =1
+
+                Checkbox3_2 As checkbox:
+                    FontWeight: =FontWeight.Bold
+                    OnSelect: |-
+                        =ClearCollect(
+                            openProjectDev,
+                            Filter(
+                                DR_製造命令番号,
+                                Not(IsBlank(製造命令番号))
+                            )
+                        );
+                        
+                        ClearCollect(
+                            nonDevCode,
+                            Filter(
+                                DropColumns(
+                                    AddColumns(
+                                        DR_プロジェクトマスタ,
+                                        "nonDevCode",
+                                        CountRows(
+                                            Filter(
+                                                openProjectDev,
+                                                project.プロジェクトid=プロジェクトid
+                                            )
+                                        ),
+                                        "projectId",
+                                        プロジェクトid
+                                    ),
+                                    "プロジェクトid"
+                                ),
+                                nonDevCode=0
+                            )
+                        )
+                    Text: ="製番未取得のみ"
+                    Width: =180
+                    Y: =
+                    ZIndex: =1
+
+                Checkbox3_3 As checkbox:
+                    FontWeight: =FontWeight.Bold
+                    OnCheck: |-
+                        =ClearCollect(
+                            openProjectDev,
+                            Filter(
+                                DR_製造命令番号,
+                                IsBlank(製造命令番号),
+                                承認id.承認種類一覧<>"却下"
+                            )
+                        );
+                        
+                        ClearCollect(
+                            inprogressDevCode,
+                            Filter(
+                                DropColumns(
+                                    AddColumns(
+                                        DR_プロジェクトマスタ,
+                                        "inprogressDevCode",
+                                        CountRows(
+                                            Filter(
+                                                openProjectDev,
+                                                project.プロジェクトid=プロジェクトid
+                                            )
+                                        ),
+                                        "projectId",
+                                        プロジェクトid
+                                    ),
+                                    "プロジェクトid"
+                                ),
+                                inprogressDevCode>0
+                            )
+                        )
+                    Text: ="製番申請WF中のみ"
+                    Width: =200
+                    Y: =
+                    ZIndex: =2
+
+                Checkbox3_1 As checkbox:
+                    Default: =true
+                    FontWeight: =FontWeight.Bold
+                    Text: ="オープンのみ"
+                    Width: =160
+                    Y: =
+                    ZIndex: =3
+
+                Checkbox3 As checkbox:
+                    Default: =true
+                    FontWeight: =FontWeight.Bold
+                    Text: ="My Project"
+                    Y: =
+                    ZIndex: =4
+
+                ComboBox1_3 As combobox:
+                    BorderColor: =colorPrimary
+                    ChevronBackground: =colorPrimary
+                    ChevronDisabledBackground: =colorPrimary
+                    ChevronDisabledFill: =colorPrimary
+                    ChevronFill: =colorLight
+                    DefaultSelectedItems: =Filter(DR_roleMaster,Or(nameEN=roleProjectManager,nameEN=roleProjectLeader,nameEN=roleProjectMember))
+                    DisplayFields: =["cr5ee_namejp"]
+                    DisplayMode: |-
+                        =If(
+                            Checkbox3.Value,
+                            DisplayMode.Edit,
+                            DisplayMode.Disabled
+                        )
+                    Fill: =colorLight
+                    InputTextPlaceholder: ="表示対象ロールを選択"
+                    Items: =Filter(DR_roleMaster,nameEN<>roleAdmin,nameEN<>roleProjectPlanner)
+                    OnChange: |-
+                        =ClearCollect(
+                            myRoleAsign, 
+                            Filter(
+                                AddColumns(
+                                    myAsign,
+                                    "selected",
+                                    Filter(
+                                        ComboBox1_3.SelectedItems,
+                                        role.nameEN=nameEN
+                                    )
+                                ),
+                                Not(IsEmpty(selected))
+                            )
+                        );
+                        Clear(MyProject);
+                        ForAll(
+                            myRoleAsign,
+                            Collect(MyProject,project.プロジェクトid);
+                        );
+                        Distinct(MyProject,Value);
+                    SearchFields: =["cr5ee_namejp"]
+                    SearchItems: =Search(Filter(DR_roleMaster,nameEN<>roleAdmin,nameEN<>roleProjectPlanner),ComboBox1_3.SearchText,"cr5ee_namejp")
+                    Width: =Parent.Width -Checkbox3.Width - Parent.PaddingLeft -Parent.PaddingRight - Parent.LayoutGap * 4 - Checkbox3_1.Width - Checkbox3_2.Width -Checkbox3_3.Width
+                    ZIndex: =5
+
+            Container20 As groupContainer.verticalAutoLayoutContainer:
+                Height: =558
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMode: =LayoutMode.Auto
+                Width: =1366
+                Y: =100
+                ZIndex: =2
+
+                "Gallery1 As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    BorderThickness: =1
+                    Items: |
+                        =Filter(
+                            AddColumns(
+                                If(
+                                    Checkbox3_1.Value,
+                                    Filter(
+                                        DR_プロジェクトマスタ,
+                                        Not(IsOpen='IsOpen (DR_プロジェクトマスタ)'.いいえ)
+                                    ),
+                                    DR_プロジェクトマスタ
+                                ),
+                                "selectedRole",
+                                Filter(
+                                    MyProject,
+                                    プロジェクトid=Value
+                                ),
+                                "devStartsWithCode",
+                                Filter(
+                                    filteredStartsWithDevCode,
+                                    projectId=プロジェクトid
+                                ),
+                                "devEndsWithCode",
+                                Filter(
+                                    filteredEndsWithDevCode,
+                                    projectId=プロジェクトid
+                                ),
+                                "NonDevCode",
+                                Filter(
+                                    nonDevCode,
+                                    projectId=プロジェクトid
+                                ),
+                                "inprogressDevCode",
+                                Filter(
+                                    inprogressDevCode,
+                                    projectId=プロジェクトid
+                                )
+                            ),
+                            Not(And(Checkbox3.Value,IsEmpty(selectedRole))),
+                            Or(Not(PrefixMatchfilterOn), Not(IsEmpty(devStartsWithCode))),
+                            Or(Not(BackwardMatchfilterOn), Not(IsEmpty(devEndsWithCode))),
+                            Or(Not(Checkbox3_2.Value), Not(IsEmpty(NonDevCode))),
+                            Or(Not(Checkbox3_3.Value), Not(IsEmpty(inprogressDevCode)))
+                        )
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    TemplateFill: |-
+                        =If(
+                            Or(IsBlank(ThisItem.IsOpen),IsEmpty(ThisItem.IsOpen),ThisItem.IsOpen<>'IsOpen (DR_プロジェクトマスタ)'.いいえ),
+                            RGBA(0, 0, 0, 0),
+                            RGBA(204, 204, 204, 1)
+                        )
+                    TemplatePadding: =0
+                    TemplateSize: =Min(185, Self.Height - 60)
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+                    "Gallery2 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+                        Height: =Gallery2_2.Height
+                        Items: |-
+                            =Filter(
+                                DR_projectMember,
+                                appUser.既定電子メール=User().Email,
+                                project.プロジェクトid=ThisItem.プロジェクトid
+                            )
+                        Layout: =Layout.Vertical
+                        TemplatePadding: =0
+                        TemplateSize: =25
+                        Width: =300
+                        X: =987
+                        Y: =Gallery2_2.Y
+                        ZIndex: =1
+
+                        Title5 As label:
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =15
+                            Text: =ThisItem.role.nameJP
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =Parent.TemplateWidth - 104
+                            ZIndex: =1
+
+                        Separator6 As rectangle:
+                            Height: =1
+                            OnSelect: =Select(Parent)
+                            Width: =Parent.TemplateWidth
+                            Y: =Parent.TemplateHeight - 1
+                            ZIndex: =3
+
+                    Title3 As label:
+                        FontWeight: =FontWeight.Bold
+                        Height: =38
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |
+                            =If(
+                                CountRows(
+                                    Filter(
+                                        Filter(
+                                            DR_製造命令番号,
+                                            project.プロジェクトid=ThisItem.プロジェクトid
+                                        ),
+                                        //委任問題がでているが、ひとつのプロジェクトで大量の製造命令番号はありえないので、警告は無視
+                                        Not(IsBlank(製造命令番号))
+                                    )
+                                ) > 0,
+                                Last(
+                                    Sort(
+                                        Filter(
+                                                DR_製造命令番号,
+                                                project.プロジェクトid=ThisItem.プロジェクトid
+                                        )
+                                        ,製番発行日
+                                    )
+                                ).製造命令番号,
+                                "製番未取得"
+                            )
+                        Width: =167
+                        X: =83
+                        Y: =43
+                        ZIndex: =1
+
+                    Subtitle2 As label:
+                        FontWeight: =FontWeight.Semibold
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =14
+                        Text: =ThisItem.開発品の名称
+                        Width: =427
+                        X: =258
+                        Y: =42
+                        ZIndex: =2
+
+                    Body1 As label:
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            =If(
+                                CountRows(
+                                    Filter(
+                                        DR_projectMember,
+                                        appUser.既定電子メール=User().Email,
+                                        project.プロジェクトid=ThisItem.プロジェクトid
+                                    )
+                                ) > 0,
+                                "",
+                                "アサインされていません"
+                            )
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =268
+                        X: =Gallery2.X
+                        Y: =Gallery2.Y
+                        ZIndex: =3
+
+                    NextArrow2 As icon.ChevronRight:
+                        AccessibleLabel: =Self.Tooltip
+                        Height: =60
+                        Icon: =Icon.ChevronRight
+                        OnSelect: |-
+                            =Navigate(DR_ProjectDetail,ScreenTransition.Fade,{drEditTargetId: ThisItem.プロジェクトid})
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        TabIndex: =0
+                        Tooltip: ="項目の詳細の表示"
+                        Width: =60
+                        X: =Parent.TemplateWidth - Self.Width - 5
+                        Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                        ZIndex: =4
+
+                    Separator3 As rectangle:
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =5
+
+                    "Gallery2_2 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+                        Height: =143
+                        Items: |-
+                            =Sort(
+                                Filter(
+                                    DR_会議情報,
+                                    プロジェクトid.プロジェクトid=ThisItem.プロジェクトid
+                                ),
+                                //no problem if sort after filter
+                                選択肢_DR種類id.DR開催順番
+                            )
+                        Layout: =Layout.Vertical
+                        TemplatePadding: =0
+                        TemplateSize: =25
+                        Width: =280
+                        X: =673
+                        Y: =Parent.TemplateHeight/2 - Self.Height/2
+                        ZIndex: =6
+
+                        Title5_2 As label:
+                            Color: |-
+                                =If(
+                                    IsEmpty(ThisItem.会議実施日),
+                                    If(
+                                        ThisItem.会議予定日>Now(),
+                                        RGBA(255, 0, 0, 1),
+                                        RGBA(0, 0, 0, 1)
+                                    ),
+                                    RGBA(204, 204, 204, 1)
+                                )
+                            FontWeight: =FontWeight.Bold
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =15
+                            Text: =ThisItem.選択肢_DR種類id.DR種類一覧
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =45
+                            X: =18
+                            ZIndex: =1
+
+                        Title5_3 As label:
+                            Color: |-
+                                =If(
+                                    IsEmpty(ThisItem.会議実施日),
+                                    If(
+                                        ThisItem.会議予定日>Now(),
+                                        RGBA(255, 0, 0, 1),
+                                        RGBA(0, 0, 0, 1)
+                                    ),
+                                    RGBA(204, 204, 204, 1)
+                                )
+                            FontWeight: =FontWeight.Bold
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =15
+                            Text: |-
+                                =If(
+                                    IsEmpty(ThisItem.会議実施日),
+                                    Text(ThisItem.会議予定日,"yyyy/mm/dd"),
+                                    Text(ThisItem.会議実施日,"yyyy/mm/dd")
+                                )
+                            VerticalAlign: =VerticalAlign.Top
+                            X: =75
+                            ZIndex: =2
+
+                        Title5_4 As label:
+                            Color: |-
+                                =If(
+                                    Not(IsEmpty(ThisItem.会議実施日)),
+                                    If(
+                                        ThisItem.選択肢_承認種類id.承認種類一覧<>"未",
+                                        If(
+                                            ThisItem.選択肢_承認種類id.承認種類一覧="承認",
+                                            colorPrimary,
+                                            colorDanger
+                                        ),
+                                        colorDark
+                                    ),
+                                    colorDark
+                                )
+                            FontWeight: =FontWeight.Bold
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =15
+                            Text: |-
+                                =If(
+                                    Not(IsEmpty(ThisItem.会議実施日)),
+                                    ThisItem.選択肢_承認種類id.承認種類一覧,
+                                    "未"
+                                )
+                            VerticalAlign: =VerticalAlign.Top
+                            X: =200
+                            ZIndex: =3
+
+                    Subtitle2_1 As label:
+                        Height: =100
+                        OnSelect: =Select(Parent)
+                        Overflow: =Overflow.Scroll
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =15
+                        Text: =ThisItem.開発の目的
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =587
+                        X: =83
+                        Y: =81
+                        ZIndex: =7
+
+                    Container26 As groupContainer.horizontalAutoLayoutContainer:
+                        Height: =41
+                        LayoutGap: =3
+                        LayoutMode: =LayoutMode.Auto
+                        X: =83
+                        Y: =3
+                        ZIndex: =13
+
+                        Icon38 As icon.Folder:
+                            Color: =RGBA(0, 0, 0, 1)
+                            Height: =40
+                            Icon: =Icon.Folder
+                            OnSelect: |-
+                                =Set(targetProjectName,{projectName: ThisItem.開発品の名称});
+                                Set(replacedProjectName,Blank());
+                                Set(setProjectFolderArg,Blank());
+                                Set(setProjectFolderArg,Blank());
+                                Set(getUrlArg,{folderId: ThisItem.projectFolder});
+                                
+                                If(
+                                    Or(IsBlank(ThisItem.projectFolder),IsEmpty(ThisItem.projectFolder),Len(Text(ThisItem.projectFolder))=0),
+                                    Set(
+                                        replacedProjectName,
+                                        DR_APP_プロジェクト名の禁止文字列を置換する.Run(JSON(targetProjectName)).replaced
+                                    );
+                                    Set(setProjectFolderArg,{folderName:replacedProjectName});
+                                    Set(createFolderRet,DR_APP_プロジェクトフォルダーを作成する.Run(JSON(setProjectFolderArg)));
+                                    Patch(
+                                        DR_プロジェクトマスタ,
+                                        First(Filter(DR_プロジェクトマスタ,プロジェクトid=ThisItem.プロジェクトid)),
+                                        {
+                                            projectFolder:Int(createFolderRet.folderid)
+                                        }
+                                    );
+                                    ClearCollect(ThisItemCode, Filter(DR_製造命令番号,project.プロジェクトid=ThisItem.プロジェクトid));
+                                    If(
+                                        CountRows(Filter(ThisItemCode, Len(製造命令番号)>0, Not(And(IsBlank(製番発行日),IsEmpty(製番発行日)))))>0,
+                                        Set(projectCode,Last(Sort(Filter(ThisItemCode, Len(製造命令番号)>0, Not(Or(IsBlank(製番発行日),IsEmpty(製番発行日)))),製番発行日)));
+                                        Set(
+                                            setProjectFolderArg,
+                                            {
+                                                folderId: Int(createFolderRet.folderid),
+                                                projectCode: projectCode.製造命令番号,
+                                                projectName: replacedProjectName
+                                            }
+                                        );
+                                        DR_APP_プロジェクトフォルダーの名前を変更する.Run(JSON(setProjectFolderArg));
+                                    );
+                                    Set(getUrlArg,{folderId: Int(createFolderRet.folderid)});
+                                );
+                                Set(sharepointUrl,DR_APP_プロジェクトフォルダーのURLを取得する.Run(JSON(getUrlArg)));
+                                Launch(sharepointUrl.url);
+                            PaddingBottom: =3
+                            PaddingLeft: =3
+                            PaddingRight: =3
+                            PaddingTop: =3
+                            Width: =40
+                            X: =64
+                            Y: =2
+                            ZIndex: =1
+
+                        Icon23 As icon.Edit:
+                            Color: =RGBA(0, 0, 0, 1)
+                            Height: =40
+                            Icon: =Icon.Edit
+                            OnSelect: |-
+                                =Navigate(
+                                    ProjectInput,
+                                    ScreenTransition.Fade,
+                                    {
+                                        displayModeContext:displayEdit, 
+                                        backTo:drMain,
+                                        targetProjectId:ThisItem.プロジェクトid
+                                    }
+                                )
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            Visible: |-
+                                =true
+                                /*
+                                CountRows(
+                                    Filter(
+                                        DR_projectMember,
+                                        appUser.既定電子メール=User().Email,
+                                        project.プロジェクトid=ThisItem.プロジェクトid,
+                                        Or(role.nameEN=roleProjectLeader,role.nameEN=roleProjectManager)
+                                    )
+                                ) > 0
+                                */
+                            Width: =40
+                            X: =Icon38.X + Icon38.Width+20
+                            Y: =2
+                            ZIndex: =2
+
+                        Icon35_1 As icon.CalendarBlank:
+                            Color: =RGBA(0, 0, 0, 1)
+                            Height: =TextInput21_6.Height
+                            Icon: =Icon.CalendarBlank
+                            OnSelect: |-
+                                =Navigate(DR_planning,ScreenTransition.Fade,{drEditTarget:ThisItem,backTo:drMain})
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            Visible: |-
+                                =true
+                                /*
+                                CountRows(
+                                    Filter(
+                                        DR_projectMember,
+                                        appUser.既定電子メール=User().Email,
+                                        project.プロジェクトid=ThisItem.プロジェクトid,
+                                        Or(role.nameEN=roleProjectLeader,role.nameEN=roleProjectManager)
+                                    )
+                                ) > 0
+                                */
+                            Width: =TextInput21_6.Height
+                            X: =173
+                            Y: =2
+                            ZIndex: =3
+
+                    Container35 As groupContainer.verticalAutoLayoutContainer:
+                        Height: =185
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =71
+                        ZIndex: =15
+
+                        Label81 As label:
+                            Align: =Align.Center
+                            Color: =colorLight
+                            Fill: =colorDanger
+                            FontWeight: =FontWeight.Bold
+                            Text: ="停止中"
+                            Visible: =ThisItem.IsActive='IsActive (DR_プロジェクトマスタ)'.いいえ
+                            Width: =Parent.Width
+                            X: =148
+                            Y: =124
+                            ZIndex: =1
+
+                        Label81_2 As label:
+                            Align: =Align.Center
+                            Fill: =colorWarning
+                            FontWeight: =FontWeight.Bold
+                            Height: =65
+                            Text: |-
+                                ="製番
+                                承認待
+                                有り"
+                            Visible: =CountRows(Filter(DR_製造命令番号,project.プロジェクトid=ThisItem.プロジェクトid,Not(IsBlank(製番申請日)),IsBlank(製番承認日)))>0
+                            Width: =Parent.Width
+                            X: =148
+                            Y: =124
+                            ZIndex: =3
+
+                        Label81_3 As label:
+                            Align: =Align.Center
+                            Fill: =colorInfo
+                            FontWeight: =FontWeight.Bold
+                            Height: =65
+                            Text: |-
+                                ="製番
+                                入力待
+                                有り"
+                            Visible: |-
+                                =If(
+                                    false,
+                                    true,
+                                    CountRows(
+                                        Filter(
+                                            DR_製造命令番号,
+                                            project.プロジェクトid=ThisItem.プロジェクトid,
+                                            // applied
+                                            Not(IsBlank(製番承認日)),
+                                            // not approved
+                                            承認id.承認種類一覧="承認",
+                                            // not issued
+                                            IsBlank(製番発行日)
+                                        )
+                                    )>0
+                                )
+                            Width: =Parent.Width
+                            X: =148
+                            Y: =124
+                            ZIndex: =4
+
+                        Label81_4 As label:
+                            Align: =Align.Center
+                            Color: =colorLight
+                            Fill: =colorSecondary
+                            FontWeight: =FontWeight.Bold
+                            Height: =65
+                            Text: |-
+                                ="製番
+                                未取得"
+                            Visible: |-
+                                =If(
+                                    false,
+                                    true,
+                                    CountRows(
+                                        Filter(
+                                            Filter(
+                                                DR_製造命令番号,
+                                                project.プロジェクトid=ThisItem.プロジェクトid
+                                            ),
+                                            //委任問題がでているが、ひとつのプロジェクトで大量の製造命令番号はありえないので、警告は無視
+                                            Not(IsBlank(製造命令番号))
+                                        )
+                                    ) = 0
+                                )
+                            Width: =Parent.Width
+                            X: =148
+                            Y: =124
+                            ZIndex: =5
+
+            Label82 As label:
+                PaddingLeft: =14
+                Text: ="プロジェクト"
+                Width: =350
+                X: =61
+                Y: =60
+                ZIndex: =3
+
+            Label82_1 As label:
+                PaddingLeft: =14
+                Text: ="DR進捗"
+                Width: =100
+                X: =681
+                Y: =60
+                ZIndex: =4
+
+            Label82_2 As label:
+                PaddingLeft: =14
+                Text: ="あなたがアサインされたロール"
+                Width: =290
+                X: =975
+                Y: =60
+                ZIndex: =5
+
+        FooterContainer1_2 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =colorPrimary
+            FillPortions: =0
+            Height: =headerFooterHeight
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =3
+
+            Container22 As groupContainer.horizontalAutoLayoutContainer:
+                LayoutGap: =15
+                LayoutMinHeight: =Parent.Height
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =10
+                ZIndex: =1
+
+                Icon34 As icon.FilterFlat:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Icon: =Icon.FilterFlat
+                    OnSelect: |-
+                        =UpdateContext({filterEdit:true})
+                    PaddingBottom: =5
+                    PaddingLeft: =5
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    Width: =Parent.Height
+                    ZIndex: =1
+
+                Label5_7 As label:
+                    Align: =Align.Right
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Size: =12
+                    Text: ="前方一致"
+                    Visible: =Or(filterEdit,PrefixMatchfilterOn,BackwardMatchfilterOn)
+                    Width: =100
+                    ZIndex: =3
+
+                TextInput23 As text:
+                    AlignInContainer: =AlignInContainer.Center
+                    Default: =
+                    DisplayMode: |-
+                        =If(
+                            filterEdit,
+                            DisplayMode.Edit,
+                            DisplayMode.Disabled
+                        )
+                    Visible: =Or(filterEdit,PrefixMatchfilterOn,BackwardMatchfilterOn)
+                    Width: =200
+                    ZIndex: =4
+
+                Label5_8 As label:
+                    Align: =Align.Right
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.Height
+                    Size: =12
+                    Text: ="後方一致"
+                    Visible: =Or(filterEdit,PrefixMatchfilterOn,BackwardMatchfilterOn)
+                    Width: =100
+                    ZIndex: =5
+
+                TextInput23_1 As text:
+                    AlignInContainer: =AlignInContainer.Center
+                    Default: =
+                    DisplayMode: |-
+                        =If(
+                            filterEdit,
+                            DisplayMode.Edit,
+                            DisplayMode.Disabled
+                        )
+                    Visible: =Or(filterEdit,PrefixMatchfilterOn,BackwardMatchfilterOn)
+                    Width: =200
+                    ZIndex: =6
+
+                Button17 As button:
+                    AlignInContainer: =AlignInContainer.Center
+                    Color: =RGBA(0, 0, 0, 1)
+                    Fill: =RGBA(175, 191, 224, 1)
+                    OnSelect: |-
+                        =UpdateContext(
+                            {
+                                filterEdit:false,
+                                PrefixMatchfilterOn: Len(TextInput23.Text)>0,
+                                BackwardMatchfilterOn: Len(TextInput23_1.Text)>0
+                            }
+                        );
+                        
+                        //前方一致
+                        If(
+                            Len(TextInput23.Text) > 0,
+                            ClearCollect(
+                                filteredStartsWithDevCode,
+                                DropColumns(
+                                    AddColumns(
+                                        Filter(
+                                            DR_製造命令番号,
+                                            StartsWith(製造命令番号, TextInput23.Text)
+                                        ),
+                                        "projectId",
+                                        project.プロジェクトid
+                                    ),
+                                    "project"
+                                )
+                            ),
+                            Clear(filteredStartsWithDevCode);
+                        );
+                        
+                        //後方一致
+                        If(
+                            Len(TextInput23_1.Text) > 0,
+                            ClearCollect(
+                                filteredEndsWithDevCode,
+                                DropColumns(
+                                    AddColumns(
+                                        Filter(
+                                            DR_製造命令番号,
+                                            EndsWith(製造命令番号, TextInput23_1.Text)
+                                        ),
+                                        "projectId",
+                                        project.プロジェクトid
+                                    ),
+                                    "project"
+                                )
+                            ),
+                            Clear(filteredEndsWithDevCode);
+                        );
+                    Text: ="OK"
+                    Visible: =filterEdit
+                    Width: =110
+                    ZIndex: =7
+
+            Label76_3 As label:
+                Align: =Align.Right
+                Color: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                PaddingRight: =20
+                Text: |-
+                    =Concatenate("VER: ", appVer)
+                Width: =200
+                ZIndex: =2
+

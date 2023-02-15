@@ -1,0 +1,98 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_examples",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_example",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_example",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_B": "テーブルB選択肢",
+      "cr5ee_dr_example_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_example_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_DR_example_DRid_cr5ee_drselect_stat": "DR選択肢_DR種類",
+      "cr5ee_dr_example_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_example_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_example_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_example_SyncErrors": "同期エラー",
+      "cr5ee_dr_exampleid": "DR_example",
+      "cr5ee_exam": "exam",
+      "cr5ee_example": "example開催日",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_example",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_example (ビュー)",
+    "Name": "_cr5ee_dr_example_views",
+    "RelatedEntityName": "DR_example",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "7a7a9447-5736-4763-8b94-9b8036335762": "DR_exampleの高度な検索ビュー",
+      "8d002ecf-50c4-4b6e-9481-86ab932094f4": "DR_example関連ビュー",
+      "9a0f523b-29b7-4265-b39b-6e53ae83b458": "非アクティブなDR_example",
+      "9ae2e00c-95a7-4820-b280-bffb117ad327": "アクティブなDR_example",
+      "f75e5530-2349-48e0-b1fb-15cda13aedff": "DR_example検索ダイアログ ビュー"
+    }
+  },
+  {
+    "DisplayName": "状態 (DR_example)",
+    "Name": "cr5ee_dr_example_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_example"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_example",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_example)",
+    "Name": "cr5ee_dr_example_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_example"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_example",
+    "Type": "OptionSetInfo"
+  }
+]

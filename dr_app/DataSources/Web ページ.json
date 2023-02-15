@@ -1,0 +1,371 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "adx_webpages",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "adx_webpage",
+    "MaxGetRowsCount": 2000,
+    "Name": "Web ページ",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "{Attachments}": "Attachments",
+      "adx_alloworigin": "発生元を許可",
+      "adx_authorid": "作成者 (adx_authorid)",
+      "adx_botconsumerid": "ボット コンシューマー",
+      "adx_category": "カテゴリ",
+      "adx_copy": "コピー",
+      "adx_createdbyipaddress": "作成者 IP アドレス",
+      "adx_createdbyusername": "作成者ユーザー名",
+      "adx_customcss": "カスタム CSS",
+      "adx_customjavascript": "カスタム JavaScript",
+      "adx_displaydate": "日付の表示",
+      "adx_displayorder": "表示順序",
+      "adx_editorialcomments": "編集上のコメント",
+      "adx_enablerating": "評価の有効化",
+      "adx_enabletracking": "追跡を有効にする (廃止)",
+      "adx_entityform": "基本フォーム (adx_entityform)",
+      "adx_entityform_redirectwebpage": "基本フォーム (adx_entityform_redirectwebpage)",
+      "adx_entitylist": "リスト (adx_entitylist)",
+      "adx_entitylist_webpageforcreate": "リスト (adx_entitylist_webpageforcreate)",
+      "adx_entitylist_webpagefordetailsview": "リスト (adx_entitylist_webpagefordetailsview)",
+      "adx_excludefromsearch": "検索から除外",
+      "adx_expirationdate": "有効期限",
+      "adx_feedbackpolicy": "コメント ポリシー",
+      "adx_hiddenfromsitemap": "サイトマップに対して非表示",
+      "adx_image": "画像",
+      "adx_imageurl": "画像の URL",
+      "adx_isofflinecached": "isOfflineCached",
+      "adx_isroot": "ルートである",
+      "adx_masterwebpageid": "マスター Web ページ",
+      "adx_meta_description": "説明",
+      "adx_modifiedbyipaddress": "修正者 IP アドレス",
+      "adx_modifiedbyusername": "修正者ユーザー名",
+      "adx_name": "名前",
+      "adx_navigation": "ナビゲーション",
+      "adx_pagetag_webpage": "ページ タグ",
+      "adx_pagetemplateid": "ページ テンプレート",
+      "adx_parentpageid": "親ページ",
+      "adx_parentwebpage_shortcut": "ショートカット (adx_parentwebpage_shortcut)",
+      "adx_partialurl": "部分 URL",
+      "adx_publishingstateid": "公開状況",
+      "adx_releasedate": "リリース日",
+      "adx_rootwebpageid": "ルート Web ページ",
+      "adx_sharedpageconfiguration": "共有ページ構成",
+      "adx_subjectid": "情報カテゴリ",
+      "adx_summary": "概要",
+      "adx_title": "タイトル",
+      "adx_webform": "マルチステップ フォーム",
+      "adx_webformstep_redirectwebpage": "フォーム ステップ",
+      "adx_webpage_ActivityPointers": "活動 ",
+      "adx_webpage_ad": "広告",
+      "adx_webpage_adx_alertsubscriptions": "アラート サブスクリプション",
+      "adx_webpage_adx_inviteredemptions": "招待状の引き換え",
+      "adx_webpage_adx_portalcomments": "ポータル コメント",
+      "adx_webpage_Annotations": "メモ ",
+      "adx_webpage_Appointments": "予定  ",
+      "adx_webpage_AsyncOperations": "システム ジョブ ",
+      "adx_webpage_BulkDeleteFailures": "一括削除の失敗 ",
+      "adx_webpage_chats": "Teams チャット",
+      "adx_webpage_connections1": "つながり (adx_webpage_connections1)",
+      "adx_webpage_connections2": "つながり (adx_webpage_connections2)",
+      "adx_webpage_Emails": "電子メール メッセージ",
+      "adx_webpage_Faxes": "FAX ",
+      "adx_webpage_Feedback": "フィードバック",
+      "adx_webpage_Letters": "レター ",
+      "adx_webpage_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "adx_webpage_masterwebpage": "Web ページ (adx_webpage_masterwebpage)",
+      "adx_webpage_msdyn_ocliveworkitems": "会話",
+      "adx_webpage_msdyn_ocsessions": "セッション",
+      "adx_webpage_msfp_alerts": "Customer Voice 通知",
+      "adx_webpage_msfp_surveyinvites": "Customer Voice 調査招待",
+      "adx_webpage_msfp_surveyresponses": "Customer Voice 調査回答",
+      "adx_webpage_pagealert": "ページ アラート",
+      "adx_webpage_pagenotification": "ページ通知",
+      "adx_webpage_PhoneCalls": "電話 ",
+      "adx_webpage_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "adx_webpage_ProcessSession": "プロセス セッション",
+      "adx_webpage_RecurringAppointmentMasters": "定期的な予定 ",
+      "adx_webpage_redirect": "リダイレクト",
+      "adx_webpage_ServiceAppointments": "サービス活動 ",
+      "adx_webpage_SharePointDocumentLocations": "ドキュメントの場所 ",
+      "adx_webpage_shortcut": "ショートカット (adx_webpage_shortcut)",
+      "adx_webpage_sitemarker": "サイト マーカー",
+      "adx_webpage_SocialActivities": "ソーシャル活動",
+      "adx_webpage_SyncErrors": "同期エラー",
+      "adx_webpage_tag": "タグ",
+      "adx_webpage_Tasks": "タスク ",
+      "adx_webpage_urlhistory": "URL 履歴",
+      "adx_webpage_webfile": "Web ファイル",
+      "adx_webpage_weblink": "Web リンク",
+      "adx_webpage_webpage": "Web ページ (adx_webpage_webpage)",
+      "adx_webpage_webpage_rootwebpageid": "Web ページ (adx_webpage_webpage_rootwebpageid)",
+      "adx_webpage_webpageaccesscontrolrule": "Web ページ アクセス制御ルール",
+      "adx_webpage_webpagehistory": "Web ページ履歴",
+      "adx_webpage_webpagelog": "Web ページ ログ",
+      "adx_webpageid": "Web ページ (adx_webpageid)",
+      "adx_webpagelanguageid": "Web ページ言語",
+      "adx_websiteid": "Web サイト",
+      "createdby": "作成者 (createdby)",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所有部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "Web ページ",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Web ページ (ビュー)",
+    "Name": "_adx_webpage_views",
+    "RelatedEntityName": "Web ページ",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "4d5b1fe1-a25f-e611-80d9-00155d540c06": "ローカライズされたコンテンツ",
+      "aab2f4bb-7813-46b2-9891-4c050325962b": "非アクティブな Web ページ",
+      "b59d77ee-da48-e011-9fff-00155d035a27": "Portal Search",
+      "c2f4f3ed-856b-4807-917f-f689c22ada13": "Web ページの高度な検索ビュー",
+      "d0f45133-c02a-df11-ac48-00155d035a12": "イベント管理 Web ページ",
+      "d40f1c4b-2b80-4d7d-8ed1-d5817562ab54": "Web ページ検索ダイアログ ビュー",
+      "de9079ab-17e2-df11-8658-00155d036405": "ルート Web ページ",
+      "df2fd824-1c91-4c4f-b156-a73745a73497": "Web ページ関連ビュー",
+      "ebc6fc95-4c19-44e0-8ba5-cb188ddf8a14": "アクティブな Web ページ"
+    }
+  },
+  {
+    "DisplayName": "カテゴリ (Web ページ)",
+    "Name": "adx_webpage_adx_category",
+    "OptionSetInfoNameMapping": {
+      "1": "ニュース"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_category",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "adx_category",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "評価の有効化 (Web ページ)",
+    "Name": "adx_webpage_adx_enablerating",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_enablerating",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_enablerating",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "追跡を有効にする (廃止) (Web ページ)",
+    "Name": "adx_webpage_adx_enabletracking",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_enabletracking",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_enabletracking",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "検索から除外 (Web ページ)",
+    "Name": "adx_webpage_adx_excludefromsearch",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_excludefromsearch",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_excludefromsearch",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "コメント ポリシー (Web ページ)",
+    "Name": "adx_webpage_adx_feedbackpolicy",
+    "OptionSetInfoNameMapping": {
+      "756150000": "継承",
+      "756150001": "なし",
+      "756150002": "オープン",
+      "756150003": "認証されたユーザーに対してオープン",
+      "756150004": "モデレート",
+      "756150005": "クローズ済み"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_feedbackpolicy",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "adx_feedbackpolicy",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "サイトマップに対して非表示 (Web ページ)",
+    "Name": "adx_webpage_adx_hiddenfromsitemap",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_hiddenfromsitemap",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_hiddenfromsitemap",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "isOfflineCached (Web ページ)",
+    "Name": "adx_webpage_adx_isofflinecached",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_isofflinecached",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_isofflinecached",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ルートである (Web ページ)",
+    "Name": "adx_webpage_adx_isroot",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_isroot",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_isroot",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "共有ページ構成 (Web ページ)",
+    "Name": "adx_webpage_adx_sharedpageconfiguration",
+    "OptionSetInfoNameMapping": {
+      "0": "いいえ",
+      "1": "はい"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "adx_sharedpageconfiguration",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "adx_sharedpageconfiguration",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "状態 (Web ページ)",
+    "Name": "adx_webpage_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (Web ページ)",
+    "Name": "adx_webpage_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Web ページ"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Web ページ",
+    "Type": "OptionSetInfo"
+  }
+]

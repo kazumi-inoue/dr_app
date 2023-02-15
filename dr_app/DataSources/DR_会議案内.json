@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr5ee_dr_meeting_guidances",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr5ee_dr_meeting_guidance",
+    "MaxGetRowsCount": 2000,
+    "Name": "DR_会議案内",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "所有者",
+      "cr5ee_dr_folder_path_ID": "フォルダパスid",
+      "cr5ee_dr_meeting_guidance_AsyncOperations": "システム ジョブ ",
+      "cr5ee_dr_meeting_guidance_BulkDeleteFailures": "一括削除の失敗 ",
+      "cr5ee_dr_meeting_guidance_id": "会議案内id",
+      "cr5ee_dr_meeting_guidance_MailboxTrackingFolders": "メールボックス自動追跡フォルダー",
+      "cr5ee_dr_meeting_guidance_PrincipalObjectAttributeAccesses": "フィールド共有 ",
+      "cr5ee_dr_meeting_guidance_ProcessSession": "プロセス セッション",
+      "cr5ee_dr_meeting_guidance_SyncErrors": "同期エラー",
+      "cr5ee_dr_meeting_guidanceid": "DR_会議案内",
+      "cr5ee_dr_meeting_info_ID": "会議情報id",
+      "cr5ee_dr_meeting_room": "会議室",
+      "cr5ee_dr_order_number_ID": "製造命令番号id",
+      "cr5ee_dr_web_meeting_address": "WEB会議アドレス",
+      "createdby": "作成者",
+      "createdon": "作成日",
+      "createdonbehalfby": "作成者 (代理)",
+      "importsequencenumber": "インポート シーケンス番号",
+      "modifiedby": "修正者",
+      "modifiedon": "修正日",
+      "modifiedonbehalfby": "修正者 (代理)",
+      "overriddencreatedon": "レコード作成日",
+      "owningbusinessunit": "所属部署",
+      "owningteam": "所有チーム",
+      "owninguser": "所有ユーザー",
+      "statecode": "状態",
+      "statuscode": "ステータス",
+      "timezoneruleversionnumber": "タイム ゾーン規則のバージョン番号",
+      "utcconversiontimezonecode": "UTC 変換タイム ゾーン コード",
+      "versionnumber": "バージョン番号"
+    },
+    "PreferredName": "DR_会議案内",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "DR_会議案内 (ビュー)",
+    "Name": "_cr5ee_dr_meeting_guidance_views",
+    "RelatedEntityName": "DR_会議案内",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "757d91cd-2d6a-4398-afed-6bfb4af4ab84": "DR_会議案内の高度な検索ビュー",
+      "934731c9-c497-4ea1-9fd5-9d5da70bac00": "非アクティブなDR_会議案内",
+      "dcff460d-78a6-4e6a-bb94-890c2fc6e170": "DR_会議案内検索ダイアログ ビュー",
+      "e41de5fc-59a2-4b57-941c-791d29a84bc7": "DR_会議案内関連ビュー",
+      "e70838ed-94b6-44da-a07c-8eeb9531244d": "アクティブなDR_会議案内"
+    }
+  },
+  {
+    "DisplayName": "状態 (DR_会議案内)",
+    "Name": "cr5ee_dr_meeting_guidance_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "アクティブ",
+      "1": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "DR_会議案内"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "DR_会議案内",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ステータス (DR_会議案内)",
+    "Name": "cr5ee_dr_meeting_guidance_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "アクティブ",
+      "2": "非アクティブ"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "DR_会議案内"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "DR_会議案内",
+    "Type": "OptionSetInfo"
+  }
+]
